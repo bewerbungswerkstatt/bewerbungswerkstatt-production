@@ -372,7 +372,7 @@ function Index() {
       <section className="contact section-dark" id="kontakt">
         <div className="container contact-inner"><RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock><div className="contact-list"><a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a><a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a><div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div><a className="button button--primary button--wide" href="mailto:audelia@bewerbungswerkstatt.ch?subject=Erstgespräch">Erstgespräch buchen</a></div></div>
       </section>
-      <footer><BrandLogo dark /><p>© 2026 Bewerbungswerkstatt. Alle Rechte vorbehalten.</p></footer>
+      <footer><p>© 2026 Digital Trust Solutions GmbH</p></footer>
     </main>
   );
 }
