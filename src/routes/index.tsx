@@ -306,9 +306,9 @@ function ContactSection() {
         body: JSON.stringify(parsed.data),
       });
       const result = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string; fieldErrors?: Record<string, string> }
+        | { success?: boolean; error?: string; fieldErrors?: Record<string, string> }
         | null;
-      if (!response.ok) {
+      if (!response.ok || !result?.success) {
         if (result?.fieldErrors) setFieldErrors(result.fieldErrors);
         throw new Error(result?.error ?? "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
       }
