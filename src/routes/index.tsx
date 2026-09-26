@@ -19,11 +19,11 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "rea
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
-import audeliaAsset from "../assets/audelia.jpg.asset.json";
-import danielAsset from "../assets/daniel.jpg.asset.json";
-import darkLogoAsset from "../assets/logo_darkmode.png.asset.json";
-import logoAsset from "../assets/logo.png.asset.json";
-import zurichAsset from "../assets/zurich-panorama.jpeg.asset.json";
+const audeliaAsset = { url: "/images/audelia.jpg" };
+const danielAsset = { url: "/images/daniel.jpg" };
+const darkLogoAsset = { url: "/images/logo_darkmode.png" };
+const logoAsset = { url: "/images/logo.png" };
+const zurichAsset = { url: "/images/zurich-panorama.jpeg" };
 
 export const Route = createFileRoute("/")({
   head: () => ({
