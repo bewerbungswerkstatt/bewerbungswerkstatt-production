@@ -137,8 +137,8 @@ function MarketStats() {
   );
 }
 
-function useScrollReveal(threshold = 0.18) {
-  const ref = useRef<HTMLElement>(null);
+function useScrollReveal<T extends HTMLElement = HTMLDivElement>(threshold = 0.18) {
+  const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ function useScrollReveal(threshold = 0.18) {
 }
 
 function StepCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
-  const { ref, visible } = useScrollReveal();
+  const { ref, visible } = useScrollReveal<HTMLElement>();
   return (
     <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
       <span className="step-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
@@ -167,7 +167,7 @@ function StepCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title
 }
 
 function ComparisonCard({ title, issue, answer }: { title: string; issue: string; answer: string }) {
-  const { ref, visible } = useScrollReveal(0.12);
+  const { ref, visible } = useScrollReveal<HTMLElement>(0.12);
   return (
     <article ref={ref} className={`comparison-row scroll-reveal ${visible ? "scroll-reveal--visible" : ""}`}>
       <div><h4>{title}</h4><p>{issue}</p></div>
@@ -183,7 +183,7 @@ function RevealBlock({ children, className = "", delay = 0 }: { children: ReactN
 }
 
 function ServiceCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
-  const { ref, visible } = useScrollReveal();
+  const { ref, visible } = useScrollReveal<HTMLElement>();
   return (
     <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
       <span className="service-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
