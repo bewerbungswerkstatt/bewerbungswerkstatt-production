@@ -260,7 +260,7 @@ footer { min-height: 90px; padding: 20px max(24px, calc((100vw - 1100px) / 2)); 
   .price-card { padding: 27px 23px; }
   .expert-row { grid-template-columns: 1fr; gap: 28px; margin-bottom: 60px; }
   .expert-photo { width: 100%; max-width: 300px; }
-  footer { flex-direction: column; justify-content: center; gap: 8px; text-align: center; }
+  footer { justify-content: flex-end; text-align: right; }
 }
 
 @media (prefers-reduced-motion: reduce) {
