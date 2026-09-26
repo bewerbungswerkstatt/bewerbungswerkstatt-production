@@ -6,12 +6,14 @@ import {
   FilePenLine,
   Mail,
   MapPin,
+  Menu,
   MessageSquare,
   PenLine,
   Phone,
   Search,
   ShieldCheck,
   Star,
+  X,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import audeliaAsset from "../assets/audelia.jpg.asset.json";
@@ -120,6 +122,7 @@ function SectionHeading({ children, subline, light = false }: { children: ReactN
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 70);
     update();
@@ -127,20 +130,57 @@ function Header() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.body.classList.add("menu-open");
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.classList.remove("menu-open");
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [menuOpen]);
+
+  const menuLinks = [
+    ["#herausforderung", "Herausforderung"],
+    ["#loesung", "Lösung"],
+    ["#angebot", "Angebot"],
+    ["#preise", "Preise"],
+    ["#experten", "Experten"],
+    ["#kontakt", "Kontakt"],
+  ];
+
   return (
     <>
       <header className="hero-header">
         <BrandLogo dark />
         <nav aria-label="Hauptnavigation">
-          <a href="#herausforderung">Herausforderung</a>
-          <a href="#loesung">Lösung</a>
-          <a href="#angebot">Angebot</a>
-          <a href="#preise">Preise</a>
-          <a href="#experten">Experten</a>
-          <a href="#kontakt">Kontakt</a>
+          {menuLinks.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         </nav>
-        <a className="button button--primary" href="#kontakt">Erstgespräch buchen</a>
+        <a className="button button--primary hero-header__cta" href="#kontakt">Erstgespräch buchen</a>
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label="Menü öffnen"
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMenuOpen(true)}
+        >
+          <Menu />
+        </button>
       </header>
+      <div className={`menu-overlay ${menuOpen ? "menu-overlay--open" : ""}`} aria-hidden={!menuOpen}>
+        <button className="menu-backdrop" type="button" aria-label="Menü schliessen" onClick={() => setMenuOpen(false)} />
+        <aside className="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
+          <button className="menu-close" type="button" aria-label="Menü schliessen" onClick={() => setMenuOpen(false)}><X /></button>
+          <nav>
+            {menuLinks.map(([href, label]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+          </nav>
+          <a className="button button--primary button--wide" href="#kontakt" onClick={() => setMenuOpen(false)}>Erstgespräch buchen</a>
+        </aside>
+      </div>
       <header className={`sticky-header ${scrolled ? "sticky-header--visible" : ""}`} aria-hidden={!scrolled}>
         <BrandLogo />
         <a className="button button--primary" href="#kontakt">Erstgespräch buchen</a>
