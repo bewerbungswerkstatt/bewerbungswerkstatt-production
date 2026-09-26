@@ -1,6 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Resend } from "resend";
-import { contactSchema } from "@/lib/contact-schema";
+import { z } from "zod";
+
+const contactRequestSchema = z.object({
+  name: z.string().trim().min(1, "Bitte geben Sie Ihren Namen ein.").max(100, "Der Name ist zu lang."),
+  email: z.string().trim().email("Bitte geben Sie eine gültige E-Mail-Adresse ein.").max(255, "Die E-Mail-Adresse ist zu lang."),
+  message: z.string().trim().min(1, "Bitte geben Sie eine Nachricht ein.").max(2000, "Die Nachricht ist zu lang."),
+  website: z.string().max(200).optional().default(""),
+});
 
 const escapeHtml = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -18,7 +24,7 @@ export const Route = createFileRoute("/api/contact")({
           return Response.json({ error: "Ungültige Anfrage." }, { status: 400 });
         }
 
-        const parsed = contactSchema.safeParse(rawBody);
+        const parsed = contactRequestSchema.safeParse(rawBody);
         if (!parsed.success) {
           const fieldErrors: Record<string, string> = {};
           for (const issue of parsed.error.issues) {
@@ -52,6 +58,7 @@ export const Route = createFileRoute("/api/contact")({
         const text = `Name: ${data.name}\nE-Mail: ${data.email}\n\nNachricht:\n${data.message}`;
 
         try {
+          const { Resend } = await import("resend");
           const resend = new Resend(resendApiKey);
           const { error: sendError } = await resend.emails.send({
             from,
@@ -64,7 +71,7 @@ export const Route = createFileRoute("/api/contact")({
           if (sendError) {
             console.error(
               `Resend-Versand fehlgeschlagen [${sendError.name}]: ${sendError.message}`,
-              { to: contactToEmail, from, subject, name: data.name, email: data.email },
+              { to: contactToEmail, from, subject },
             );
             return Response.json({ error: SAFE_ERROR }, { status: 500 });
           }
@@ -73,8 +80,6 @@ export const Route = createFileRoute("/api/contact")({
             to: contactToEmail,
             from,
             subject,
-            name: data.name,
-            email: data.email,
           });
           return Response.json({ error: SAFE_ERROR }, { status: 500 });
         }
