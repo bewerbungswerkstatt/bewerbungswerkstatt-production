@@ -208,7 +208,7 @@ function Index() {
             <article><span className="service-icon"><FilePenLine /></span><h3>Komplett neues Dossier erstellen</h3><p>Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</p></article>
             <article><span className="service-icon"><MapPin /></span><h3>Lokale Expertise</h3><p>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</p></article>
           </div>
-          <div className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span>🇨🇭</span><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
+          <div className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
         </div>
       </section>
 
