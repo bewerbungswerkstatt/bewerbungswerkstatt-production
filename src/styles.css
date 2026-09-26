@@ -87,6 +87,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero h1 { margin: 0; font-size: clamp(3rem, 5.2vw, 4.75rem); line-height: .98; letter-spacing: 0; }
 .hero h1 strong { display: block; color: var(--primary); }
 .hero-lead { color: oklch(0.78 0.015 255); font-size: 1.15rem; margin: 26px 0 0; line-height: 1.45; }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(42px); } to { opacity: 1; transform: translateY(0); } }
+.hero-copy > * { opacity: 0; animation: hero-rise .85s cubic-bezier(.22,.61,.36,1) forwards; }
+.hero-copy > .eyebrow { animation-delay: .1s; }
+.hero-copy > h1 { animation-delay: .28s; }
+.hero-copy > .hero-lead { animation-delay: .48s; }
 .application-field { position: relative; flex: 0 0 270px; width: 100%; height: 270px; margin-top: 42px; overflow: hidden; opacity: .52; background: oklch(0.175 0.04 260); mask-image: linear-gradient(to bottom, transparent 0, black 14%, black 72%, transparent 100%); }
 .application-row { position: absolute; left: 0; width: 100%; overflow: hidden; }
 .application-row:first-child { top: 18px; }
@@ -238,6 +243,7 @@ footer { min-height: 90px; padding: 20px max(24px, calc((100vw - 1100px) / 2)); 
 
 @media (prefers-reduced-motion: reduce) {
   .stat-card, .scroll-reveal { opacity: 1; transform: none; transition: none; }
+  .hero-copy > * { opacity: 1; animation: none; }
 }
 
 @media (max-width: 600px) {
