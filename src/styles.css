@@ -143,6 +143,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .comparison-heading p { color: oklch(0.58 0.02 255); font-size: .78rem; margin: 7px 0 0; }
 .comparisons { width: min(730px, 100%); margin: auto; display: grid; gap: 12px; }
 .comparison-row { display: grid; grid-template-columns: 1fr 50px 1fr; align-items: center; gap: 16px; min-height: 92px; padding: 17px 20px; background: var(--navy-soft); border: 1px solid transparent; border-radius: 8px; transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease; }
+.comparison-row.scroll-reveal { transition: opacity .55s ease, transform .55s ease, border-color .25s ease, box-shadow .25s ease; }
 .comparison-row:hover { border-color: oklch(0.62 0.16 242 / .55); box-shadow: 0 0 24px oklch(0.62 0.16 242 / .18); transform: translateY(-1px); }
 .comparison-row h4 { color: var(--coral); margin: 0 0 5px; font-size: .86rem; }
 .comparison-row p { color: oklch(0.58 0.012 255); margin: 0; font-size: .76rem; }
@@ -167,7 +168,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .local-banner p { margin: 0; color: oklch(0.9 0.008 255); }
 
 .reviews { padding: 75px 0 90px; overflow: hidden; }
-.reviews h2 { text-align: center; margin-bottom: 45px; }
+.reviews-heading { margin-bottom: 45px; text-align: center; }
+.reviews h2 { text-align: center; margin-bottom: 0; }
 .review-marquee { width: 100%; overflow: hidden; }
 .review-track { width: max-content; display: flex; gap: 24px; animation: marquee 42s linear infinite; }
 .review-track:hover { animation-play-state: paused; }
@@ -192,6 +194,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .refund svg { width: 15px; color: var(--primary); }
 
 .experts h2 { font-size: 2rem; margin: 0 0 60px; }
+.experts-heading h2 { margin-bottom: 60px; }
 .expert-row { display: grid; grid-template-columns: 270px 1fr; gap: 105px; align-items: center; margin-bottom: 70px; }
 .expert-photo { width: 270px; aspect-ratio: 1; display: block; object-fit: cover; object-position: center 24%; border-radius: 8px; box-shadow: var(--shadow); }
 .expert-photo--audelia { object-position: center 18%; }
