@@ -210,8 +210,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .contact-list svg { color: var(--primary); width: 21px; }
 .contact-list span { display: flex; flex-direction: column; }
 .contact-list small { color: oklch(0.62 0.015 255); }
-footer { min-height: 90px; padding: 20px max(24px, calc((100vw - 1100px) / 2)); display: flex; align-items: center; justify-content: space-between; background: oklch(0.15 0.035 260); color: oklch(0.58 0.015 255); font-size: .78rem; }
-footer .brand-logo { width: 126px; }
+footer { min-height: 90px; padding: 20px max(24px, calc((100vw - 1100px) / 2)); display: flex; align-items: center; justify-content: flex-end; background: oklch(0.15 0.035 260); color: oklch(0.58 0.015 255); font-size: .78rem; text-align: right; }
 
 @media (max-width: 1080px) {
   .hero-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
