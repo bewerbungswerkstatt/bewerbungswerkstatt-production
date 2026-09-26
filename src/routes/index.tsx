@@ -338,7 +338,7 @@ function Index() {
             <ServiceCard icon={<FilePenLine />} title="Komplett neues Dossier erstellen">Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</ServiceCard>
             <ServiceCard icon={<MapPin />} title="Lokale Expertise" delay={1}>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</ServiceCard>
           </div>
-          <div className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
+          <RevealBlock className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></RevealBlock>
         </div>
       </section>
 
