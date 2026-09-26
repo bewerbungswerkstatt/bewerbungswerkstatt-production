@@ -73,32 +73,42 @@ export const Route = createFileRoute("/api/contact")({
           );
         }
 
-        // E-Mail-Benachrichtigung über Resend. Die Nachricht ist bereits sicher
-        // gespeichert — ein E-Mail-Fehler darf den Versand nicht als fehlgeschlagen
-        // melden, sonst denkt der Absender, seine Nachricht sei verloren.
-        try {
-          const resendApiKey = process.env["RESEND_API_KEY"];
-          const contactToEmail = process.env["CONTACT_TO_EMAIL"];
-          if (!resendApiKey || !contactToEmail) throw new Error("Resend ist nicht konfiguriert.");
+        const resendApiKey = process.env["RESEND_API_KEY"];
+        const contactToEmail = process.env["CONTACT_TO_EMAIL"];
+        const safeError = Response.json(
+          { error: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut." },
+          { status: 500 },
+        );
+        if (!resendApiKey || !contactToEmail) {
+          console.error("Kontaktformular: RESEND_API_KEY oder CONTACT_TO_EMAIL fehlt.");
+          return safeError;
+        }
 
+        const from = "Bewerbungswerkstatt <kontakt@bewerbungswerkstatt.ch>";
+        const subject = `Neue Kontaktanfrage von ${data.name}`;
+        const html = `<h2>Neue Kontaktanfrage</h2><p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`;
+        const text = `Name: ${data.name}\nE-Mail: ${data.email}\n\nNachricht:\n${data.message}`;
+
+        try {
           const resend = new Resend(resendApiKey);
           const { error: sendError } = await resend.emails.send({
-            from: "Bewerbungswerkstatt Website <website@bewerbungswerkstatt.ch>",
+            from,
             to: [contactToEmail],
             replyTo: data.email,
-            subject: `Neue Nachricht von ${data.name}`,
-            html: `<p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`,
+            subject,
+            html,
+            text,
           });
-          if (sendError) throw new Error(sendError.message);
-        } catch (notifyError) {
-          // Der hier verknüpfte Resend-Schlüssel läuft über die gesicherte
-          // Lovable-Verbindung; schlägt der direkte Versand fehl, wird darüber
-          // zugestellt.
+          if (sendError) throw new Error(`${sendError.name}: ${sendError.message}`);
+        } catch (sendFailure) {
+          // In der Lovable-Vorschau ist der Schlüssel ein Connector-Schlüssel;
+          // nur dort existiert LOVABLE_API_KEY und der Gateway-Weg greift.
+          const lovableApiKey = process.env["LOVABLE_API_KEY"];
+          if (!lovableApiKey) {
+            console.error("Resend-Versand fehlgeschlagen:", sendFailure);
+            return safeError;
+          }
           try {
-            const lovableApiKey = process.env["LOVABLE_API_KEY"];
-            const resendApiKey = process.env["RESEND_API_KEY"];
-            const contactToEmail = process.env["CONTACT_TO_EMAIL"];
-            if (!lovableApiKey || !resendApiKey || !contactToEmail) throw notifyError;
             const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
               method: "POST",
               headers: {
@@ -106,24 +116,19 @@ export const Route = createFileRoute("/api/contact")({
                 Authorization: `Bearer ${lovableApiKey}`,
                 "X-Connection-Api-Key": resendApiKey,
               },
-              body: JSON.stringify({
-                from: "Bewerbungswerkstatt Website <website@bewerbungswerkstatt.ch>",
-                to: [contactToEmail],
-                reply_to: data.email,
-                subject: `Neue Nachricht von ${data.name}`,
-                html: `<p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`,
-              }),
+              body: JSON.stringify({ from, to: [contactToEmail], reply_to: data.email, subject, html, text }),
             });
             if (!response.ok) {
-              const body = await response.text();
-              console.error(`Resend-Benachrichtigung fehlgeschlagen [${response.status}]: ${body}`);
+              console.error(`Resend-Versand fehlgeschlagen [${response.status}]: ${await response.text()}`, sendFailure);
+              return safeError;
             }
           } catch (fallbackError) {
-            console.error("Resend-Benachrichtigung fehlgeschlagen:", fallbackError);
+            console.error("Resend-Versand fehlgeschlagen:", sendFailure, fallbackError);
+            return safeError;
           }
         }
 
-        return Response.json({ ok: true });
+        return Response.json({ success: true }, { status: 200 });
       },
     },
   },
