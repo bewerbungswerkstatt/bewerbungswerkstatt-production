@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import {
   ArrowRight,
   Check,
@@ -19,8 +18,7 @@ import {
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { submitContact } from "@/lib/contact.functions";
-import { contactSchema } from "@/lib/contact-schema";
+import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
 import audeliaAsset from "../assets/audelia.jpg.asset.json";
 import danielAsset from "../assets/daniel.jpg.asset.json";
 import darkLogoAsset from "../assets/logo_darkmode.png.asset.json";
