@@ -166,7 +166,14 @@ function Index() {
                 {Array.from({ length: 32 }, (_, index) => {
                   const position = index % 16;
                   const active = row === 0 ? position === 12 : position === 4;
-                  return <div className={`application-card ${active ? "application-card--active" : ""}`} key={index}><i /><span><b /><b /><b /><b /></span><em><b /><b /><b /></em></div>;
+                  const profile = (position + row) % 2 === 0;
+                  return (
+                    <div className={`application-card ${profile ? "application-card--profile" : "application-card--letter"} ${active ? "application-card--active" : ""}`} key={index}>
+                      <div className="application-card__heading">{profile ? <i /> : null}<span><b /><b /></span></div>
+                      <em><b /><b /><b /><b /><b /></em>
+                      {active ? <small><b /><b /><b /></small> : null}
+                    </div>
+                  );
                 })}
               </div>
             </div>
