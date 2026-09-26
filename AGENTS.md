@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project architecture
+
+- Keep the Bewerbungswerkstatt experience as one anchor-navigated landing page because the source site and requested scroll interactions form one continuous journey.
