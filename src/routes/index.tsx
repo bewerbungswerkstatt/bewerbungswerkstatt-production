@@ -14,6 +14,11 @@ import {
   Star,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import audeliaAsset from "../assets/audelia.jpg.asset.json";
+import danielAsset from "../assets/daniel.jpg.asset.json";
+import darkLogoAsset from "../assets/logo_darkmode.png.asset.json";
+import logoAsset from "../assets/logo.png.asset.json";
+import zurichAsset from "../assets/zurich-panorama.jpeg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,12 +67,13 @@ const reviews = [
   ["«Das Team hat mir geholfen meine Bewerbungsunterlagen professionell zu erstellen und ich wurde zu mehreren ersten Interviews eingeladen!»", "Raphael P."],
 ];
 
-function LogoPlaceholder({ compact = false }: { compact?: boolean }) {
+function BrandLogo({ dark = false }: { dark?: boolean }) {
   return (
-    <div className={`logo-placeholder ${compact ? "logo-placeholder--compact" : ""}`} aria-label="Logo Platzhalter">
-      <span>LOGO</span>
-      <small>Bewerbungswerkstatt</small>
-    </div>
+    <img
+      className="brand-logo"
+      src={dark ? darkLogoAsset.url : logoAsset.url}
+      alt="Bewerbungswerkstatt"
+    />
   );
 }
 
@@ -124,7 +130,7 @@ function Header() {
   return (
     <>
       <header className="hero-header">
-        <LogoPlaceholder />
+        <BrandLogo dark />
         <nav aria-label="Hauptnavigation">
           <a href="#herausforderung">Herausforderung</a>
           <a href="#loesung">Lösung</a>
@@ -136,7 +142,7 @@ function Header() {
         <a className="button button--primary" href="#kontakt">Erstgespräch buchen</a>
       </header>
       <header className={`sticky-header ${scrolled ? "sticky-header--visible" : ""}`} aria-hidden={!scrolled}>
-        <LogoPlaceholder compact />
+        <BrandLogo />
         <a className="button button--primary" href="#kontakt">Erstgespräch buchen</a>
       </header>
     </>
@@ -202,7 +208,7 @@ function Index() {
             <article><span className="service-icon"><FilePenLine /></span><h3>Komplett neues Dossier erstellen</h3><p>Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</p></article>
             <article><span className="service-icon"><MapPin /></span><h3>Lokale Expertise</h3><p>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</p></article>
           </div>
-          <div className="local-banner"><span>🇨🇭</span><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
+          <div className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
         </div>
       </section>
 
@@ -228,15 +234,15 @@ function Index() {
       <section className="experts section-white" id="experten">
         <div className="container container--experts">
           <h2>Ihre Experten</h2>
-          <div className="expert-row"><div className="photo-placeholder">Foto folgt</div><div><h3>Audelia Babbev-Pittet</h3><p className="expert-role">Bewerbungsspezialistin im Finanz- Versicherungs- und Back Office Sektor</p><p>Mit mehr als 5 Jahre Erfahrung in der Beratung von Stellensuchenden habe ich es mir zur Aufgabe gemacht, Sie dabei zu unterstützen, sich authentisch und überzeugend zu bewerben.</p><p>Ich schreibe Bewerbungen mit Leidenschaft - und das widerspiegelt sich in jedem Text. In einer Welt voller KI-generierter Lebensläufe und Motivationsschreiben zeige ich Ihnen, wie Sie mit ehrlichen, menschlichen Worten den Unterschied machen. Als lokale Beraterin in der Deutschschweiz kenne ich den Markt und weiss, worauf Rekruter wirklich achten.</p></div></div>
-          <div className="expert-row"><div className="photo-placeholder">Foto folgt</div><div><h3>Daniel Babbev</h3><p className="expert-role">Bewerbungsspezialist im IT Sektor</p><p>Als Softwareingenieur mit über 10 Jahren Erfahrung weiss ich genau, worauf es bei technischen Bewerbungen ankommt. Ich habe mich darauf spezialisiert, Ihre technischen Kenntnisse, Projekte und Fähigkeiten überzeugend und professionell auf Papier zu bringen.</p><p>Als jemand, der selbst für die Besetzung mehrerer Stellen verantwortlich war, weiss ich genau, worauf technische Rekruter achten - und wie ich Ihren Lebenslauf genau dort positioniere.</p></div></div>
+          <div className="expert-row"><img className="expert-photo expert-photo--audelia" src={audeliaAsset.url} alt="Audelia Babbev-Pittet" /><div><h3>Audelia Babbev-Pittet</h3><p className="expert-role">Bewerbungsspezialistin im Finanz- Versicherungs- und Back Office Sektor</p><p>Mit mehr als 5 Jahre Erfahrung in der Beratung von Stellensuchenden habe ich es mir zur Aufgabe gemacht, Sie dabei zu unterstützen, sich authentisch und überzeugend zu bewerben.</p><p>Ich schreibe Bewerbungen mit Leidenschaft - und das widerspiegelt sich in jedem Text. In einer Welt voller KI-generierter Lebensläufe und Motivationsschreiben zeige ich Ihnen, wie Sie mit ehrlichen, menschlichen Worten den Unterschied machen. Als lokale Beraterin in der Deutschschweiz kenne ich den Markt und weiss, worauf Rekruter wirklich achten.</p></div></div>
+          <div className="expert-row"><img className="expert-photo" src={danielAsset.url} alt="Daniel Babbev" /><div><h3>Daniel Babbev</h3><p className="expert-role">Bewerbungsspezialist im IT Sektor</p><p>Als Softwareingenieur mit über 10 Jahren Erfahrung weiss ich genau, worauf es bei technischen Bewerbungen ankommt. Ich habe mich darauf spezialisiert, Ihre technischen Kenntnisse, Projekte und Fähigkeiten überzeugend und professionell auf Papier zu bringen.</p><p>Als jemand, der selbst für die Besetzung mehrerer Stellen verantwortlich war, weiss ich genau, worauf technische Rekruter achten - und wie ich Ihren Lebenslauf genau dort positioniere.</p></div></div>
         </div>
       </section>
 
       <section className="contact section-dark" id="kontakt">
         <div className="container contact-inner"><div><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></div><div className="contact-list"><a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a><a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a><div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div><a className="button button--primary button--wide" href="mailto:audelia@bewerbungswerkstatt.ch?subject=Erstgespräch">Erstgespräch buchen</a></div></div>
       </section>
-      <footer><LogoPlaceholder compact /><p>© 2026 Bewerbungswerkstatt. Alle Rechte vorbehalten.</p></footer>
+      <footer><BrandLogo dark /><p>© 2026 Bewerbungswerkstatt. Alle Rechte vorbehalten.</p></footer>
     </main>
   );
 }
