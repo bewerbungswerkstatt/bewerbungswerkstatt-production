@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import {
   ArrowRight,
   Check,
@@ -15,7 +16,11 @@ import {
   Star,
   X,
 } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { submitContact } from "@/lib/contact.functions";
+import { contactSchema } from "@/lib/contact-schema";
 import audeliaAsset from "../assets/audelia.jpg.asset.json";
 import danielAsset from "../assets/daniel.jpg.asset.json";
 import darkLogoAsset from "../assets/logo_darkmode.png.asset.json";
@@ -270,6 +275,77 @@ function Header() {
   );
 }
 
+function ContactSection() {
+  const send = useServerFn(submitContact);
+  const [sending, setSending] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (sending) return;
+    const form = event.currentTarget;
+    const fields = new FormData(form);
+    const parsed = contactSchema.safeParse({
+      name: fields.get("name"),
+      email: fields.get("email"),
+      message: fields.get("message"),
+      website: fields.get("website"),
+    });
+    if (!parsed.success) {
+      const errors: Record<string, string> = {};
+      for (const issue of parsed.error.issues) errors[String(issue.path[0])] ??= issue.message;
+      setFieldErrors(errors);
+      return;
+    }
+    setFieldErrors({});
+    setError("");
+    setSending(true);
+    try {
+      await send({ data: parsed.data });
+      form.reset();
+      setSuccessOpen(true);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <section className="contact section-dark" id="kontakt">
+      <div className="container contact-inner">
+        <div className="contact-left">
+          <RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock>
+          <RevealBlock className="contact-list" delay={1}>
+            <a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a>
+            <a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a>
+            <div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div>
+          </RevealBlock>
+        </div>
+        <RevealBlock className="contact-form-wrap" delay={1}>
+          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <div className="contact-field"><label htmlFor="contact-name">Name</label><input id="contact-name" name="name" autoComplete="name" maxLength={100} aria-invalid={!!fieldErrors.name} aria-describedby={fieldErrors.name ? "contact-name-error" : undefined} required />{fieldErrors.name && <small id="contact-name-error" className="contact-field-error">{fieldErrors.name}</small>}</div>
+            <div className="contact-field"><label htmlFor="contact-email">E-Mail</label><input id="contact-email" name="email" type="email" autoComplete="email" maxLength={255} aria-invalid={!!fieldErrors.email} aria-describedby={fieldErrors.email ? "contact-email-error" : undefined} required />{fieldErrors.email && <small id="contact-email-error" className="contact-field-error">{fieldErrors.email}</small>}</div>
+            <div className="contact-field"><label htmlFor="contact-message">Nachricht</label><textarea id="contact-message" name="message" rows={6} maxLength={2000} aria-invalid={!!fieldErrors.message} aria-describedby={fieldErrors.message ? "contact-message-error" : undefined} required />{fieldErrors.message && <small id="contact-message-error" className="contact-field-error">{fieldErrors.message}</small>}</div>
+            <div className="contact-honeypot" aria-hidden="true"><label htmlFor="contact-website">Website</label><input id="contact-website" name="website" tabIndex={-1} autoComplete="off" /></div>
+            {error && <p className="contact-submit-error" role="alert">{error}</p>}
+            <Button className="button button--primary button--wide" type="submit" disabled={sending}>{sending ? "Wird gesendet …" : "Nachricht absenden"}</Button>
+          </form>
+        </RevealBlock>
+      </div>
+      <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
+        <DialogContent className="contact-success-dialog">
+          <DialogTitle>Vielen Dank für Ihre Nachricht.</DialogTitle>
+          <DialogDescription>Wir melden uns innerhalb von zwei Arbeitstagen bei Ihnen.</DialogDescription>
+          <Button className="button button--primary" onClick={() => setSuccessOpen(false)}>Schliessen</Button>
+        </DialogContent>
+      </Dialog>
+    </section>
+  );
+}
+
 function Index() {
   return (
     <main>
@@ -369,9 +445,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="contact section-dark" id="kontakt">
-        <div className="container contact-inner"><RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock><RevealBlock className="contact-list" delay={1}><a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a><a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a><div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div><a className="button button--primary button--wide" href="mailto:audelia@bewerbungswerkstatt.ch?subject=Erstgespräch">Erstgespräch buchen</a></RevealBlock></div>
-      </section>
+      <ContactSection />
       <footer><p>© 2026 Digital Trust Solutions GmbH</p></footer>
     </main>
   );

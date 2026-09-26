@@ -13,3 +13,4 @@
 
 - Keep the Bewerbungswerkstatt experience as one anchor-navigated landing page because the source site and requested scroll interactions form one continuous journey.
 - Keep the three labour-market statistic cards equal-height, stack them below 980px, and reveal them upward on first scroll into view so the layout stays legible.
+- Persist contact submissions through a validated server function into a private Cloud table; never claim success until the insert succeeds, because messages contain personal details.
