@@ -160,7 +160,17 @@ function Index() {
           <p className="hero-lead">Wir helfen Ihnen, Ihren besten Lebenslauf zu schreiben — authentisch,<br className="desktop-break" /> überzeugend und menschlich. Keine generischen Phrasen, sondern<br className="desktop-break" /> echte Worte, die Recruiter überzeugen.</p>
         </div>
         <div className="application-field" aria-hidden="true">
-          {Array.from({ length: 24 }, (_, index) => <div className={`application-card ${index === 2 ? "application-card--active" : ""}`} key={index}><i /><b /><b /><b /></div>)}
+          {["application-row--right", "application-row--left"].map((direction, row) => (
+            <div className={`application-row ${direction}`} key={direction}>
+              <div className="application-track">
+                {Array.from({ length: 32 }, (_, index) => {
+                  const position = index % 16;
+                  const active = row === 0 ? position === 12 : position === 4;
+                  return <div className={`application-card ${active ? "application-card--active" : ""}`} key={index}><i /><span><b /><b /><b /><b /></span><em><b /><b /><b /></em></div>;
+                })}
+              </div>
+            </div>
+          ))}
         </div>
         <p className="hero-caption">Hunderte Bewerbungen. Fast alle identisch. Welche sticht heraus?</p>
       </section>
