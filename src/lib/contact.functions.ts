@@ -50,7 +50,7 @@ export const submitContact = createServerFn({ method: "POST" })
         },
         body: JSON.stringify({
           from: "Bewerbungswerkstatt <onboarding@resend.dev>",
-          to: ["audelia@bewerbungswerkstatt.ch"],
+          to: [contactToEmail],
           reply_to: data.email,
           subject: `Neue Nachricht von ${data.name}`,
           html: `<p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`,
