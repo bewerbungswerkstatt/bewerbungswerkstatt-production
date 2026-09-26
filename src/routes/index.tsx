@@ -137,6 +137,46 @@ function MarketStats() {
   );
 }
 
+function useScrollReveal(threshold = 0.18) {
+  const ref = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, visible };
+}
+
+function StepCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
+  const { ref, visible } = useScrollReveal();
+  return (
+    <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
+      <span className="step-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
+    </article>
+  );
+}
+
+function ComparisonCard({ title, issue, answer }: { title: string; issue: string; answer: string }) {
+  const { ref, visible } = useScrollReveal(0.12);
+  return (
+    <article ref={ref} className={`comparison-row scroll-reveal ${visible ? "scroll-reveal--visible" : ""}`}>
+      <div><h4>{title}</h4><p>{issue}</p></div>
+      <span className="arrow"><ArrowRight /></span>
+      <strong>{answer}</strong>
+    </article>
+  );
+}
+
 function SectionHeading({ children, subline, light = false }: { children: ReactNode; subline?: string; light?: boolean }) {
   return (
     <div className={`section-heading ${light ? "section-heading--light" : ""}`}>
@@ -261,18 +301,14 @@ function Index() {
         <div className="container">
           <SectionHeading light subline="Drei Schritte zu einer Bewerbung, die wirklich überzeugt.">So machen Sie den Unterschied</SectionHeading>
           <div className="steps">
-            <article><span className="step-icon"><Search /></span><h3>Menschliche Analyse</h3><p>Ein echter Experte analysiert Ihren Lebenslauf — nicht ein Algorithmus, sondern jemand, der den Schweizer Arbeitsmarkt kennt.</p></article>
-            <article><span className="step-icon"><Star /></span><h3>Erster Eindruck optimieren</h3><p>Struktur, Layout, Kernaussagen — wir optimieren alles, was in den ersten 8 Sekunden zählt.</p></article>
-            <article><span className="step-icon"><PenLine /></span><h3>Ehrlicher, menschlicher Text</h3><p>Keine generischen KI-Phrasen. Echte Worte, die Ihre tatsächlichen Stärken und Erfahrungen zeigen.</p></article>
+            <StepCard icon={<Search />} title="Menschliche Analyse">Ein echter Experte analysiert Ihren Lebenslauf — nicht ein Algorithmus, sondern jemand, der den Schweizer Arbeitsmarkt kennt.</StepCard>
+            <StepCard icon={<Star />} title="Erster Eindruck optimieren" delay={1}>Struktur, Layout, Kernaussagen — wir optimieren alles, was in den ersten 8 Sekunden zählt.</StepCard>
+            <StepCard icon={<PenLine />} title="Ehrlicher, menschlicher Text" delay={2}>Keine generischen KI-Phrasen. Echte Worte, die Ihre tatsächlichen Stärken und Erfahrungen zeigen.</StepCard>
           </div>
           <div className="comparison-heading"><h3>Der Unterschied auf einen Blick</h3><p>Typische Fehler in Schweizer Bewerbungen — und wie es besser geht.</p></div>
           <div className="comparisons">
             {comparisons.map(([title, issue, answer]) => (
-              <article className="comparison-row" key={title}>
-                <div><h4>{title}</h4><p>{issue}</p></div>
-                <span className="arrow"><ArrowRight /></span>
-                <strong>{answer}</strong>
-              </article>
+              <ComparisonCard title={title} issue={issue} answer={answer} key={title} />
             ))}
           </div>
         </div>
