@@ -5,6 +5,8 @@ import { contactSchema } from "@/lib/contact-schema";
 const escapeHtml = (value: string) =>
   value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
+const SAFE_ERROR = "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.";
+
 export const Route = createFileRoute("/api/contact")({
   server: {
     handlers: {
@@ -30,58 +32,18 @@ export const Route = createFileRoute("/api/contact")({
         }
         const data = parsed.data;
 
-        // A hidden field catches automated submissions without showing a success for unsaved messages.
+        // A hidden field catches automated submissions without showing a success message.
         if (data.website) {
-          return Response.json({ error: "Ihre Nachricht konnte nicht gesendet werden." }, { status: 400 });
-        }
-
-        const { createHash } = await import("node:crypto");
-        const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-real-ip") ?? "unknown";
-        const salt = process.env["SUPABASE_SERVICE_ROLE_KEY"] ?? "contact-form";
-        const ipHash = createHash("sha256").update(`${salt}:${ip}`).digest("hex");
-
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const windowStart = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-        const { count, error: countError } = await supabaseAdmin
-          .from("contact_messages")
-          .select("id", { count: "exact", head: true })
-          .eq("ip_hash", ipHash)
-          .gte("created_at", windowStart);
-        if (countError) {
-          return Response.json(
-            { error: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut." },
-            { status: 500 },
-          );
-        }
-        if ((count ?? 0) >= 5) {
-          return Response.json(
-            { error: "Zu viele Nachrichten. Bitte versuchen Sie es später erneut." },
-            { status: 429 },
-          );
-        }
-
-        const { error } = await supabaseAdmin.from("contact_messages").insert({
-          name: data.name,
-          email: data.email,
-          message: data.message,
-          ip_hash: ipHash,
-        });
-        if (error) {
-          return Response.json(
-            { error: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut." },
-            { status: 500 },
-          );
+          return Response.json({ error: SAFE_ERROR }, { status: 400 });
         }
 
         const resendApiKey = process.env["RESEND_API_KEY"];
         const contactToEmail = process.env["CONTACT_TO_EMAIL"];
-        const safeError = Response.json(
-          { error: "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut." },
-          { status: 500 },
-        );
         if (!resendApiKey || !contactToEmail) {
-          console.error("Kontaktformular: RESEND_API_KEY oder CONTACT_TO_EMAIL fehlt.");
-          return safeError;
+          console.error(
+            "Kontaktformular: RESEND_API_KEY oder CONTACT_TO_EMAIL ist auf dem Server nicht gesetzt.",
+          );
+          return Response.json({ error: SAFE_ERROR }, { status: 500 });
         }
 
         const from = "Bewerbungswerkstatt <kontakt@bewerbungswerkstatt.ch>";
@@ -99,33 +61,22 @@ export const Route = createFileRoute("/api/contact")({
             html,
             text,
           });
-          if (sendError) throw new Error(`${sendError.name}: ${sendError.message}`);
+          if (sendError) {
+            console.error(
+              `Resend-Versand fehlgeschlagen [${sendError.name}]: ${sendError.message}`,
+              { to: contactToEmail, from, subject, name: data.name, email: data.email },
+            );
+            return Response.json({ error: SAFE_ERROR }, { status: 500 });
+          }
         } catch (sendFailure) {
-          // In der Lovable-Vorschau ist der Schlüssel ein Connector-Schlüssel;
-          // nur dort existiert LOVABLE_API_KEY und der Gateway-Weg greift.
-          const lovableApiKey = process.env["LOVABLE_API_KEY"];
-          if (!lovableApiKey) {
-            console.error("Resend-Versand fehlgeschlagen:", sendFailure);
-            return safeError;
-          }
-          try {
-            const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${lovableApiKey}`,
-                "X-Connection-Api-Key": resendApiKey,
-              },
-              body: JSON.stringify({ from, to: [contactToEmail], reply_to: data.email, subject, html, text }),
-            });
-            if (!response.ok) {
-              console.error(`Resend-Versand fehlgeschlagen [${response.status}]: ${await response.text()}`, sendFailure);
-              return safeError;
-            }
-          } catch (fallbackError) {
-            console.error("Resend-Versand fehlgeschlagen:", sendFailure, fallbackError);
-            return safeError;
-          }
+          console.error("Resend-Versand fehlgeschlagen:", sendFailure, {
+            to: contactToEmail,
+            from,
+            subject,
+            name: data.name,
+            email: data.email,
+          });
+          return Response.json({ error: SAFE_ERROR }, { status: 500 });
         }
 
         return Response.json({ success: true }, { status: 200 });
