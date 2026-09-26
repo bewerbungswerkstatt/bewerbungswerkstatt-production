@@ -79,14 +79,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .application-track { width: max-content; display: flex; gap: 12px; will-change: transform; }
 .application-row--right .application-track { animation: applications-right 70s linear infinite; }
 .application-row--left .application-track { animation: applications-left 70s linear infinite; }
-.application-card { width: 92px; height: 108px; flex: 0 0 92px; padding: 14px 10px; border: 1px solid oklch(0.48 0.08 245 / .28); border-radius: 3px; background: oklch(0.205 0.035 258); }
-.application-card i { float: left; display: block; width: 13px; height: 13px; border-radius: 50%; background: oklch(0.4 0.04 250 / .7); margin: 0 7px 9px 0; }
-.application-card span { display: block; height: 22px; padding-top: 1px; }
-.application-card b { display: block; width: 72%; height: 2px; background: oklch(0.48 0.08 245 / .5); margin: 4px 0; }
-.application-card span b { width: 55%; }
-.application-card span b:first-child { width: 73%; }
-.application-card em { clear: both; display: block; padding-top: 7px; font-style: normal; }
+.application-card { position: relative; width: 92px; height: 108px; flex: 0 0 92px; padding: 14px 10px; border: 1px solid oklch(0.48 0.08 245 / .28); border-radius: 3px; background: oklch(0.205 0.035 258); }
+.application-card__heading { display: flex; align-items: center; gap: 7px; height: 17px; margin-bottom: 8px; }
+.application-card__heading i { display: block; width: 13px; height: 13px; flex: 0 0 13px; border-radius: 50%; background: oklch(0.4 0.04 250 / .7); }
+.application-card__heading span { width: 36px; }
+.application-card b { display: block; width: 72%; height: 2px; background: oklch(0.48 0.08 245 / .5); margin: 4px 0; border-radius: 2px; }
+.application-card__heading b { width: 70%; margin: 3px 0; }
+.application-card__heading b:first-child { width: 100%; }
+.application-card--letter .application-card__heading span { width: 53px; }
+.application-card em { display: block; font-style: normal; }
 .application-card em b:nth-child(2) { width: 84%; }
+.application-card em b:nth-child(3) { width: 76%; }
+.application-card em b:nth-child(4) { width: 88%; }
+.application-card em b:nth-child(5) { width: 65%; }
+.application-card small { position: absolute; left: 10px; bottom: 8px; display: flex; gap: 3px; }
+.application-card small b { width: 18px; height: 5px; margin: 0; border-radius: 999px; background: oklch(0.32 0.09 244); }
 .application-card--active { border: 2px solid var(--primary); box-shadow: 0 0 18px oklch(0.62 0.16 242 / .48); background: oklch(0.225 0.055 252); }
 .application-card--active b { background: oklch(0.58 0.15 242 / .9); }
 @keyframes applications-right { from { transform: translateX(calc(-50% - 6px)); } to { transform: translateX(0); } }
