@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import {
   ArrowRight,
   Check,
@@ -19,8 +18,7 @@ import {
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { submitContact } from "@/lib/contact.functions";
-import { contactSchema } from "@/lib/contact-schema";
+import { contactSchema, type ContactFormValues } from "@/lib/contact-schema";
 import audeliaAsset from "../assets/audelia.jpg.asset.json";
 import danielAsset from "../assets/daniel.jpg.asset.json";
 import darkLogoAsset from "../assets/logo_darkmode.png.asset.json";
@@ -276,7 +274,6 @@ function Header() {
 }
 
 function ContactSection() {
-  const send = useServerFn(submitContact);
   const [sending, setSending] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [error, setError] = useState("");
@@ -303,7 +300,18 @@ function ContactSection() {
     setError("");
     setSending(true);
     try {
-      await send({ data: parsed.data });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+      const result = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string; fieldErrors?: Record<string, string> }
+        | null;
+      if (!response.ok) {
+        if (result?.fieldErrors) setFieldErrors(result.fieldErrors);
+        throw new Error(result?.error ?? "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+      }
       form.reset();
       setSuccessOpen(true);
     } catch (cause) {
