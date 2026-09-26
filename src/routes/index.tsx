@@ -274,7 +274,6 @@ function Header() {
 }
 
 function ContactSection() {
-  const send = useServerFn(submitContact);
   const [sending, setSending] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [error, setError] = useState("");
@@ -301,7 +300,18 @@ function ContactSection() {
     setError("");
     setSending(true);
     try {
-      await send({ data: parsed.data });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+      const result = (await response.json().catch(() => null)) as
+        | { ok?: boolean; error?: string; fieldErrors?: Record<string, string> }
+        | null;
+      if (!response.ok) {
+        if (result?.fieldErrors) setFieldErrors(result.fieldErrors);
+        throw new Error(result?.error ?? "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+      }
       form.reset();
       setSuccessOpen(true);
     } catch (cause) {
