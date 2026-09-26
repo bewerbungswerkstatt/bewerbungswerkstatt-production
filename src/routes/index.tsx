@@ -137,8 +137,8 @@ function MarketStats() {
   );
 }
 
-function useScrollReveal(threshold = 0.18) {
-  const ref = useRef<HTMLElement>(null);
+function useScrollReveal<T extends HTMLElement = HTMLDivElement>(threshold = 0.18) {
+  const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -158,7 +158,7 @@ function useScrollReveal(threshold = 0.18) {
 }
 
 function StepCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
-  const { ref, visible } = useScrollReveal();
+  const { ref, visible } = useScrollReveal<HTMLElement>();
   return (
     <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
       <span className="step-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
@@ -167,7 +167,7 @@ function StepCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title
 }
 
 function ComparisonCard({ title, issue, answer }: { title: string; issue: string; answer: string }) {
-  const { ref, visible } = useScrollReveal(0.12);
+  const { ref, visible } = useScrollReveal<HTMLElement>(0.12);
   return (
     <article ref={ref} className={`comparison-row scroll-reveal ${visible ? "scroll-reveal--visible" : ""}`}>
       <div><h4>{title}</h4><p>{issue}</p></div>
@@ -177,9 +177,24 @@ function ComparisonCard({ title, issue, answer }: { title: string; issue: string
   );
 }
 
-function SectionHeading({ children, subline, light = false }: { children: ReactNode; subline?: string; light?: boolean }) {
+function RevealBlock({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const { ref, visible } = useScrollReveal();
+  return <div ref={ref} className={`${className} scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>{children}</div>;
+}
+
+function ServiceCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
+  const { ref, visible } = useScrollReveal<HTMLElement>();
   return (
-    <div className={`section-heading ${light ? "section-heading--light" : ""}`}>
+    <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
+      <span className="service-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
+    </article>
+  );
+}
+
+function SectionHeading({ children, subline, light = false }: { children: ReactNode; subline?: string; light?: boolean }) {
+  const { ref, visible } = useScrollReveal();
+  return (
+    <div ref={ref} className={`section-heading scroll-reveal ${light ? "section-heading--light" : ""} ${visible ? "scroll-reveal--visible" : ""}`}>
       <h2>{children}</h2>
       {subline ? <p>{subline}</p> : null}
     </div>
@@ -305,7 +320,7 @@ function Index() {
             <StepCard icon={<Star />} title="Erster Eindruck optimieren" delay={1}>Struktur, Layout, Kernaussagen — wir optimieren alles, was in den ersten 8 Sekunden zählt.</StepCard>
             <StepCard icon={<PenLine />} title="Ehrlicher, menschlicher Text" delay={2}>Keine generischen KI-Phrasen. Echte Worte, die Ihre tatsächlichen Stärken und Erfahrungen zeigen.</StepCard>
           </div>
-          <div className="comparison-heading"><h3>Der Unterschied auf einen Blick</h3><p>Typische Fehler in Schweizer Bewerbungen — und wie es besser geht.</p></div>
+          <RevealBlock className="comparison-heading"><h3>Der Unterschied auf einen Blick</h3><p>Typische Fehler in Schweizer Bewerbungen — und wie es besser geht.</p></RevealBlock>
           <div className="comparisons">
             {comparisons.map(([title, issue, answer]) => (
               <ComparisonCard title={title} issue={issue} answer={answer} key={title} />
@@ -318,17 +333,17 @@ function Index() {
         <div className="container container--narrow">
           <SectionHeading subline="Massgeschneiderte Unterstützung in Deutsch und Englisch.">Unsere Dienstleistungen</SectionHeading>
           <div className="service-grid">
-            <article><span className="service-icon"><ClipboardCheck /></span><h3>Einen CV, der beim ersten Eindruck überzeugt.</h3><p>Persönliche Analyse Ihres Lebenslaufs mit einem Experten. Wir identifizieren Schwachstellen und erarbeiten gemeinsam eine überzeugende Darstellung Ihrer Laufbahn.</p></article>
-            <article><span className="service-icon"><MessageSquare /></span><h3>Ein Motivationsschreiben, das auf die Anforderungen der Stelle zugeschnitten ist.</h3><p>Wir zeigen Ihnen, wie ein von der Masse herausstechendes Motivationsschreiben aussehen könnte.</p></article>
-            <article><span className="service-icon"><FilePenLine /></span><h3>Komplett neues Dossier erstellen</h3><p>Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</p></article>
-            <article><span className="service-icon"><MapPin /></span><h3>Lokale Expertise</h3><p>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</p></article>
+            <ServiceCard icon={<ClipboardCheck />} title="Einen CV, der beim ersten Eindruck überzeugt.">Persönliche Analyse Ihres Lebenslaufs mit einem Experten. Wir identifizieren Schwachstellen und erarbeiten gemeinsam eine überzeugende Darstellung Ihrer Laufbahn.</ServiceCard>
+            <ServiceCard icon={<MessageSquare />} title="Ein Motivationsschreiben, das auf die Anforderungen der Stelle zugeschnitten ist." delay={1}>Wir zeigen Ihnen, wie ein von der Masse herausstechendes Motivationsschreiben aussehen könnte.</ServiceCard>
+            <ServiceCard icon={<FilePenLine />} title="Komplett neues Dossier erstellen">Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</ServiceCard>
+            <ServiceCard icon={<MapPin />} title="Lokale Expertise" delay={1}>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</ServiceCard>
           </div>
           <div className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></div>
         </div>
       </section>
 
       <section className="reviews section-light" aria-labelledby="reviews-title">
-        <h2 id="reviews-title">Das sagen unsere Kunden</h2>
+        <RevealBlock className="reviews-heading"><h2 id="reviews-title">Das sagen unsere Kunden</h2></RevealBlock>
         <div className="review-marquee">
           <div className="review-track">
             {[...reviews, ...reviews].map(([quote, name], index) => <article className="review-card" key={`${name}-${index}`}><p>{quote}</p><strong>{name}</strong></article>)}
@@ -348,14 +363,14 @@ function Index() {
 
       <section className="experts section-white" id="experten">
         <div className="container container--experts">
-          <h2>Ihre Experten</h2>
+          <RevealBlock className="experts-heading"><h2>Ihre Experten</h2></RevealBlock>
           <div className="expert-row"><img className="expert-photo expert-photo--audelia" src={audeliaAsset.url} alt="Audelia Babbev-Pittet" /><div><h3>Audelia Babbev-Pittet</h3><p className="expert-role">Bewerbungsspezialistin im Finanz- Versicherungs- und Back Office Sektor</p><p>Mit mehr als 5 Jahre Erfahrung in der Beratung von Stellensuchenden habe ich es mir zur Aufgabe gemacht, Sie dabei zu unterstützen, sich authentisch und überzeugend zu bewerben.</p><p>Ich schreibe Bewerbungen mit Leidenschaft - und das widerspiegelt sich in jedem Text. In einer Welt voller KI-generierter Lebensläufe und Motivationsschreiben zeige ich Ihnen, wie Sie mit ehrlichen, menschlichen Worten den Unterschied machen. Als lokale Beraterin in der Deutschschweiz kenne ich den Markt und weiss, worauf Rekruter wirklich achten.</p></div></div>
           <div className="expert-row"><img className="expert-photo" src={danielAsset.url} alt="Daniel Babbev" /><div><h3>Daniel Babbev</h3><p className="expert-role">Bewerbungsspezialist im IT Sektor</p><p>Als Softwareingenieur mit über 10 Jahren Erfahrung weiss ich genau, worauf es bei technischen Bewerbungen ankommt. Ich habe mich darauf spezialisiert, Ihre technischen Kenntnisse, Projekte und Fähigkeiten überzeugend und professionell auf Papier zu bringen.</p><p>Als jemand, der selbst für die Besetzung mehrerer Stellen verantwortlich war, weiss ich genau, worauf technische Rekruter achten - und wie ich Ihren Lebenslauf genau dort positioniere.</p></div></div>
         </div>
       </section>
 
       <section className="contact section-dark" id="kontakt">
-        <div className="container contact-inner"><div><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></div><div className="contact-list"><a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a><a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a><div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div><a className="button button--primary button--wide" href="mailto:audelia@bewerbungswerkstatt.ch?subject=Erstgespräch">Erstgespräch buchen</a></div></div>
+        <div className="container contact-inner"><RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock><div className="contact-list"><a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a><a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a><div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div><a className="button button--primary button--wide" href="mailto:audelia@bewerbungswerkstatt.ch?subject=Erstgespräch">Erstgespräch buchen</a></div></div>
       </section>
       <footer><BrandLogo dark /><p>© 2026 Bewerbungswerkstatt. Alle Rechte vorbehalten.</p></footer>
     </main>
