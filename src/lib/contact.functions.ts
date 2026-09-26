@@ -37,7 +37,8 @@ export const submitContact = createServerFn({ method: "POST" })
     try {
       const lovableApiKey = process.env['LOVABLE_API_KEY'];
       const resendApiKey = process.env['RESEND_API_KEY'];
-      if (!lovableApiKey || !resendApiKey) throw new Error("Resend ist nicht konfiguriert.");
+      const contactToEmail = process.env['CONTACT_TO_EMAIL'];
+      if (!lovableApiKey || !resendApiKey || !contactToEmail) throw new Error("Resend ist nicht konfiguriert.");
       const escapeHtml = (value: string) =>
         value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
       const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
@@ -49,7 +50,7 @@ export const submitContact = createServerFn({ method: "POST" })
         },
         body: JSON.stringify({
           from: "Bewerbungswerkstatt <onboarding@resend.dev>",
-          to: ["audelia@bewerbungswerkstatt.ch"],
+          to: [contactToEmail],
           reply_to: data.email,
           subject: `Neue Nachricht von ${data.name}`,
           html: `<p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`,
