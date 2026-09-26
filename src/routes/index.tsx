@@ -47,7 +47,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const comparisons = [
+const comparisons: Array<[string, string, string]> = [
   ["Fliesstext im CV", "Wichtige Informationen gehen unter, Text wird nicht gelesen.", "Eine DAS BRINGE ICH MIT Section und Stichwortartige Aufzählung."],
   ["Person auf dem Bild wendet sich GEGEN den CV", "Macht psychologisch einen unsauberen Eindruck", "Das Bild muss gespiegelt werden."],
   ["Wichtiges fehlt im Lebenslauf", "Rekrutierer finden die relevanten Infos nicht.", "Unbedingt darauf achten, dass der Lebenslauf vollständig ist."],
