@@ -30,5 +30,37 @@ export const submitContact = createServerFn({ method: "POST" })
       ip_hash: ipHash,
     });
     if (error) throw new Error("Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+
+    // E-Mail-Benachrichtigung über Resend. Die Nachricht ist bereits sicher
+    // gespeichert — ein E-Mail-Fehler darf den Versand nicht als fehlgeschlagen
+    // melden, sonst denkt der Absender, seine Nachricht sei verloren.
+    try {
+      const lovableApiKey = process.env['LOVABLE_API_KEY'];
+      const resendApiKey = process.env['RESEND_API_KEY'];
+      if (!lovableApiKey || !resendApiKey) throw new Error("Resend ist nicht konfiguriert.");
+      const escapeHtml = (value: string) =>
+        value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      const response = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${lovableApiKey}`,
+          "X-Connection-Api-Key": resendApiKey,
+        },
+        body: JSON.stringify({
+          from: "Bewerbungswerkstatt <onboarding@resend.dev>",
+          to: ["audelia@bewerbungswerkstatt.ch"],
+          reply_to: data.email,
+          subject: `Neue Nachricht von ${data.name}`,
+          html: `<p><strong>Name:</strong> ${escapeHtml(data.name)}</p><p><strong>E-Mail:</strong> ${escapeHtml(data.email)}</p><p><strong>Nachricht:</strong></p><p>${escapeHtml(data.message).replace(/\n/g, "<br>")}</p>`,
+        }),
+      });
+      if (!response.ok) {
+        const body = await response.text();
+        console.error(`Resend-Benachrichtigung fehlgeschlagen [${response.status}]: ${body}`);
+      }
+    } catch (notifyError) {
+      console.error("Resend-Benachrichtigung fehlgeschlagen:", notifyError);
+    }
     return { success: true };
   });
