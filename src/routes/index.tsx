@@ -111,6 +111,32 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <span ref={ref}>{value}{suffix}</span>;
 }
 
+function MarketStats() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.18 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`market-grid ${visible ? "market-grid--visible" : ""}`}>
+      <article className="stat-card"><div className="stat"><CountUp target={5} /><sup>*</sup></div><h3>Stellensuchende pro offene Stelle</h3><p>Der Schweizer Arbeitsmarkt erlebt einen sehr hohen Wettbewerb.</p></article>
+      <article className="stat-card"><div className="stat stat--word">Mehrheit</div><h3>der Bewerbungen sind identische KI-Lebensläufe</h3><p>ChatGPT, gleiche Prompts, gleiche Resultate.</p></article>
+      <article className="stat-card"><div className="stat"><CountUp target={200} suffix="+" /><sup>**</sup></div><h3>Bewerbungen auf beliebte Finance-Stellen</h3><p>Bei Rollen in Tech, Banking &amp; Finance ist der Wettbewerb besonders hart.</p></article>
+    </div>
+  );
+}
+
 function SectionHeading({ children, subline, light = false }: { children: ReactNode; subline?: string; light?: boolean }) {
   return (
     <div className={`section-heading ${light ? "section-heading--light" : ""}`}>
@@ -225,11 +251,7 @@ function Index() {
       <section className="market section-light" id="herausforderung">
         <div className="container">
           <SectionHeading subline="Kennen Sie das? Hunderte Bewerbungen verschickt, nur generische Absagen erhalten.">Die Realität des Schweizer Arbeitsmarkts</SectionHeading>
-          <div className="market-grid">
-            <article className="stat-card"><div className="stat"><CountUp target={5} /><sup>*</sup></div><h3>Stellensuchende pro offene Stelle</h3><p>Der Schweizer Arbeitsmarkt erlebt einen sehr hohen Wettbewerb.</p></article>
-            <article className="stat-card"><div className="stat stat--word">Mehrheit</div><h3>der Bewerbungen sind identische KI-Lebensläufe</h3><p>ChatGPT, gleiche Prompts, gleiche Resultate.</p></article>
-            <article className="stat-card"><div className="stat"><CountUp target={200} suffix="+" /><sup>**</sup></div><h3>Bewerbungen auf beliebte Finance-Stellen</h3><p>Bei Rollen in Tech, Banking &amp; Finance ist der Wettbewerb besonders hart.</p></article>
-          </div>
+          <MarketStats />
           <p className="market-copy">Der Schweizer Arbeitsmarkt bleibt hart umkämpft: Im März 2026 standen 234’815 registrierten Stellensuchenden 48’843 beim RAV gemeldete offene Stellen gegenüber.<br />Alle benutzen dieselben KI-Tools, um dieselben generischen Lebensläufe und Motivationsschreiben zu erstellen. Ihr CV sieht aus wie jeder andere — und landet auf demselben Stapel.</p>
           <div className="sources"><a href="https://www.seco.admin.ch/seco/de/home/Publikationen_Dienstleistungen/Publikationen_und_Formulare/Arbeit/Arbeitslosenversicherung/Die_Lage_auf_dem_Arbeitsmarkt/lage_arbeitsmarkt_2026.html" target="_blank" rel="noreferrer">* Offizieller Arbeitsmarktbericht 2026 (SECO)</a><a href="https://economicgraph.linkedin.com/" target="_blank" rel="noreferrer">** LinkedIn Economic Graph</a></div>
         </div>
