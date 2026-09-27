@@ -204,7 +204,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .expert-photo { width: 270px; aspect-ratio: 1; display: block; object-fit: cover; object-position: center 24%; border-radius: 8px; box-shadow: var(--shadow); }
 .expert-photo--audelia { object-position: center 18%; }
 .expert-row h3 { margin: 0 0 15px; font-size: 1.2rem; }
-.expert-role { color: var(--primary) !important; text-transform: uppercase; font-weight: 700; font-size: .75rem !important; }
+.expert-role { color: var(--primary) !important; text-transform: uppercase; font-weight: 700; font-size: .75rem !important; margin-bottom: 20px; }
+.expert-lead { margin-bottom: 20px; }
 .expert-row p { color: var(--muted-foreground); font-size: .91rem; }
 
 .contact-inner { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(35px, 7vw, 95px); align-items: start; }
