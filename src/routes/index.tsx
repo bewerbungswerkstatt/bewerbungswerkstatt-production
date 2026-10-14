@@ -328,8 +328,8 @@ function ContactSection() {
           <RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock>
           <RevealBlock className="contact-list" delay={1}>
             <a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a>
-            <a href="tel:+41766295056"><Phone /><span><small>Telefon</small>076 629 50 56</span></a>
-            <div><MapPin /><span><small>Standort</small>Einsiedeln / Deutschschweiz</span></div>
+            <a href="tel:+41766295056"><Phone /><span><small>Telefon</small>+41 76 629 50 56</span></a>
+            <div><MapPin /><span><small>Standort</small>6418 Rothenthurm</span></div>
           </RevealBlock>
         </div>
         <RevealBlock className="contact-form-wrap" delay={1}>
