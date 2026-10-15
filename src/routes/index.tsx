@@ -70,6 +70,7 @@ const reviews = [
   ["«Ich bin schon mehrere Jahre Kundin von Bewerbungswerkstatt und habe bereits einige Interviews ergattert dank ihren Bewerbungsdossiers. :) »", "Melissa H."],
   ["«Ich bin absolut zufrieden mit den Ratschlägen und natürlich mit meinen neuen Bewerbungsunterlagen, mit denen ich sofort erste Interviews ergattert habe.»", "Sarah M."],
   ["«Das Team hat mir geholfen meine Bewerbungsunterlagen professionell zu erstellen und ich wurde zu mehreren ersten Interviews eingeladen!»", "Raphael P."],
+  ["«Sehr speditiv, setzt eigene und Kundenmeinung effizient und präzise um. Sehr netter Kontakt. Danke💪»", "Belinda S."],
 ];
 
 function BrandLogo({ dark = false }: { dark?: boolean }) {
