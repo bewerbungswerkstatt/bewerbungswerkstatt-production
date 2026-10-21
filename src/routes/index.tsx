@@ -71,6 +71,8 @@ const reviews = [
   ["«Ich bin absolut zufrieden mit den Ratschlägen und natürlich mit meinen neuen Bewerbungsunterlagen, mit denen ich sofort erste Interviews ergattert habe.»", "Sarah M."],
   ["«Das Team hat mir geholfen meine Bewerbungsunterlagen professionell zu erstellen und ich wurde zu mehreren ersten Interviews eingeladen!»", "Raphael P."],
   ["«Sehr speditiv, setzt eigene und Kundenmeinung effizient und präzise um. Sehr netter Kontakt. Danke💪»", "Belinda S."],
+  ["«Ich bin sehr zufrieden mit unserer Zusammenarbeit und finde, dass du die CVs und Motivationsschreiben sehr professionell erstellst. Was ich auch sehr gut finde, ist, dass deine Bewerbungsunterlagen trotz all den KI-Technologien, die es gibt, menschlich und authentisch aufgebaut sind, das merkt man!»", "Wladimir F."],
+
 ];
 
 function BrandLogo({ dark = false }: { dark?: boolean }) {
