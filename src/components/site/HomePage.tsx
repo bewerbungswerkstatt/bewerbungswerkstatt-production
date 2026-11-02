@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Check,
@@ -81,7 +80,7 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   return <span ref={ref}>{value}{suffix}</span>;
 }
 
-function MarketStats() {
+function MarketStats({ t }: { t: HomeContent }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -100,9 +99,9 @@ function MarketStats() {
 
   return (
     <div ref={ref} className={`market-grid ${visible ? "market-grid--visible" : ""}`}>
-      <article className="stat-card"><div className="stat"><CountUp target={5} /><sup>*</sup></div><h3>Stellensuchende pro offene Stelle</h3><p>Der Schweizer Arbeitsmarkt erlebt einen sehr hohen Wettbewerb.</p></article>
-      <article className="stat-card"><div className="stat stat--word">Mehrheit</div><h3>der Bewerbungen sind identische KI-Lebensläufe</h3><p>ChatGPT, gleiche Prompts, gleiche Resultate.</p></article>
-      <article className="stat-card"><div className="stat"><CountUp target={200} suffix="+" /><sup>**</sup></div><h3>Bewerbungen auf beliebte Finance-Stellen</h3><p>Bei Rollen in Tech, Banking &amp; Finance ist der Wettbewerb besonders hart.</p></article>
+      <article className="stat-card"><div className="stat"><CountUp target={5} /><sup>*</sup></div><h3>{t.stats[0][0]}</h3><p>{t.stats[0][1]}</p></article>
+      <article className="stat-card"><div className="stat stat--word">{t.stats[1][0]}</div><h3>{t.stats[1][1]}</h3><p>{t.stats[1][2]}</p></article>
+      <article className="stat-card"><div className="stat"><CountUp target={200} suffix="+" /><sup>**</sup></div><h3>{t.stats[2][0]}</h3><p>{t.stats[2][1]}</p></article>
     </div>
   );
 }
@@ -152,11 +151,12 @@ function RevealBlock({ children, className = "", delay = 0 }: { children: ReactN
   return <div ref={ref} className={`${className} scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>{children}</div>;
 }
 
-function ServiceCard({ icon, title, children, delay = 0 }: { icon: ReactNode; title: string; children: ReactNode; delay?: number }) {
+function ServiceCard({ icon, title, children, delay = 0, href, more }: { icon: ReactNode; title: string; children: ReactNode; delay?: number; href: string; more: string }) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
   return (
     <article ref={ref} className={`scroll-reveal reveal-delay-${delay} ${visible ? "scroll-reveal--visible" : ""}`}>
       <span className="service-icon">{icon}</span><h3>{title}</h3><p>{children}</p>
+      <a className="service-more" href={href}>{more} <ArrowRight /></a>
     </article>
   );
 }
@@ -171,7 +171,7 @@ function SectionHeading({ children, subline, light = false }: { children: ReactN
   );
 }
 
-function Header() {
+function Header({ t }: { t: HomeContent }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
@@ -194,27 +194,21 @@ function Header() {
     };
   }, [menuOpen]);
 
-  const menuLinks = [
-    ["#herausforderung", "Herausforderung"],
-    ["#loesung", "Lösung"],
-    ["#angebot", "Angebot"],
-    ["#preise", "Preise"],
-    ["#experten", "Experten"],
-    ["#kontakt", "Kontakt"],
-  ];
+  const contactHref = t.menu[5]![0];
 
   return (
     <>
       <header className="hero-header">
         <BrandLogo dark />
-        <nav aria-label="Hauptnavigation">
-          {menuLinks.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
+        <nav aria-label={t.navLabel}>
+          {t.menu.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
+          <a href={t.switchHref} className="lang-switch" aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}>{t.switchText}</a>
         </nav>
-        <a className="button button--primary hero-header__cta" href="#kontakt">Erstgespräch buchen</a>
+        <a className="button button--primary hero-header__cta" href={contactHref}>{t.cta}</a>
         <button
           className="menu-toggle"
           type="button"
-          aria-label="Menü öffnen"
+          aria-label={t.menuOpen}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
           onClick={() => setMenuOpen(true)}
@@ -223,28 +217,37 @@ function Header() {
         </button>
       </header>
       <div className={`menu-overlay ${menuOpen ? "menu-overlay--open" : ""}`} aria-hidden={!menuOpen}>
-        <button className="menu-backdrop" type="button" aria-label="Menü schliessen" onClick={() => setMenuOpen(false)} />
-        <aside className="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
-          <button className="menu-close" type="button" aria-label="Menü schliessen" onClick={() => setMenuOpen(false)}><X /></button>
+        <button className="menu-backdrop" type="button" aria-label={t.menuClose} onClick={() => setMenuOpen(false)} />
+        <aside className="mobile-menu" id="mobile-menu" aria-label={t.mobileNavLabel}>
+          <button className="menu-close" type="button" aria-label={t.menuClose} onClick={() => setMenuOpen(false)}><X /></button>
           <nav>
-            {menuLinks.map(([href, label]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+            {t.menu.map(([href, label]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
+            <a href={t.switchHref} hrefLang={t.switchText.toLowerCase()}>{t.switchLabel}</a>
           </nav>
-          <a className="button button--primary button--wide" href="#kontakt" onClick={() => setMenuOpen(false)}>Erstgespräch buchen</a>
+          <a className="button button--primary button--wide" href={contactHref} onClick={() => setMenuOpen(false)}>{t.cta}</a>
         </aside>
       </div>
       <header className={`sticky-header ${scrolled ? "sticky-header--visible" : ""}`} aria-hidden={!scrolled}>
         <BrandLogo />
-        <a className="button button--primary" href="#kontakt">Erstgespräch buchen</a>
+        <a className="button button--primary" href={contactHref}>{t.cta}</a>
       </header>
     </>
   );
 }
 
-function ContactSection() {
+function ContactSection({ t, lang, id }: { t: HomeContent; lang: Lang; id: string }) {
+  const c = t.contact;
   const [sending, setSending] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const localize = (errors: Record<string, string>) => {
+    if (lang === "de") return errors;
+    const out: Record<string, string> = {};
+    for (const key of Object.keys(errors)) out[key] = c.fieldErrors[key] ?? errors[key]!;
+    return out;
+  };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -260,7 +263,7 @@ function ContactSection() {
     if (!parsed.success) {
       const errors: Record<string, string> = {};
       for (const issue of parsed.error.issues) errors[String(issue.path[0])] ??= issue.message;
-      setFieldErrors(errors);
+      setFieldErrors(localize(errors));
       return;
     }
     setFieldErrors({});
@@ -276,60 +279,66 @@ function ContactSection() {
         | { success?: boolean; error?: string; fieldErrors?: Record<string, string> }
         | null;
       if (!response.ok || !result?.success) {
-        if (result?.fieldErrors) setFieldErrors(result.fieldErrors);
-        throw new Error(result?.error ?? "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+        if (result?.fieldErrors) setFieldErrors(localize(result.fieldErrors));
+        throw new Error(lang === "de" ? (result?.error ?? c.genericError) : c.genericError);
       }
       form.reset();
       setSuccessOpen(true);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Ihre Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.");
+      setError(cause instanceof Error ? cause.message : c.genericError);
     } finally {
       setSending(false);
     }
   }
 
   return (
-    <section className="contact section-dark" id="kontakt">
+    <section className="contact section-dark" id={id}>
       <div className="container contact-inner">
         <div className="contact-left">
-          <RevealBlock><p className="eyebrow">Persönlich. Unverbindlich. Auf Augenhöhe.</p><h2>Bereit für den nächsten<br />Karriereschritt?</h2><p>Kontaktieren Sie uns für ein unverbindliches Erstgespräch.</p></RevealBlock>
+          <RevealBlock><p className="eyebrow">{c.eyebrow}</p><h2>{c.title}</h2><p>{c.text}</p></RevealBlock>
           <RevealBlock className="contact-list" delay={1}>
-            <a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>E-Mail</small>audelia@bewerbungswerkstatt.ch</span></a>
-            <a href="tel:+41766295056"><Phone /><span><small>Telefon</small>+41 76 629 50 56</span></a>
-            <div><MapPin /><span><small>Standort</small>6418 Rothenthurm</span></div>
+            <a href="mailto:audelia@bewerbungswerkstatt.ch"><Mail /><span><small>{c.email}</small>audelia@bewerbungswerkstatt.ch</span></a>
+            <a href="tel:+41766295056"><Phone /><span><small>{c.phone}</small>+41 76 629 50 56</span></a>
+            <div><MapPin /><span><small>{c.location}</small>6418 Rothenthurm{lang === "en" ? ", Switzerland" : ""}</span></div>
           </RevealBlock>
         </div>
         <RevealBlock className="contact-form-wrap" delay={1}>
           <form className="contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="contact-field"><label htmlFor="contact-name">Name</label><input id="contact-name" name="name" autoComplete="name" maxLength={100} aria-invalid={!!fieldErrors['name']} aria-describedby={fieldErrors['name'] ? "contact-name-error" : undefined} required />{fieldErrors['name'] && <small id="contact-name-error" className="contact-field-error">{fieldErrors['name']}</small>}</div>
-            <div className="contact-field"><label htmlFor="contact-email">E-Mail</label><input id="contact-email" name="email" type="email" autoComplete="email" maxLength={255} aria-invalid={!!fieldErrors['email']} aria-describedby={fieldErrors['email'] ? "contact-email-error" : undefined} required />{fieldErrors['email'] && <small id="contact-email-error" className="contact-field-error">{fieldErrors['email']}</small>}</div>
-            <div className="contact-field"><label htmlFor="contact-message">Nachricht</label><textarea id="contact-message" name="message" rows={6} maxLength={2000} aria-invalid={!!fieldErrors['message']} aria-describedby={fieldErrors['message'] ? "contact-message-error" : undefined} required />{fieldErrors['message'] && <small id="contact-message-error" className="contact-field-error">{fieldErrors['message']}</small>}</div>
+            <div className="contact-field"><label htmlFor="contact-name">{c.name}</label><input id="contact-name" name="name" autoComplete="name" maxLength={100} aria-invalid={!!fieldErrors['name']} aria-describedby={fieldErrors['name'] ? "contact-name-error" : undefined} required />{fieldErrors['name'] && <small id="contact-name-error" className="contact-field-error">{fieldErrors['name']}</small>}</div>
+            <div className="contact-field"><label htmlFor="contact-email">{c.email}</label><input id="contact-email" name="email" type="email" autoComplete="email" maxLength={255} aria-invalid={!!fieldErrors['email']} aria-describedby={fieldErrors['email'] ? "contact-email-error" : undefined} required />{fieldErrors['email'] && <small id="contact-email-error" className="contact-field-error">{fieldErrors['email']}</small>}</div>
+            <div className="contact-field"><label htmlFor="contact-message">{c.message}</label><textarea id="contact-message" name="message" rows={6} maxLength={2000} aria-invalid={!!fieldErrors['message']} aria-describedby={fieldErrors['message'] ? "contact-message-error" : undefined} required />{fieldErrors['message'] && <small id="contact-message-error" className="contact-field-error">{fieldErrors['message']}</small>}</div>
             <div className="contact-honeypot" aria-hidden="true"><label htmlFor="contact-website">Website</label><input id="contact-website" name="website" tabIndex={-1} autoComplete="off" /></div>
             {error && <p className="contact-submit-error" role="alert">{error}</p>}
-            <Button className="button button--primary button--wide" type="submit" disabled={sending}>{sending ? "Wird gesendet …" : "Nachricht absenden"}</Button>
+            <Button className="button button--primary button--wide" type="submit" disabled={sending}>{sending ? c.sending : c.send}</Button>
           </form>
         </RevealBlock>
       </div>
       <Dialog open={successOpen} onOpenChange={setSuccessOpen}>
         <DialogContent className="contact-success-dialog">
-          <DialogTitle>Vielen Dank für Ihre Nachricht.</DialogTitle>
-          <DialogDescription>Wir melden uns innerhalb von zwei Arbeitstagen bei Ihnen.</DialogDescription>
-          <Button className="button button--primary" onClick={() => setSuccessOpen(false)}>Schliessen</Button>
+          <DialogTitle>{c.successTitle}</DialogTitle>
+          <DialogDescription>{c.successText}</DialogDescription>
+          <Button className="button button--primary" onClick={() => setSuccessOpen(false)}>{c.close}</Button>
         </DialogContent>
       </Dialog>
     </section>
   );
 }
 
-function Index() {
+const serviceIcons = [<ClipboardCheck key="a" />, <MessageSquare key="b" />, <FilePenLine key="c" />, <MapPin key="d" />];
+const stepIcons = [<Search key="a" />, <Star key="b" />, <PenLine key="c" />];
+
+export function HomePage({ lang }: { lang: Lang }) {
+  const t = homeContent[lang];
+  const id = (n: number) => t.menu[n]![0].slice(1);
+  const contactHref = t.menu[5]![0];
   return (
     <main>
       <section className="hero" aria-labelledby="hero-title">
-        <Header />
+        <Header t={t} />
         <div className="hero-copy">
-          <p className="eyebrow">Für Professionals in Tech, Finance &amp; Back Office</p>
-          <h1 id="hero-title">Heben Sie sich ab <strong>von der KI-generierten<br />Masse</strong></h1>
-          <p className="hero-lead">Wir helfen Ihnen, Ihren besten Lebenslauf zu schreiben — authentisch,<br className="desktop-break" /> überzeugend und menschlich. Keine generischen Phrasen, sondern<br className="desktop-break" /> echte Worte, die Recruiter überzeugen.</p>
+          <p className="eyebrow">{t.heroEyebrow}</p>
+          <h1 id="hero-title">{t.heroTitle}</h1>
+          <p className="hero-lead">{t.heroLead}</p>
         </div>
         <div className="application-field" aria-hidden="true">
           {["application-row--right", "application-row--left"].map((direction, row) => (
@@ -351,50 +360,45 @@ function Index() {
             </div>
           ))}
         </div>
-        <p className="hero-caption">Hunderte Bewerbungen. Fast alle identisch. Welche sticht heraus?</p>
+        <p className="hero-caption">{t.heroCaption}</p>
       </section>
 
-      <section className="market section-light" id="herausforderung">
+      <section className="market section-light" id={id(0)}>
         <div className="container">
-          <SectionHeading subline="Kennen Sie das? Hunderte Bewerbungen verschickt, nur generische Absagen erhalten.">Die Realität des Schweizer Arbeitsmarkts</SectionHeading>
-          <MarketStats />
-          <p className="market-copy">Der Schweizer Arbeitsmarkt bleibt hart umkämpft: Im März 2026 standen 234’815 registrierten Stellensuchenden 48’843 beim RAV gemeldete offene Stellen gegenüber.<br />Alle benutzen dieselben KI-Tools, um dieselben generischen Lebensläufe und Motivationsschreiben zu erstellen. Ihr CV sieht aus wie jeder andere — und landet auf demselben Stapel.</p>
-          <div className="sources"><a href="https://www.seco.admin.ch/seco/de/home/Publikationen_Dienstleistungen/Publikationen_und_Formulare/Arbeit/Arbeitslosenversicherung/Die_Lage_auf_dem_Arbeitsmarkt/lage_arbeitsmarkt_2026.html" target="_blank" rel="noreferrer">* Offizieller Arbeitsmarktbericht 2026 (SECO)</a><a href="https://economicgraph.linkedin.com/" target="_blank" rel="noreferrer">** LinkedIn Economic Graph</a></div>
+          <SectionHeading subline={t.marketSub}>{t.marketTitle}</SectionHeading>
+          <MarketStats t={t} />
+          <p className="market-copy">{t.marketCopy}</p>
+          <div className="sources"><a href="https://www.seco.admin.ch/seco/de/home/Publikationen_Dienstleistungen/Publikationen_und_Formulare/Arbeit/Arbeitslosenversicherung/Die_Lage_auf_dem_Arbeitsmarkt/lage_arbeitsmarkt_2026.html" target="_blank" rel="noreferrer">{t.sources[0]}</a><a href="https://economicgraph.linkedin.com/" target="_blank" rel="noreferrer">{t.sources[1]}</a></div>
         </div>
       </section>
 
-      <section className="difference section-dark" id="loesung">
+      <section className="difference section-dark" id={id(1)}>
         <div className="container">
-          <SectionHeading light subline="Drei Schritte zu einer Bewerbung, die wirklich überzeugt.">So machen Sie den Unterschied</SectionHeading>
+          <SectionHeading light subline={t.diffSub}>{t.diffTitle}</SectionHeading>
           <div className="steps">
-            <StepCard icon={<Search />} title="Menschliche Analyse">Ein echter Experte analysiert Ihren Lebenslauf — nicht ein Algorithmus, sondern jemand, der den Schweizer Arbeitsmarkt kennt.</StepCard>
-            <StepCard icon={<Star />} title="Erster Eindruck optimieren" delay={1}>Struktur, Layout, Kernaussagen — wir optimieren alles, was in den ersten 8 Sekunden zählt.</StepCard>
-            <StepCard icon={<PenLine />} title="Ehrlicher, menschlicher Text" delay={2}>Keine generischen KI-Phrasen. Echte Worte, die Ihre tatsächlichen Stärken und Erfahrungen zeigen.</StepCard>
+            {t.steps.map(([title, text], i) => <StepCard icon={stepIcons[i]} title={title} delay={i} key={title}>{text}</StepCard>)}
           </div>
-          <RevealBlock className="comparison-heading"><h3>Der Unterschied auf einen Blick</h3><p>Typische Fehler in Schweizer Bewerbungen — und wie es besser geht.</p></RevealBlock>
+          <RevealBlock className="comparison-heading"><h3>{t.compTitle}</h3><p>{t.compSub}</p></RevealBlock>
           <div className="comparisons">
-            {comparisons.map(([title, issue, answer]) => (
+            {t.comparisons.map(([title, issue, answer]) => (
               <ComparisonCard title={title} issue={issue} answer={answer} key={title} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="services section-white" id="angebot">
+      <section className="services section-white" id={id(2)}>
         <div className="container container--narrow">
-          <SectionHeading subline="Massgeschneiderte Unterstützung in Deutsch und Englisch.">Unsere Dienstleistungen</SectionHeading>
+          <SectionHeading subline={t.servicesSub}>{t.servicesTitle}</SectionHeading>
           <div className="service-grid">
-            <ServiceCard icon={<ClipboardCheck />} title="Einen CV, der beim ersten Eindruck überzeugt.">Persönliche Analyse Ihres Lebenslaufs mit einem Experten. Wir identifizieren Schwachstellen und erarbeiten gemeinsam eine überzeugende Darstellung Ihrer Laufbahn.</ServiceCard>
-            <ServiceCard icon={<MessageSquare />} title="Ein Motivationsschreiben, das auf die Anforderungen der Stelle zugeschnitten ist." delay={1}>Wir zeigen Ihnen, wie ein von der Masse herausstechendes Motivationsschreiben aussehen könnte.</ServiceCard>
-            <ServiceCard icon={<FilePenLine />} title="Komplett neues Dossier erstellen">Professionelle Überarbeitung oder Neuerstellung von Lebenslauf und Motivationsschreiben. Jedes Wort wird sorgfältig gewählt.</ServiceCard>
-            <ServiceCard icon={<MapPin />} title="Lokale Expertise" delay={1}>Unsere Berater kennen den Arbeitsmarkt in der Deutschschweiz — von Tech-Startups über Banken bis zu Back-Office-Positionen.</ServiceCard>
+            {t.services.map(([title, text, href], i) => <ServiceCard icon={serviceIcons[i]} title={title} delay={i % 2} href={href} more={t.more} key={title}>{text}</ServiceCard>)}
           </div>
-          <RevealBlock className="local-banner"><img src={zurichAsset.url} alt="Zürich Panorama" /><span className="swiss-flag" aria-label="Schweizer Flagge" /><div><h3>Lokal verankert. Persönlich engagiert.</h3><p>Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.</p></div></RevealBlock>
+          <RevealBlock className="local-banner"><img src={zurichAsset.url} alt={t.bannerAlt} /><span className="swiss-flag" aria-label={t.flagLabel} /><div><h3>{t.bannerTitle}</h3><p>{t.bannerText}</p></div></RevealBlock>
         </div>
       </section>
 
       <section className="reviews section-light" aria-labelledby="reviews-title">
-        <RevealBlock className="reviews-heading"><h2 id="reviews-title">Das sagen unsere Kunden</h2></RevealBlock>
+        <RevealBlock className="reviews-heading"><h2 id="reviews-title">{t.reviewsTitle}</h2></RevealBlock>
         <div className="review-marquee">
           <div className="review-track">
             {[...reviews, ...reviews].map(([quote, name], index) => <article className="review-card" key={`${name}-${index}`}><p>{quote}</p><strong>{name}</strong></article>)}
@@ -402,26 +406,26 @@ function Index() {
         </div>
       </section>
 
-      <section className="pricing section-light" id="preise">
+      <section className="pricing section-light" id={id(3)}>
         <div className="container container--pricing">
-          <SectionHeading subline="Faire Stundensätze, keine versteckten Kosten.">Transparente Preise</SectionHeading>
+          <SectionHeading subline={t.pricingSub}>{t.pricingTitle}</SectionHeading>
           <div className="pricing-grid">
-            <RevealBlock className="price-card price-card--featured"><span className="pill">Einstieg</span><h3>Analyse &amp; Erstgespräch</h3><div className="price">95 <small>CHF</small></div><p>Online Besprechung bis zu 45 Minuten</p><ul>{["Analyse Ihrer aktuellen Unterlagen", "Identifikation der grössten Verbesserungspotenziale", "Konkreter Massnahmenplan", "Vollständig online", "Unverbindlich"].map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--primary button--wide" href="#kontakt">Termin vereinbaren</a><small className="refund"><ShieldCheck /> Nicht zufrieden? Volle Rückerstattung.</small></RevealBlock>
-            <RevealBlock className="price-card" delay={1}><span className="pill pill--muted">Weiterführend</span><h3>CV-Review &amp; Bearbeitung</h3><div className="price">75 <small>CHF</small></div><p>pro Stunde</p><ul>{["Detaillierte Überarbeitung Lebenslauf", "Motivationsschreiben Optimierung", "Laufende Anpassungen & Feedback", "Auf Ihre Zielbranche zugeschnitten"].map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--outline button--wide" href="#kontakt">Kontakt aufnehmen</a></RevealBlock>
+            <RevealBlock className="price-card price-card--featured"><span className="pill">{t.price1.pill}</span><h3>{t.price1.title}</h3><div className="price">95 <small>CHF</small></div><p>{t.price1.unit}</p><ul>{t.price1.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--primary button--wide" href={contactHref}>{t.price1.button}</a><small className="refund"><ShieldCheck /> {t.price1.refund}</small></RevealBlock>
+            <RevealBlock className="price-card" delay={1}><span className="pill pill--muted">{t.price2.pill}</span><h3>{t.price2.title}</h3><div className="price">75 <small>CHF</small></div><p>{t.price2.unit}</p><ul>{t.price2.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--outline button--wide" href={contactHref}>{t.price2.button}</a></RevealBlock>
           </div>
         </div>
       </section>
 
-      <section className="experts section-white" id="experten">
+      <section className="experts section-white" id={id(4)}>
         <div className="container container--experts">
-          <RevealBlock className="experts-heading"><h2>Ihre Experten</h2></RevealBlock>
-          <RevealBlock className="expert-row"><img className="expert-photo expert-photo--audelia" src={audeliaAsset.url} alt="Audelia Babbev-Pittet" /><div><h3>Audelia Babbev-Pittet</h3><p className="expert-role">Bewerbungsspezialistin im Finanz- Versicherungs- und Back Office Sektor</p><p className="expert-lead">Mit mehr als 5 Jahre Erfahrung in der Beratung von Stellensuchenden habe ich es mir zur Aufgabe gemacht, Sie dabei zu unterstützen, sich authentisch und überzeugend zu bewerben.</p><p>Ich schreibe Bewerbungen mit Leidenschaft - und das widerspiegelt sich in jedem Text. In einer Welt voller KI-generierter Lebensläufe und Motivationsschreiben zeige ich Ihnen, wie Sie mit ehrlichen, menschlichen Worten den Unterschied machen. Als lokale Beraterin in der Deutschschweiz kenne ich den Markt und weiss, worauf Rekruter wirklich achten.</p></div></RevealBlock>
-          <RevealBlock className="expert-row"><img className="expert-photo" src={danielAsset.url} alt="Daniel Babbev" /><div><h3>Daniel Babbev</h3><p className="expert-role">Bewerbungsspezialist im IT Sektor</p><p>Als Softwareingenieur mit über 10 Jahren Erfahrung weiss ich genau, worauf es bei technischen Bewerbungen ankommt. Ich habe mich darauf spezialisiert, Ihre technischen Kenntnisse, Projekte und Fähigkeiten überzeugend und professionell auf Papier zu bringen.</p><p>Als jemand, der selbst für die Besetzung mehrerer Stellen verantwortlich war, weiss ich genau, worauf technische Rekruter achten - und wie ich Ihren Lebenslauf genau dort positioniere.</p></div></RevealBlock>
+          <RevealBlock className="experts-heading"><h2>{t.expertsTitle}</h2></RevealBlock>
+          <RevealBlock className="expert-row"><img className="expert-photo expert-photo--audelia" src={audeliaAsset.url} alt="Audelia Babbev-Pittet" /><div><h3>Audelia Babbev-Pittet</h3><p className="expert-role">{t.audelia.role}</p><p className="expert-lead">{t.audelia.lead}</p><p>{t.audelia.text}</p></div></RevealBlock>
+          <RevealBlock className="expert-row"><img className="expert-photo" src={danielAsset.url} alt="Daniel Babbev" /><div><h3>Daniel Babbev</h3><p className="expert-role">{t.daniel.role}</p><p>{t.daniel.texts[0]}</p><p>{t.daniel.texts[1]}</p></div></RevealBlock>
         </div>
       </section>
 
-      <ContactSection />
-      <footer><p>© 2026 Digital Trust Solutions GmbH</p></footer>
+      <ContactSection t={t} lang={lang} id={id(5)} />
+      <SiteFooter lang={lang} />
     </main>
   );
 }
