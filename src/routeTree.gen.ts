@@ -13,13 +13,18 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BewerbungSchreibenLassenRouteImport } from './routes/bewerbung-schreiben-lassen'
 import { Route as LebenslaufSchreibenLassenRouteImport } from './routes/lebenslauf-schreiben-lassen'
 import { Route as MotivationsschreibenSchreibenLassenRouteImport } from './routes/motivationsschreiben-schreiben-lassen'
+import { Route as SchulenRouteImport } from './routes/schulen'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnCoverLetterSwitzerlandRouteImport } from './routes/en.cover-letter-switzerland'
 import { Route as EnJobApplicationSwitzerlandRouteImport } from './routes/en.job-application-switzerland'
 import { Route as EnSwissCvWritingRouteImport } from './routes/en.swiss-cv-writing'
+import { Route as RatgeberArbeitszeugnisSchweizRouteImport } from './routes/ratgeber.arbeitszeugnis-schweiz'
 import { Route as RatgeberBewerbenInDerSchweizRouteImport } from './routes/ratgeber.bewerben-in-der-schweiz'
+import { Route as RatgeberBewerbenInDerSchweizAusDeutschlandRouteImport } from './routes/ratgeber.bewerben-in-der-schweiz-aus-deutschland'
 import { Route as EnGuideApplyingForJobsInSwitzerlandRouteImport } from './routes/en.guide.applying-for-jobs-in-switzerland'
+import { Route as EnGuideApplyingToSwitzerlandFromAbroadRouteImport } from './routes/en.guide.applying-to-switzerland-from-abroad'
+import { Route as EnGuideSwissReferenceLetterRouteImport } from './routes/en.guide.swiss-reference-letter'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -44,6 +49,11 @@ const MotivationsschreibenSchreibenLassenRoute =
     path: '/motivationsschreiben-schreiben-lassen',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SchulenRoute = SchulenRouteImport.update({
+  id: '/schulen',
+  path: '/schulen',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiContactRoute = ApiContactRouteImport.update({
   id: '/api/contact',
   path: '/api/contact',
@@ -71,10 +81,22 @@ const EnSwissCvWritingRoute = EnSwissCvWritingRouteImport.update({
   path: '/en/swiss-cv-writing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RatgeberArbeitszeugnisSchweizRoute =
+  RatgeberArbeitszeugnisSchweizRouteImport.update({
+    id: '/ratgeber/arbeitszeugnis-schweiz',
+    path: '/ratgeber/arbeitszeugnis-schweiz',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const RatgeberBewerbenInDerSchweizRoute =
   RatgeberBewerbenInDerSchweizRouteImport.update({
     id: '/ratgeber/bewerben-in-der-schweiz',
     path: '/ratgeber/bewerben-in-der-schweiz',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RatgeberBewerbenInDerSchweizAusDeutschlandRoute =
+  RatgeberBewerbenInDerSchweizAusDeutschlandRouteImport.update({
+    id: '/ratgeber/bewerben-in-der-schweiz-aus-deutschland',
+    path: '/ratgeber/bewerben-in-der-schweiz-aus-deutschland',
     getParentRoute: () => rootRouteImport,
   } as any)
 const EnGuideApplyingForJobsInSwitzerlandRoute =
@@ -83,32 +105,54 @@ const EnGuideApplyingForJobsInSwitzerlandRoute =
     path: '/en/guide/applying-for-jobs-in-switzerland',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EnGuideApplyingToSwitzerlandFromAbroadRoute =
+  EnGuideApplyingToSwitzerlandFromAbroadRouteImport.update({
+    id: '/en/guide/applying-to-switzerland-from-abroad',
+    path: '/en/guide/applying-to-switzerland-from-abroad',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EnGuideSwissReferenceLetterRoute =
+  EnGuideSwissReferenceLetterRouteImport.update({
+    id: '/en/guide/swiss-reference-letter',
+    path: '/en/guide/swiss-reference-letter',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bewerbung-schreiben-lassen': typeof BewerbungSchreibenLassenRoute
   '/lebenslauf-schreiben-lassen': typeof LebenslaufSchreibenLassenRoute
   '/motivationsschreiben-schreiben-lassen': typeof MotivationsschreibenSchreibenLassenRoute
+  '/schulen': typeof SchulenRoute
   '/api/contact': typeof ApiContactRoute
   '/en/cover-letter-switzerland': typeof EnCoverLetterSwitzerlandRoute
   '/en/job-application-switzerland': typeof EnJobApplicationSwitzerlandRoute
   '/en/swiss-cv-writing': typeof EnSwissCvWritingRoute
+  '/ratgeber/arbeitszeugnis-schweiz': typeof RatgeberArbeitszeugnisSchweizRoute
   '/ratgeber/bewerben-in-der-schweiz': typeof RatgeberBewerbenInDerSchweizRoute
+  '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/en/': typeof EnIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
+  '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
+  '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bewerbung-schreiben-lassen': typeof BewerbungSchreibenLassenRoute
   '/lebenslauf-schreiben-lassen': typeof LebenslaufSchreibenLassenRoute
   '/motivationsschreiben-schreiben-lassen': typeof MotivationsschreibenSchreibenLassenRoute
+  '/schulen': typeof SchulenRoute
   '/api/contact': typeof ApiContactRoute
   '/en/cover-letter-switzerland': typeof EnCoverLetterSwitzerlandRoute
   '/en/job-application-switzerland': typeof EnJobApplicationSwitzerlandRoute
   '/en/swiss-cv-writing': typeof EnSwissCvWritingRoute
+  '/ratgeber/arbeitszeugnis-schweiz': typeof RatgeberArbeitszeugnisSchweizRoute
   '/ratgeber/bewerben-in-der-schweiz': typeof RatgeberBewerbenInDerSchweizRoute
+  '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/en': typeof EnIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
+  '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
+  '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,13 +160,18 @@ export interface FileRoutesById {
   '/bewerbung-schreiben-lassen': typeof BewerbungSchreibenLassenRoute
   '/lebenslauf-schreiben-lassen': typeof LebenslaufSchreibenLassenRoute
   '/motivationsschreiben-schreiben-lassen': typeof MotivationsschreibenSchreibenLassenRoute
+  '/schulen': typeof SchulenRoute
   '/api/contact': typeof ApiContactRoute
   '/en/cover-letter-switzerland': typeof EnCoverLetterSwitzerlandRoute
   '/en/job-application-switzerland': typeof EnJobApplicationSwitzerlandRoute
   '/en/swiss-cv-writing': typeof EnSwissCvWritingRoute
+  '/ratgeber/arbeitszeugnis-schweiz': typeof RatgeberArbeitszeugnisSchweizRoute
   '/ratgeber/bewerben-in-der-schweiz': typeof RatgeberBewerbenInDerSchweizRoute
+  '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/en/': typeof EnIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
+  '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
+  '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,39 +180,54 @@ export interface FileRouteTypes {
     | '/bewerbung-schreiben-lassen'
     | '/lebenslauf-schreiben-lassen'
     | '/motivationsschreiben-schreiben-lassen'
+    | '/schulen'
     | '/api/contact'
     | '/en/cover-letter-switzerland'
     | '/en/job-application-switzerland'
     | '/en/swiss-cv-writing'
+    | '/ratgeber/arbeitszeugnis-schweiz'
     | '/ratgeber/bewerben-in-der-schweiz'
+    | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/en/'
     | '/en/guide/applying-for-jobs-in-switzerland'
+    | '/en/guide/applying-to-switzerland-from-abroad'
+    | '/en/guide/swiss-reference-letter'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/bewerbung-schreiben-lassen'
     | '/lebenslauf-schreiben-lassen'
     | '/motivationsschreiben-schreiben-lassen'
+    | '/schulen'
     | '/api/contact'
     | '/en/cover-letter-switzerland'
     | '/en/job-application-switzerland'
     | '/en/swiss-cv-writing'
+    | '/ratgeber/arbeitszeugnis-schweiz'
     | '/ratgeber/bewerben-in-der-schweiz'
+    | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/en'
     | '/en/guide/applying-for-jobs-in-switzerland'
+    | '/en/guide/applying-to-switzerland-from-abroad'
+    | '/en/guide/swiss-reference-letter'
   id:
     | '__root__'
     | '/'
     | '/bewerbung-schreiben-lassen'
     | '/lebenslauf-schreiben-lassen'
     | '/motivationsschreiben-schreiben-lassen'
+    | '/schulen'
     | '/api/contact'
     | '/en/cover-letter-switzerland'
     | '/en/job-application-switzerland'
     | '/en/swiss-cv-writing'
+    | '/ratgeber/arbeitszeugnis-schweiz'
     | '/ratgeber/bewerben-in-der-schweiz'
+    | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/en/'
     | '/en/guide/applying-for-jobs-in-switzerland'
+    | '/en/guide/applying-to-switzerland-from-abroad'
+    | '/en/guide/swiss-reference-letter'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,13 +235,18 @@ export interface RootRouteChildren {
   BewerbungSchreibenLassenRoute: typeof BewerbungSchreibenLassenRoute
   LebenslaufSchreibenLassenRoute: typeof LebenslaufSchreibenLassenRoute
   MotivationsschreibenSchreibenLassenRoute: typeof MotivationsschreibenSchreibenLassenRoute
+  SchulenRoute: typeof SchulenRoute
   ApiContactRoute: typeof ApiContactRoute
   EnCoverLetterSwitzerlandRoute: typeof EnCoverLetterSwitzerlandRoute
   EnJobApplicationSwitzerlandRoute: typeof EnJobApplicationSwitzerlandRoute
   EnSwissCvWritingRoute: typeof EnSwissCvWritingRoute
+  RatgeberArbeitszeugnisSchweizRoute: typeof RatgeberArbeitszeugnisSchweizRoute
   RatgeberBewerbenInDerSchweizRoute: typeof RatgeberBewerbenInDerSchweizRoute
+  RatgeberBewerbenInDerSchweizAusDeutschlandRoute: typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   EnIndexRoute: typeof EnIndexRoute
   EnGuideApplyingForJobsInSwitzerlandRoute: typeof EnGuideApplyingForJobsInSwitzerlandRoute
+  EnGuideApplyingToSwitzerlandFromAbroadRoute: typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
+  EnGuideSwissReferenceLetterRoute: typeof EnGuideSwissReferenceLetterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -208,6 +277,13 @@ declare module '@tanstack/react-router' {
       path: '/motivationsschreiben-schreiben-lassen'
       fullPath: '/motivationsschreiben-schreiben-lassen'
       preLoaderRoute: typeof MotivationsschreibenSchreibenLassenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schulen': {
+      id: '/schulen'
+      path: '/schulen'
+      fullPath: '/schulen'
+      preLoaderRoute: typeof SchulenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/contact': {
@@ -245,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnSwissCvWritingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ratgeber/arbeitszeugnis-schweiz': {
+      id: '/ratgeber/arbeitszeugnis-schweiz'
+      path: '/ratgeber/arbeitszeugnis-schweiz'
+      fullPath: '/ratgeber/arbeitszeugnis-schweiz'
+      preLoaderRoute: typeof RatgeberArbeitszeugnisSchweizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ratgeber/bewerben-in-der-schweiz': {
       id: '/ratgeber/bewerben-in-der-schweiz'
       path: '/ratgeber/bewerben-in-der-schweiz'
@@ -252,11 +335,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RatgeberBewerbenInDerSchweizRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': {
+      id: '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
+      path: '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
+      fullPath: '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
+      preLoaderRoute: typeof RatgeberBewerbenInDerSchweizAusDeutschlandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/en/guide/applying-for-jobs-in-switzerland': {
       id: '/en/guide/applying-for-jobs-in-switzerland'
       path: '/en/guide/applying-for-jobs-in-switzerland'
       fullPath: '/en/guide/applying-for-jobs-in-switzerland'
       preLoaderRoute: typeof EnGuideApplyingForJobsInSwitzerlandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/guide/applying-to-switzerland-from-abroad': {
+      id: '/en/guide/applying-to-switzerland-from-abroad'
+      path: '/en/guide/applying-to-switzerland-from-abroad'
+      fullPath: '/en/guide/applying-to-switzerland-from-abroad'
+      preLoaderRoute: typeof EnGuideApplyingToSwitzerlandFromAbroadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/guide/swiss-reference-letter': {
+      id: '/en/guide/swiss-reference-letter'
+      path: '/en/guide/swiss-reference-letter'
+      fullPath: '/en/guide/swiss-reference-letter'
+      preLoaderRoute: typeof EnGuideSwissReferenceLetterRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -268,14 +372,21 @@ const rootRouteChildren: RootRouteChildren = {
   LebenslaufSchreibenLassenRoute: LebenslaufSchreibenLassenRoute,
   MotivationsschreibenSchreibenLassenRoute:
     MotivationsschreibenSchreibenLassenRoute,
+  SchulenRoute: SchulenRoute,
   ApiContactRoute: ApiContactRoute,
   EnCoverLetterSwitzerlandRoute: EnCoverLetterSwitzerlandRoute,
   EnJobApplicationSwitzerlandRoute: EnJobApplicationSwitzerlandRoute,
   EnSwissCvWritingRoute: EnSwissCvWritingRoute,
+  RatgeberArbeitszeugnisSchweizRoute: RatgeberArbeitszeugnisSchweizRoute,
   RatgeberBewerbenInDerSchweizRoute: RatgeberBewerbenInDerSchweizRoute,
+  RatgeberBewerbenInDerSchweizAusDeutschlandRoute:
+    RatgeberBewerbenInDerSchweizAusDeutschlandRoute,
   EnIndexRoute: EnIndexRoute,
   EnGuideApplyingForJobsInSwitzerlandRoute:
     EnGuideApplyingForJobsInSwitzerlandRoute,
+  EnGuideApplyingToSwitzerlandFromAbroadRoute:
+    EnGuideApplyingToSwitzerlandFromAbroadRoute,
+  EnGuideSwissReferenceLetterRoute: EnGuideSwissReferenceLetterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

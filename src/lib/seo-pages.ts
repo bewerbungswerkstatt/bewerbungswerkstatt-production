@@ -2,6 +2,8 @@ import type { Lang } from "@/lib/home-content";
 
 export type SeoSection = { heading: string; paragraphs: string[]; list?: string[] };
 
+export type SeoFaq = { q: string; a: string };
+
 export type SeoPage = {
   path: string;
   lang: Lang;
@@ -16,6 +18,7 @@ export type SeoPage = {
   ctaTitle: string;
   ctaText: string;
   type: "service" | "article";
+  faq?: SeoFaq[];
 };
 
 const de = (p: Omit<SeoPage, "lang">): SeoPage => ({ ...p, lang: "de" });
@@ -56,6 +59,7 @@ export const seoPages = {
         paragraphs: ["Analyse & Erstgespräch: CHF 95. CV-Review & Bearbeitung: CHF 75 pro Stunde. Keine versteckten Kosten – und wenn Sie mit dem Erstgespräch nicht zufrieden sind, erhalten Sie den vollen Betrag zurück."],
       },
     ],
+    faq: [{ q: "Was kostet es, den Lebenslauf schreiben zu lassen?", a: "Das Erstgespräch mit Analyse kostet CHF 95, die weitere Bearbeitung CHF 75 pro Stunde." }, { q: "Findet die Beratung auch online statt?", a: "Ja, alle Gespräche finden online statt – Sie können von überall in der Schweiz oder aus dem Ausland teilnehmen." }],
     ctaTitle: "Bereit für einen besseren Lebenslauf?",
     ctaText: "Buchen Sie ein unverbindliches Erstgespräch.",
   }),
@@ -88,6 +92,7 @@ export const seoPages = {
         ],
       },
     ],
+    faq: [{ q: "Wie lang sollte ein Motivationsschreiben sein?", a: "In der Regel maximal eine A4-Seite – kurz, konkret und auf die Stelle bezogen." }, { q: "Kann ich das Schreiben für mehrere Stellen verwenden?", a: "Wir erarbeiten eine starke Grundlage, die Sie mit wenig Aufwand an jede Stelle anpassen können." }],
     ctaTitle: "Ihr nächstes Motivationsschreiben soll überzeugen?",
     ctaText: "Kontaktieren Sie uns für ein unverbindliches Erstgespräch.",
   }),
@@ -267,6 +272,142 @@ export const seoPages = {
     ],
     ctaTitle: "Planning your move to Switzerland?",
     ctaText: "We review your documents and get them ready for the Swiss job market – in English or German.",
+  }),
+  zeugnisDe: de({
+    path: "/ratgeber/arbeitszeugnis-schweiz",
+    alternate: "/en/guide/swiss-reference-letter",
+    navLabel: "Ratgeber: Arbeitszeugnis",
+    type: "article",
+    title: "Arbeitszeugnis Schweiz – Formulierungen verstehen | Bewerbungswerkstatt",
+    description: "Arbeitszeugnis in der Schweiz: Was drinstehen muss, wie Sie Formulierungen richtig lesen und wann Sie eine Berichtigung verlangen sollten.",
+    eyebrow: "Ratgeber",
+    h1: "Arbeitszeugnis in der Schweiz – was drinsteht und wie Sie es richtig lesen",
+    intro: "In der Schweiz gehört das Arbeitszeugnis in fast jedes Bewerbungsdossier. Recruiter lesen es genau – deshalb lohnt es sich zu wissen, worauf es ankommt.",
+    sections: [
+      {
+        heading: "Ihr Recht auf ein Zeugnis",
+        paragraphs: ["Nach Art. 330a des Obligationenrechts können Sie jederzeit ein Arbeitszeugnis verlangen – nicht erst beim Austritt. Ein Vollzeugnis äussert sich zu Art und Dauer der Anstellung sowie zu Leistung und Verhalten. Eine reine Arbeitsbestätigung nennt nur Art und Dauer."],
+      },
+      {
+        heading: "Was ein gutes Zeugnis enthält",
+        paragraphs: ["Ein aussagekräftiges Vollzeugnis umfasst typischerweise:"],
+        list: ["Funktion, Dauer und wichtigste Aufgaben", "Beurteilung von Leistung und Fachwissen", "Beurteilung des Verhaltens gegenüber Vorgesetzten, Kollegen und Kunden", "Grund des Austritts (auf Wunsch) und eine Schlussformel mit Dank und guten Wünschen"],
+      },
+      {
+        heading: "Zwischen den Zeilen lesen",
+        paragraphs: ["Ein Zeugnis muss wahr und wohlwollend sein. Deshalb sind Kritikpunkte oft nur indirekt formuliert: Fehlende Aussagen zum Verhalten, auffällig knappe Beschreibungen oder eine fehlende Schlussformel fallen Recruitern auf."],
+      },
+      {
+        heading: "Wann Sie eine Berichtigung verlangen sollten",
+        paragraphs: ["Sind Angaben falsch oder unvollständig, dürfen Sie eine Korrektur verlangen. Am besten schlagen Sie konkrete Formulierungen vor – sachlich und mit Belegen. Gerne prüfen wir Ihr Zeugnis und helfen bei der Formulierung."],
+      },
+    ],
+    faq: [
+      { q: "Muss ich alle Arbeitszeugnisse beilegen?", a: "In der Regel die Zeugnisse der letzten Stellen und die für die Zielstelle relevanten. Sehr alte Zeugnisse können Sie weglassen." },
+      { q: "Was tun, wenn ein Zeugnis schlecht ist?", a: "Verlangen Sie zuerst eine Berichtigung. Lässt sich nichts ändern, stärken Sie Ihr Dossier mit Referenzen und einem überzeugenden Motivationsschreiben." },
+    ],
+    ctaTitle: "Unsicher, was Ihr Zeugnis aussagt?",
+    ctaText: "Wir lesen es mit Ihnen und zeigen, wie Sie es im Dossier am besten einsetzen.",
+  }),
+  zuzugDe: de({
+    path: "/ratgeber/bewerben-in-der-schweiz-aus-deutschland",
+    alternate: "/en/guide/applying-to-switzerland-from-abroad",
+    navLabel: "Ratgeber: aus Deutschland & Österreich",
+    type: "article",
+    title: "Bewerben in der Schweiz aus Deutschland & Österreich | Bewerbungswerkstatt",
+    description: "Als Deutsche oder Österreicherin in der Schweiz bewerben: Unterschiede bei Lebenslauf, Anschreiben und Sprache – und was Schweizer Recruiter erwarten.",
+    eyebrow: "Ratgeber",
+    h1: "Bewerben in der Schweiz aus Deutschland oder Österreich",
+    intro: "Viele Bewerbende aus Deutschland und Österreich unterschätzen die kleinen Unterschiede. Wer sie kennt, wirkt sofort vertrauter mit dem Schweizer Arbeitsmarkt.",
+    sections: [
+      {
+        heading: "Die wichtigsten Unterschiede",
+        paragraphs: ["Inhaltlich ähneln sich die Unterlagen, doch Details machen den Unterschied:"],
+        list: ["Kein «ß» – in der Schweiz schreibt man immer «ss»", "«Freundliche Grüsse» ohne Komma statt «Mit freundlichen Grüßen,»", "Arbeitszeugnisse sind fester Bestandteil des Dossiers", "Ein sachlicher, eher zurückhaltender Ton wirkt besser als Selbstlob"],
+      },
+      {
+        heading: "Aufenthalt und Verfügbarkeit angeben",
+        paragraphs: ["Für Personen aus EU/EFTA-Staaten gilt das Freizügigkeitsabkommen. Geben Sie im Lebenslauf trotzdem an, ob Sie bereits eine Bewilligung haben, als Grenzgänger arbeiten möchten oder ab wann Sie umziehen können – das beantwortet die erste Frage des Recruiters."],
+      },
+      {
+        heading: "Abschlüsse verständlich machen",
+        paragraphs: ["Nicht jeder Schweizer Recruiter kennt ausländische Abschlüsse oder Arbeitgeber. Eine kurze Einordnung (z. B. Branche, Grösse des Unternehmens, vergleichbarer Schweizer Abschluss) hilft, Ihr Profil richtig einzuschätzen."],
+      },
+    ],
+    faq: [
+      { q: "Brauche ich ein Foto im Lebenslauf?", a: "In der Schweiz ist ein professionelles Foto weiterhin üblich und wird von vielen Recruitern erwartet." },
+      { q: "Soll ich Schweizerdeutsch erwähnen?", a: "Wenn Sie Schweizerdeutsch verstehen, lohnt sich ein kurzer Hinweis bei den Sprachkenntnissen – gerade bei Kundenkontakt." },
+    ],
+    ctaTitle: "Planen Sie den Schritt in die Schweiz?",
+    ctaText: "Wir passen Ihre Unterlagen an den Schweizer Markt an.",
+  }),
+  zeugnisEn: en({
+    path: "/en/guide/swiss-reference-letter",
+    alternate: "/ratgeber/arbeitszeugnis-schweiz",
+    navLabel: "Guide: Swiss reference letters",
+    type: "article",
+    title: "Swiss Reference Letter (Arbeitszeugnis) Explained | Bewerbungswerkstatt",
+    description: "What a Swiss reference letter (Arbeitszeugnis) contains, how to read its wording and when to ask your employer for a correction.",
+    eyebrow: "Guide",
+    h1: "The Swiss reference letter (Arbeitszeugnis) – what it says and how to read it",
+    intro: "In Switzerland, reference letters from previous employers are part of almost every application. Recruiters read them closely – so it pays to understand them.",
+    sections: [
+      {
+        heading: "Your right to a reference",
+        paragraphs: ["Under Article 330a of the Swiss Code of Obligations you can request a reference letter at any time, not only when you leave. A full reference covers the type and duration of employment as well as performance and conduct; a simple confirmation only states type and duration."],
+      },
+      {
+        heading: "What a good reference contains",
+        paragraphs: ["A meaningful full reference usually includes:"],
+        list: ["Job title, duration and key responsibilities", "An assessment of performance and expertise", "An assessment of conduct towards managers, colleagues and clients", "A closing statement with thanks and good wishes"],
+      },
+      {
+        heading: "Reading between the lines",
+        paragraphs: ["A reference must be truthful and benevolent, so criticism is often only implied: missing statements about conduct, unusually short descriptions or a missing closing statement stand out to recruiters."],
+      },
+      {
+        heading: "When to ask for a correction",
+        paragraphs: ["If information is wrong or incomplete, you may ask for a correction. Suggest concrete wording, politely and with evidence. We are happy to review your reference and help you phrase the request."],
+      },
+    ],
+    faq: [
+      { q: "Do I need to include all reference letters?", a: "Usually the letters from your recent positions and those relevant to the target role. Very old ones can be left out." },
+      { q: "I come from abroad and have no Swiss references. Is that a problem?", a: "No. Include recommendation letters or contacts for references from your previous employers and explain them briefly." },
+    ],
+    ctaTitle: "Not sure what your reference says?",
+    ctaText: "We read it with you and show you how to use it in your dossier.",
+  }),
+  zuzugEn: en({
+    path: "/en/guide/applying-to-switzerland-from-abroad",
+    alternate: "/ratgeber/bewerben-in-der-schweiz-aus-deutschland",
+    navLabel: "Guide: applying from abroad",
+    type: "article",
+    title: "Applying to Swiss Jobs from Abroad – CV Tips | Bewerbungswerkstatt",
+    description: "Applying for a job in Switzerland from Germany, Austria or elsewhere: how Swiss CVs differ, what recruiters expect and how to present permits and degrees.",
+    eyebrow: "Guide",
+    h1: "Applying for Swiss jobs from abroad",
+    intro: "Many applicants from abroad underestimate the small differences in Swiss applications. Knowing them makes you look familiar with the Swiss job market from the first page.",
+    sections: [
+      {
+        heading: "The key differences",
+        paragraphs: ["The content is similar to other countries, but details matter:"],
+        list: ["Reference letters (Arbeitszeugnisse) are a standard part of the dossier", "A professional photo on the CV is still common", "A factual, modest tone works better than self-praise", "In German applications: “ss” instead of “ß” and “Freundliche Grüsse” without a comma"],
+      },
+      {
+        heading: "State your permit and availability",
+        paragraphs: ["Say clearly whether you already hold a Swiss permit, plan to commute as a cross-border worker or when you can relocate. EU/EFTA citizens benefit from the free movement agreement; other nationals usually need employer sponsorship, so mention your situation openly."],
+      },
+      {
+        heading: "Make your background easy to understand",
+        paragraphs: ["Swiss recruiters may not know foreign degrees or employers. A short explanation – industry, company size, comparable Swiss qualification – helps them place your profile correctly."],
+      },
+    ],
+    faq: [
+      { q: "Can I apply in English?", a: "Many international companies, especially in IT and finance, accept English applications. If the job ad is in German, apply in German." },
+      { q: "Do you work with clients outside Switzerland?", a: "Yes. All consultations take place online, in English or German." },
+    ],
+    ctaTitle: "Planning your move to Switzerland?",
+    ctaText: "We get your documents ready for the Swiss job market.",
   }),
 } satisfies Record<string, SeoPage>;
 

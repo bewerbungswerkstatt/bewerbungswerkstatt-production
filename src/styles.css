@@ -328,3 +328,6 @@ footer.site-footer { justify-content: space-between; gap: 24px; flex-wrap: wrap;
   .content-cta { padding: 28px 20px; }
   footer.site-footer { flex-direction: column; align-items: flex-end; }
 }
+.content-faq details { border-bottom: 1px solid var(--border); padding: 14px 0; }
+.content-faq summary { cursor: pointer; font-weight: 600; }
+.content-faq details p { margin-top: 10px; }

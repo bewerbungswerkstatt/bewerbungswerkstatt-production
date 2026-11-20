@@ -34,6 +34,17 @@ export function ContentPage({ page }: { page: SeoPage }) {
               {s.list ? <ul>{s.list.map((li) => <li key={li}><Check />{li}</li>)}</ul> : null}
             </section>
           ))}
+          {page.faq ? (
+            <section className="content-faq">
+              <h2>{de ? "Häufige Fragen" : "Frequently asked questions"}</h2>
+              {page.faq.map((f) => (
+                <details key={f.q}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </section>
+          ) : null}
           <aside className="content-cta">
             <h2>{page.ctaTitle}</h2>
             <p>{page.ctaText}</p>
