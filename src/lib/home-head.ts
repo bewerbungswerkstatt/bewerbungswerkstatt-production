@@ -2,18 +2,18 @@ import type { Lang } from "@/lib/home-content";
 
 const copy = {
   de: {
-    title: "Bewerbungswerkstatt | CV-Beratung & Bewerbungscoach Schweiz",
-    description: "Persönliche CV-Beratung und überzeugende Motivationsschreiben für den Schweizer Arbeitsmarkt – für Professionals in Tech, Finance und Back Office.",
+    title: "Bewerbung & Lebenslauf schreiben lassen Schweiz | Bewerbungswerkstatt",
+    description: "Lebenslauf erstellen lassen, Motivationsschreiben und Bewerbungsdossier optimieren – persönliche, authentische Bewerbungsberatung in der Schweiz für Tech, Finance und Back Office.",
   },
   en: {
-    title: "Bewerbungswerkstatt | CV Consultant & Career Coach in Switzerland",
+    title: "Swiss CV Writing & Job Application Service | Bewerbungswerkstatt",
     description: "Personal CV consulting and convincing cover letters for the Swiss job market – for professionals in tech, finance and back office. In English or German.",
   },
 };
 
 export function homeHead(lang: Lang) {
   const c = copy[lang];
-  const path = lang === "de" ? "/" : "/en";
+  const path = lang === "de" ? "https://www.bewerbungswerkstatt.ch/" : "https://www.bewerbungswerkstatt.ch/en";
   return {
     meta: [
       { title: c.title },
@@ -27,9 +27,9 @@ export function homeHead(lang: Lang) {
     ],
     links: [
       { rel: "canonical", href: path },
-      { rel: "alternate", hrefLang: "de-CH", href: "/" },
-      { rel: "alternate", hrefLang: "en", href: "/en" },
-      { rel: "alternate", hrefLang: "x-default", href: "/" },
+      { rel: "alternate", hrefLang: "de-CH", href: "https://www.bewerbungswerkstatt.ch/" },
+      { rel: "alternate", hrefLang: "en", href: "https://www.bewerbungswerkstatt.ch/en" },
+      { rel: "alternate", hrefLang: "x-default", href: "https://www.bewerbungswerkstatt.ch/" },
     ],
     scripts: [
       {

@@ -413,22 +413,25 @@ export const seoPages = {
 
 export const pagesByLang = (lang: Lang) => Object.values(seoPages).filter((p) => p.lang === lang);
 
+const SITE = "https://www.bewerbungswerkstatt.ch";
+
 export function seoHead(page: SeoPage) {
-  const de = page.lang === "de" ? page.path : page.alternate;
-  const en = page.lang === "en" ? page.path : page.alternate;
+  const de = SITE + (page.lang === "de" ? page.path : page.alternate);
+  const en = SITE + (page.lang === "en" ? page.path : page.alternate);
+  const self = SITE + page.path;
   return {
     meta: [
       { title: page.title },
       { name: "description", content: page.description },
       { property: "og:title", content: page.title },
       { property: "og:description", content: page.description },
-      { property: "og:url", content: page.path },
+      { property: "og:url", content: self },
       { property: "og:type", content: page.type === "article" ? "article" : "website" },
       { property: "og:locale", content: page.lang === "de" ? "de_CH" : "en_GB" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: page.path },
+      { rel: "canonical", href: self },
       { rel: "alternate", hrefLang: "de-CH", href: de },
       { rel: "alternate", hrefLang: "en", href: en },
       { rel: "alternate", hrefLang: "x-default", href: de },

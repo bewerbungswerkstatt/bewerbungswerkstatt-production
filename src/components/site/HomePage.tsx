@@ -50,7 +50,7 @@ function BrandLogo({ dark = false }: { dark?: boolean }) {
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(target);
   const [started, setStarted] = useState(false);
 
   useEffect(() => {
