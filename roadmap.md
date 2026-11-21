@@ -1,5 +1,7 @@
 # Suchoptimierungen
 
+- [x] SEO-Sprachkennzeichnung geprüft: alle 17 Sitemap-Seiten liefern de-CH/en im initialen HTML; DE–EN–DE-Sprachwechsel erfolgreich. Veraltete Scanner-Meldung als behoben dokumentiert, keine Design-/Codekorrektur nötig.
+
 - [x] Ratgeber als kurze DE/EN-Kachelübersicht für Schweizer und internationale Bewerbende angelegt; alle Artikel separat erhalten und Desktop/Mobil-Navigation geprüft.
 
 - [x] Sprachwechsel überall als Symbol + EN/DE, Kontaktbutton und Angebotspreise/-dauer aktualisiert; Desktop/Mobil und sieben Regeltests erfolgreich geprüft.
