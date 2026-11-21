@@ -1,5 +1,7 @@
 # Suchoptimierungen
 
+- [x] Sprachwechsel überall als Symbol + EN/DE, Kontaktbutton und Angebotspreise/-dauer aktualisiert; Desktop/Mobil und sieben Regeltests erfolgreich geprüft.
+
 - [x] Abschliessender Live-Audit: DE-Menü, initiales HTML, Quellen, Preise und Indexierbarkeit.
 - [x] Nachgewiesene statistische und preisliche Unklarheiten ohne Designänderung beheben und testen.
 

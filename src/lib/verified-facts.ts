@@ -12,6 +12,10 @@ export const registeredSeekersPerReportedVacancy =
 
 export const consultationPrices = {
   firstContact: 0,
-  analysis: 95,
-  editingPerHour: 75,
+  analysis: 105,
+  editingPerHour: 85,
+} as const;
+export const consultationTerms = {
+  analysisMaxMinutes: 30,
+  vatIncluded: true,
 } as const;

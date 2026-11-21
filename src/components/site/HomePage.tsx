@@ -4,6 +4,7 @@ import {
   ClipboardCheck,
   FilePenLine,
   Mail,
+  Languages,
   MapPin,
   Menu,
   MessageSquare,
@@ -173,7 +174,7 @@ function Header({ t }: { t: HomeContent }) {
         <nav aria-label={t.navLabel}>
           {t.menu.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
           <Link to={t.switchText === "EN" ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
-          <a href={t.switchHref} className="lang-switch" aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}>{t.switchText}</a>
+          <a href={t.switchHref} className="lang-switch language-link" aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}><Languages aria-hidden="true" />{t.switchText}</a>
         </nav>
         <a className="button button--primary hero-header__cta" href={contactHref}>{t.cta}</a>
         <button
@@ -194,7 +195,7 @@ function Header({ t }: { t: HomeContent }) {
           <nav>
             {t.menu.map(([href, label]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
             <Link to={t.switchText === "EN" ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"} onClick={() => setMenuOpen(false)}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
-            <a href={t.switchHref} hrefLang={t.switchText.toLowerCase()}>{t.switchLabel}</a>
+            <a className="language-link" href={t.switchHref} aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}><Languages aria-hidden="true" />{t.switchText}</a>
           </nav>
           <a className="button button--primary button--wide" href={contactHref} onClick={() => setMenuOpen(false)}>{t.cta}</a>
         </aside>

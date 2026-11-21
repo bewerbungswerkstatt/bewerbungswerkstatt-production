@@ -1,6 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { consultationPrices, labourMarket, registeredSeekersPerReportedVacancy } from "./verified-facts";
+import { consultationPrices, consultationTerms, labourMarket, registeredSeekersPerReportedVacancy } from "./verified-facts";
 
 describe("Verified labour market data, March 2026", () => {
   test("SECO reports 234815 registered job seekers and 48843 reported vacancies", () => {
@@ -16,6 +16,10 @@ describe("Verified labour market data, March 2026", () => {
 
 describe("Contact and paid analysis are separate", () => {
   test("first contact is free", () => assert.equal(consultationPrices.firstContact, 0));
-  test("analysis costs CHF 95", () => assert.equal(consultationPrices.analysis, 95));
-  test("further editing costs CHF 75 per hour", () => assert.equal(consultationPrices.editingPerHour, 75));
+  test("analysis costs CHF 105", () => assert.equal(consultationPrices.analysis, 105));
+  test("further editing costs CHF 85 per hour", () => assert.equal(consultationPrices.editingPerHour, 85));
+});
+describe("Consultation terms", () => {
+  test("online analysis lasts up to 30 minutes", () => assert.equal(consultationTerms.analysisMaxMinutes, 30));
+  test("both prices include VAT", () => assert.equal(consultationTerms.vatIncluded, true));
 });

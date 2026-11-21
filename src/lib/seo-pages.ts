@@ -1,3 +1,4 @@
+import { consultationPrices, consultationTerms } from "@/lib/verified-facts";
 import type { LinkProps } from "@tanstack/react-router";
 import type { Lang } from "@/lib/home-content";
 
@@ -38,7 +39,7 @@ export const seoPages = {
     navLabel: "Lebenslauf (CV)",
     type: "service",
     title: "Lebenslauf schreiben lassen – CV-Beratung Schweiz | Bewerbungswerkstatt",
-    description: "Lebenslauf für die Schweiz schreiben lassen: persönliche CV-Beratung, klare Struktur und menschliche Texte statt KI-Floskeln. Analysegespräch CHF 95.",
+    description: `Lebenslauf für die Schweiz schreiben lassen: persönliche CV-Beratung, klare Struktur und menschliche Texte statt KI-Floskeln. Analysegespräch CHF ${consultationPrices.analysis} inkl. MWST.`,
     eyebrow: "CV-Beratung Schweiz",
     h1: "Lebenslauf schreiben lassen – ein CV, der in der Schweiz überzeugt",
     intro: "Recruiter entscheiden in wenigen Sekunden, ob sie Ihren Lebenslauf weiterlesen. Wir analysieren Ihren CV persönlich, schärfen Struktur und Kernaussagen und formulieren ihn so, dass er zum Schweizer Arbeitsmarkt passt – authentisch statt generisch.",
@@ -59,18 +60,18 @@ export const seoPages = {
         heading: "So arbeiten wir",
         links: [{"before": "Wenn Sie aus dem Ausland kommen, finden Sie ergänzende ", "text": "Tipps für Bewerbungen aus Deutschland und Österreich", "to": "/ratgeber/bewerben-in-der-schweiz-aus-deutschland", "after": "."}],
         paragraphs: [
-          "Im Analysegespräch (CHF 95, bis zu 45 Minuten, online) analysieren wir Ihre aktuellen Unterlagen und zeigen die grössten Verbesserungspotenziale. Danach überarbeiten wir Ihren Lebenslauf gemeinsam oder erstellen ihn komplett neu – auf Ihre Zielbranche zugeschnitten.",
+          `Im Analysegespräch (CHF ${consultationPrices.analysis} inkl. MWST, bis zu ${consultationTerms.analysisMaxMinutes} Minuten, online) analysieren wir Ihre aktuellen Unterlagen und zeigen die grössten Verbesserungspotenziale. Danach überarbeiten wir Ihren Lebenslauf gemeinsam oder erstellen ihn komplett neu – auf Ihre Zielbranche zugeschnitten.`,
           "Wir sind spezialisiert auf Finance, Versicherungen, Back Office und IT und beraten Sie auf Deutsch oder Englisch.",
         ],
       },
       {
         heading: "Preise",
-        paragraphs: ["Analysegespräch: CHF 95. CV-Review & Bearbeitung: CHF 75 pro Stunde. Keine versteckten Kosten – und wenn Sie mit dem Analysegespräch nicht zufrieden sind, erhalten Sie den vollen Betrag zurück."],
+        paragraphs: [`Analysegespräch: CHF ${consultationPrices.analysis} inkl. MWST. CV-Review & Bearbeitung: CHF ${consultationPrices.editingPerHour} inkl. MWST pro Stunde. Keine versteckten Kosten – und wenn Sie mit dem Analysegespräch nicht zufrieden sind, erhalten Sie den vollen Betrag zurück.`],
       },
     ],
-    faq: [{ q: "Was kostet es, den Lebenslauf schreiben zu lassen?", a: "Der Erstkontakt ist kostenlos. Das separate Analysegespräch kostet CHF 95, die weitere Bearbeitung CHF 75 pro Stunde." }, { q: "Findet die Beratung auch online statt?", a: "Ja, alle Gespräche finden online statt – Sie können von überall in der Schweiz oder aus dem Ausland teilnehmen." }],
+    faq: [{ q: "Was kostet es, den Lebenslauf schreiben zu lassen?", a: `Der Erstkontakt ist kostenlos. Das separate Analysegespräch kostet CHF ${consultationPrices.analysis} inkl. MWST, die weitere Bearbeitung CHF ${consultationPrices.editingPerHour} inkl. MWST pro Stunde.` }, { q: "Findet die Beratung auch online statt?", a: "Ja, alle Gespräche finden online statt – Sie können von überall in der Schweiz oder aus dem Ausland teilnehmen." }],
     ctaTitle: "Bereit für einen besseren Lebenslauf?",
-    ctaText: "Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF 95.",
+    ctaText: `Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF ${consultationPrices.analysis} inkl. MWST.`,
   }),
   letterDe: de({
     path: "/motivationsschreiben-schreiben-lassen",
@@ -105,7 +106,7 @@ export const seoPages = {
     ],
     faq: [{ q: "Wie lang sollte ein Motivationsschreiben sein?", a: "In der Regel maximal eine A4-Seite – kurz, konkret und auf die Stelle bezogen." }, { q: "Kann ich das Schreiben für mehrere Stellen verwenden?", a: "Wir erarbeiten eine starke Grundlage, die Sie mit wenig Aufwand an jede Stelle anpassen können." }],
     ctaTitle: "Ihr nächstes Motivationsschreiben soll überzeugen?",
-    ctaText: "Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF 95.",
+    ctaText: `Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF ${consultationPrices.analysis} inkl. MWST.`,
   }),
   dossierDe: de({
     path: "/bewerbung-schreiben-lassen",
@@ -131,7 +132,7 @@ export const seoPages = {
       },
       {
         heading: "Preise",
-        paragraphs: ["Analysegespräch für CHF 95, danach CHF 75 pro Stunde für die Bearbeitung. Vollständig online, schweizweit."],
+        paragraphs: [`Analysegespräch für CHF ${consultationPrices.analysis} inkl. MWST, danach CHF ${consultationPrices.editingPerHour} inkl. MWST pro Stunde für die Bearbeitung. Vollständig online, schweizweit.`],
       },
     ],
     ctaTitle: "Bereit für Ihr neues Bewerbungsdossier?",
@@ -178,7 +179,7 @@ export const seoPages = {
     navLabel: "Swiss CV writing",
     type: "service",
     title: "Swiss CV Writing Service – CV Consultant Switzerland | Bewerbungswerkstatt",
-    description: "Professional Swiss CV writing and review by local consultants. Get a CV in the Swiss format that stands out from AI-generated applications. Analysis meeting CHF 95.",
+    description: `Professional Swiss CV writing and review by local consultants. Get a CV in the Swiss format that stands out from AI-generated applications. Analysis meeting CHF ${consultationPrices.analysis} incl. VAT.`,
     eyebrow: "CV consulting in Switzerland",
     h1: "Swiss CV writing – a CV that works in the Swiss job market",
     intro: "Recruiters decide within seconds whether to keep reading your CV. We review your CV personally, sharpen its structure and key messages, and adapt it to the Swiss CV format – authentic rather than generic. In English or German.",
@@ -193,17 +194,17 @@ export const seoPages = {
         heading: "How we work",
         links: [{"before": "Moving from another country? See our ", "text": "CV tips for applicants from abroad", "to": "/en/guide/applying-to-switzerland-from-abroad", "after": "."}],
         paragraphs: [
-          "In an online analysis meeting (CHF 95, up to 45 minutes) we analyse your current documents and show you the biggest improvement potential. Then we revise your CV together or create a new one – tailored to your target industry.",
+          `In an online analysis meeting (CHF ${consultationPrices.analysis} incl. VAT, up to ${consultationTerms.analysisMaxMinutes} minutes) we analyse your current documents and show you the biggest improvement potential. Then we revise your CV together or create a new one – tailored to your target industry.`,
           "We specialise in finance, insurance, back office and IT roles in German-speaking Switzerland, including Zurich.",
         ],
       },
       {
         heading: "Pricing",
-        paragraphs: ["Analysis meeting: CHF 95. CV review & editing: CHF 75 per hour. No hidden costs – and if you are not satisfied with the analysis meeting, you get a full refund."],
+        paragraphs: [`Analysis meeting: CHF ${consultationPrices.analysis} incl. VAT. CV review & editing: CHF ${consultationPrices.editingPerHour} incl. VAT per hour. No hidden costs – and if you are not satisfied with the analysis meeting, you get a full refund.`],
       },
     ],
     ctaTitle: "Ready for a better CV?",
-    ctaText: "First contact is free and without obligation; the separate analysis meeting costs CHF 95.",
+    ctaText: `First contact is free and without obligation; the separate analysis meeting costs CHF ${consultationPrices.analysis} incl. VAT.`,
   }),
   letterEn: en({
     path: "/en/cover-letter-switzerland",
@@ -229,7 +230,7 @@ export const seoPages = {
       },
     ],
     ctaTitle: "Want your next cover letter to convince?",
-    ctaText: "First contact is free and without obligation; the separate analysis meeting costs CHF 95.",
+    ctaText: `First contact is free and without obligation; the separate analysis meeting costs CHF ${consultationPrices.analysis} incl. VAT.`,
   }),
   dossierEn: en({
     path: "/en/job-application-switzerland",
@@ -255,7 +256,7 @@ export const seoPages = {
       },
       {
         heading: "Pricing",
-        paragraphs: ["An analysis meeting costs CHF 95, then CHF 75 per hour for editing. Fully online – wherever you are."],
+        paragraphs: [`An analysis meeting costs CHF ${consultationPrices.analysis} incl. VAT, then CHF ${consultationPrices.editingPerHour} incl. VAT per hour for editing. Fully online – wherever you are.`],
       },
     ],
     ctaTitle: "Ready for your new application dossier?",
@@ -582,7 +583,7 @@ export const seoPages = {
         ],
         paragraphs: [
           "Bei der Bewerbungswerkstatt prüfen wir bestehende Lebensläufe persönlich und besprechen, wo Verbesserungen sinnvoll sind. Dabei berücksichtigen wir Ihren beruflichen Hintergrund, Ihre Erfahrungen und die Stellen, auf die Sie sich bewerben möchten.",
-          "Das Online-Analysegespräch dauert bis zu 45 Minuten und kostet CHF 95. Für eine anschliessende Überarbeitung des Lebenslaufs gilt ein Stundensatz von CHF 75.",
+          `Das Online-Analysegespräch dauert bis zu ${consultationTerms.analysisMaxMinutes} Minuten und kostet CHF ${consultationPrices.analysis} inkl. MWST. Für eine anschliessende Überarbeitung des Lebenslaufs gilt ein Stundensatz von CHF ${consultationPrices.editingPerHour} inkl. MWST.`,
         ],
       },
       {
@@ -610,7 +611,7 @@ export const seoPages = {
       { q: "Muss ich meinen Lebenslauf für jede Stelle anpassen?", a: "Eine komplette Neuerstellung ist meistens nicht erforderlich. Es empfiehlt sich aber, die besonders relevanten Fähigkeiten, Erfahrungen und Fachkenntnisse passend zur ausgeschriebenen Stelle hervorzuheben." },
     ],
     ctaTitle: "Sie möchten Ihren bestehenden Lebenslauf professionell prüfen lassen?",
-    ctaText: "Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF 95.",
+    ctaText: `Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF ${consultationPrices.analysis} inkl. MWST.`,
   }),
 } satisfies Record<string, SeoPage>;
 

@@ -1,3 +1,4 @@
+import { consultationPrices } from "@/lib/verified-facts";
 import type { Lang } from "@/lib/home-content";
 
 const copy = {
@@ -43,7 +44,7 @@ export function homeHead(lang: Lang) {
           email: "audelia@bewerbungswerkstatt.ch",
           areaServed: "CH",
           availableLanguage: ["de", "en"],
-          priceRange: "CHF 75–95",
+          priceRange: `CHF ${consultationPrices.editingPerHour}–${consultationPrices.analysis}`,
           address: { "@type": "PostalAddress", postalCode: "6418", addressLocality: "Rothenthurm", addressCountry: "CH" },
         }),
       },

@@ -1,3 +1,4 @@
+import { consultationPrices, consultationTerms } from "@/lib/verified-facts";
 import type { ReactNode } from "react";
 
 export type Lang = "de" | "en";
@@ -74,7 +75,7 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["#experten", "Experten"],
       ["#kontakt", "Kontakt"],
     ],
-    cta: "Erstkontakt anfragen",
+    cta: "Kontakt aufnehmen",
     menuOpen: "Menü öffnen",
     menuClose: "Menü schliessen",
     navLabel: "Hauptnavigation",
@@ -131,9 +132,9 @@ export const homeContent: Record<Lang, HomeContent> = {
     bannerText: "Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.",
     reviewsTitle: "Das sagen unsere Kunden",
     pricingTitle: "Transparente Preise",
-    pricingSub: "Erstkontakt kostenlos. Analysegespräch CHF 95; anschliessende Bearbeitung CHF 75 pro Stunde.",
-    price1: { pill: "Einstieg", title: "Analysegespräch", unit: "Online Besprechung bis zu 45 Minuten", items: ["Analyse Ihrer aktuellen Unterlagen", "Identifikation der grössten Verbesserungspotenziale", "Konkreter Massnahmenplan", "Vollständig online", "Keine Verpflichtung zur Weiterbearbeitung"], button: "Termin vereinbaren", refund: "Nicht zufrieden? Volle Rückerstattung." },
-    price2: { pill: "Weiterführend", title: "CV-Review & Bearbeitung", unit: "pro Stunde", items: ["Detaillierte Überarbeitung Lebenslauf", "Motivationsschreiben Optimierung", "Laufende Anpassungen & Feedback", "Auf Ihre Zielbranche zugeschnitten"], button: "Kontakt aufnehmen" },
+    pricingSub: `Erstkontakt kostenlos. Analysegespräch CHF ${consultationPrices.analysis} inkl. MWST; anschliessende Bearbeitung CHF ${consultationPrices.editingPerHour} inkl. MWST pro Stunde.`,
+    price1: { pill: "Einstieg", title: "Analysegespräch", unit: `Online Besprechung bis zu ${consultationTerms.analysisMaxMinutes} Minuten · inkl. MWST`, items: ["Analyse Ihrer aktuellen Unterlagen", "Identifikation der grössten Verbesserungspotenziale", "Konkreter Massnahmenplan", "Vollständig online", "Keine Verpflichtung zur Weiterbearbeitung"], button: "Termin vereinbaren", refund: "Nicht zufrieden? Volle Rückerstattung." },
+    price2: { pill: "Weiterführend", title: "CV-Review & Bearbeitung", unit: "pro Stunde · inkl. MWST", items: ["Detaillierte Überarbeitung Lebenslauf", "Motivationsschreiben Optimierung", "Laufende Anpassungen & Feedback", "Auf Ihre Zielbranche zugeschnitten"], button: "Kontakt aufnehmen" },
     expertsTitle: "Ihre Experten",
     audelia: {
       role: "Bewerbungsspezialistin im Finanz- Versicherungs- und Back Office Sektor",
@@ -150,7 +151,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     contact: {
       eyebrow: "Persönlich. Unverbindlich. Auf Augenhöhe.",
       title: <>Bereit für den nächsten<br />Karriereschritt?</>,
-      text: "Der Erstkontakt zur Klärung Ihres Anliegens ist kostenlos und unverbindlich. Die separate Analyse Ihrer Unterlagen im Gespräch (bis zu 45 Minuten) kostet CHF 95.",
+      text: `Der Erstkontakt zur Klärung Ihres Anliegens ist kostenlos und unverbindlich. Die separate Analyse Ihrer Unterlagen im Gespräch (bis zu ${consultationTerms.analysisMaxMinutes} Minuten) kostet CHF ${consultationPrices.analysis} inkl. MWST.`,
       email: "E-Mail",
       phone: "Telefon",
       location: "Standort",
@@ -174,7 +175,7 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["#experts", "Experts"],
       ["#contact", "Contact"],
     ],
-    cta: "Request first contact",
+    cta: "Get in touch",
     menuOpen: "Open menu",
     menuClose: "Close menu",
     navLabel: "Main navigation",
@@ -231,9 +232,9 @@ export const homeContent: Record<Lang, HomeContent> = {
     bannerText: "Our consultants live and work in German-speaking Switzerland — they know the market, the culture and the expectations of your future employers.",
     reviewsTitle: "What our clients say",
     pricingTitle: "Transparent pricing",
-    pricingSub: "First contact is free. Analysis meeting CHF 95; subsequent editing CHF 75 per hour.",
-    price1: { pill: "Starter", title: "Analysis meeting", unit: "Online meeting of up to 45 minutes", items: ["Analysis of your current documents", "Identification of the biggest improvement potential", "Concrete action plan", "Fully online", "No obligation to book further editing"], button: "Book an appointment", refund: "Not satisfied? Full refund." },
-    price2: { pill: "Advanced", title: "CV review & editing", unit: "per hour", items: ["Detailed revision of your CV", "Cover letter optimisation", "Ongoing adjustments & feedback", "Tailored to your target industry"], button: "Get in touch" },
+    pricingSub: `First contact is free. Analysis meeting CHF ${consultationPrices.analysis} incl. VAT; subsequent editing CHF ${consultationPrices.editingPerHour} incl. VAT per hour.`,
+    price1: { pill: "Starter", title: "Analysis meeting", unit: `Online meeting of up to ${consultationTerms.analysisMaxMinutes} minutes · incl. VAT`, items: ["Analysis of your current documents", "Identification of the biggest improvement potential", "Concrete action plan", "Fully online", "No obligation to book further editing"], button: "Book an appointment", refund: "Not satisfied? Full refund." },
+    price2: { pill: "Advanced", title: "CV review & editing", unit: "per hour · incl. VAT", items: ["Detailed revision of your CV", "Cover letter optimisation", "Ongoing adjustments & feedback", "Tailored to your target industry"], button: "Get in touch" },
     expertsTitle: "Your experts",
     audelia: {
       role: "Application specialist for finance, insurance and back office",
@@ -250,7 +251,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     contact: {
       eyebrow: "Personal. No obligation. On equal terms.",
       title: <>Ready for your next<br />career step?</>,
-      text: "First contact to discuss your needs is free and without obligation, in English or German. The separate document analysis meeting (up to 45 minutes) costs CHF 95.",
+      text: `First contact to discuss your needs is free and without obligation, in English or German. The separate document analysis meeting (up to ${consultationTerms.analysisMaxMinutes} minutes) costs CHF ${consultationPrices.analysis} incl. VAT.`,
       email: "Email",
       phone: "Phone",
       location: "Location",

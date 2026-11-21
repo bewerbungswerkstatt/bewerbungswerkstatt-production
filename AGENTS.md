@@ -12,6 +12,7 @@
 ## Project architecture
 
 - Render labour-market figures as stable SSR text and source them with consultation prices from `verified-facts.ts`; card reveal animations remain independent so crawlers never capture transient numerical values.
+- Source consultation duration and all DE/EN price copy, including SEO descriptions, from `verified-facts.ts` so offer changes stay consistent across pages.
 
 - Keep contextual service/guide links on their relevant section in `seo-pages.ts` and render them with typed router links in `ContentPage`; this preserves existing prose and makes thematic cross-links explicit.
 
