@@ -1,4 +1,4 @@
-import { ArrowRight, Languages } from "lucide-react";
+import { ArrowRight, Globe } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import type { Lang } from "@/lib/home-content";
 import { guidesContent } from "@/lib/guides-content";
@@ -15,7 +15,7 @@ export function GuidesPage({ lang }: { lang: Lang }) {
           <nav aria-label="Navigation">
             <Link to={de ? "/" : "/en"}>{de ? "Startseite" : "Home"}</Link>
             <Link to={de ? "/ratgeber" : "/en/guide"} aria-current="page">{de ? "Ratgeber" : "Guides"}</Link>
-            <Link to={de ? "/en/guide" : "/ratgeber"} className="lang-switch language-link" hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"}><Languages aria-hidden="true" />{de ? "EN" : "DE"}</Link>
+            <Link to={de ? "/en/guide" : "/ratgeber"} className="lang-switch language-link" hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"}><Globe aria-hidden="true" />{de ? "EN" : "DE"}</Link>
             <a className="button button--primary" href={de ? "/#kontakt" : "/en#contact"}>{de ? "Kontakt aufnehmen" : "Get in touch"}</a>
           </nav>
         </header>

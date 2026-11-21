@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Languages } from "lucide-react";
+import { ArrowRight, Check, Globe } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import type { SeoPage } from "@/lib/seo-pages";
 import { pagesByLang } from "@/lib/seo-pages";
@@ -17,7 +17,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
           <nav aria-label={de ? "Navigation" : "Navigation"}>
             <a href={home}>{de ? "Startseite" : "Home"}</a>
             <Link to={de ? "/ratgeber" : "/en/guide"}>{de ? "Ratgeber" : "Guides"}</Link>
-            {page.noEnAlternate ? null : <a href={page.alternate} hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"} className="lang-switch language-link"><Languages aria-hidden="true" />{de ? "EN" : "DE"}</a>}
+            {page.noEnAlternate ? null : <a href={page.alternate} hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"} className="lang-switch language-link"><Globe aria-hidden="true" />{de ? "EN" : "DE"}</a>}
             <a className="button button--primary" href={contact}>{de ? "Kontakt aufnehmen" : "Get in touch"}</a>
           </nav>
         </header>
