@@ -48,3 +48,14 @@ Dieser Abschnitt aktualisiert den obigen Veröffentlichungsstand.
 Quelle: https://www.seco.admin.ch/dam/de/sd-web/C6Htf34KPwjy/2026-03_Die_Lage_auf_dem_Arbeitsmarkt_DE.pdf
 
 **Verbleibend:** Die neuen Korrekturen brauchen ein Vercel-Deployment; es wurde hier nicht ausgelöst. Auf der öffentlichen Website sind zum Prüfzeitpunkt noch die unbelegten 200+-/Mehrheitsangaben und die unklare Erstgespräch-Bezeichnung vorhanden. Nach Veröffentlichung erneut öffentlich kontrollieren.
+
+## Neuer Ratgeberartikel – 21. November 2026
+
+- Freigegebener Fachartikel «Lebenslauf Schweiz: 7 typische Fehler, die Ihren CV schwächen» vollständig und ungekürzt unter `/ratgeber/lebenslauf-fehler-schweiz` veröffentlicht (nur Deutsch, de-CH). Kein inhaltlicher Doppelkonflikt mit bestehenden Seiten.
+- Meta-Title «Lebenslauf Schweiz: 7 typische Fehler und praktische Tipps», freigegebene Meta-Description, selbstreferenzierender absoluter Canonical, Hreflang nur de-CH + x-default (keine erfundene EN-Zielseite), BlogPosting-JSON-LD mit datePublished/dateModified 2026-11-21.
+- Darstellung im bestehenden Design: H2-/H3-Zwischentitel, dezent hervorgehobene Beispiel-Boxen, Checkliste mit Kästchen, FAQ (5 Fragen), Quellenliste, Kontakt-CTA am Ende. Keine Stockfotos, keine neuen Animationen.
+- Interne Verlinkung: Artikel verlinkt auf `/lebenslauf-schreiben-lassen` und `/ratgeber/bewerben-in-der-schweiz`; die Lebenslauf-Leistungsseite verlinkt zurück auf den neuen Artikel. Der Artikel erscheint automatisch unter «Weitere Themen» auf den anderen deutschen Ratgeberseiten.
+- Sitemap um die neue URL ergänzt (jetzt 15 URLs). Sprachumschalter EN/DE wird auf dieser Seite ausgeblendet, da keine englische Fassung existiert.
+- Vorschau geprüft (Desktop 1280 px, Mobil 390 px): Seite lädt mit HTTP 200, alle Inhalte, Boxen, Checkliste und FAQ korrekt, keine Browserfehler.
+
+**Verbleibend:** Live-Schaltung erfolgt erst nach ausdrücklicher Freigabe; danach Vercel-Deployment und öffentliche Kontrolle von Artikel, Sitemap und Ratgeber-Navigation.

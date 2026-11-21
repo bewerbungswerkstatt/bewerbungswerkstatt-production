@@ -1,7 +1,11 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { Lang } from "@/lib/home-content";
 
-export type SeoSection = { heading: string; paragraphs: string[]; list?: string[]; links?: { before: string; text: string; to: NonNullable<LinkProps["to"]>; after: string }[] };
+export type SeoSubsection = { title: string; paragraphs?: string[]; list?: string[] };
+export type SeoExample = { label: string; lines: string[] };
+export type SeoSource = { label: string; href: string };
+
+export type SeoSection = { heading: string; paragraphs: string[]; list?: string[]; links?: { before: string; text: string; to: NonNullable<LinkProps["to"]>; after: string }[]; subsections?: SeoSubsection[]; examples?: SeoExample[]; checklist?: string[]; sources?: SeoSource[] };
 
 export type SeoFaq = { q: string; a: string };
 
@@ -20,6 +24,8 @@ export type SeoPage = {
   ctaText: string;
   type: "service" | "article";
   faq?: SeoFaq[];
+  noEnAlternate?: boolean;
+  dates?: { published: string; modified: string };
 };
 
 const de = (p: Omit<SeoPage, "lang">): SeoPage => ({ ...p, lang: "de" });
@@ -39,7 +45,7 @@ export const seoPages = {
     sections: [
       {
         heading: "Was ein guter Schweizer Lebenslauf braucht",
-        links: [{"before": "Welche Unterlagen dazugehören, zeigt unser ", "text": "Ratgeber zum Bewerben in der Schweiz", "to": "/ratgeber/bewerben-in-der-schweiz", "after": "."}],
+        links: [{"before": "Welche Unterlagen dazugehören, zeigt unser ", "text": "Ratgeber zum Bewerben in der Schweiz", "to": "/ratgeber/bewerben-in-der-schweiz", "after": "."}, {"before": "Die häufigsten Schwachstellen zeigt unser Ratgeber zu den ", "text": "7 typischen Fehlern im Schweizer Lebenslauf", "to": "/ratgeber/lebenslauf-fehler-schweiz", "after": "."}],
         paragraphs: ["Ein Schweizer CV ist übersichtlich, vollständig und auf die Zielstelle ausgerichtet. Fliesstext wird selten gelesen – entscheidend sind klare Abschnitte und prägnante Stichworte."],
         list: [
           "Eine «Das bringe ich mit»-Übersicht mit Ihren wichtigsten Stärken",
@@ -434,6 +440,178 @@ export const seoPages = {
     ctaTitle: "Planning your move to Switzerland?",
     ctaText: "We get your documents ready for the Swiss job market.",
   }),
+  cvFehlerDe: de({
+    path: "/ratgeber/lebenslauf-fehler-schweiz",
+    alternate: "/ratgeber/lebenslauf-fehler-schweiz",
+    noEnAlternate: true,
+    navLabel: "Ratgeber: Lebenslauf-Fehler",
+    type: "article",
+    title: "Lebenslauf Schweiz: 7 typische Fehler und praktische Tipps",
+    description: "Zu viel Text, unklare Stärken oder schlechtes Layout? Entdecken Sie 7 typische Fehler im Schweizer Lebenslauf – mit Beispielen und einer CV-Checkliste.",
+    eyebrow: "Ratgeber / Lebenslauf",
+    h1: "Lebenslauf Schweiz: 7 typische Fehler, die Ihren CV schwächen",
+    intro: "Viele Lebensläufe sehen heute ähnlich aus. Dieselben Vorlagen, ähnliche Formulierungen und oft viel Text, der wenig über die eigentlichen Stärken einer Person aussagt. Dabei muss ein guter Lebenslauf weder besonders kreativ noch aussergewöhnlich gestaltet sein. Viel wichtiger ist, dass die relevanten Erfahrungen und Fähigkeiten schnell erkennbar sind. Gerade bei Bewerbungen in der Schweiz lohnt es sich deshalb, den eigenen CV kritisch zu überprüfen. Wir zeigen Ihnen sieben typische Schwachstellen und wie Sie Ihren Lebenslauf gezielt verbessern können.",
+    dates: { published: "2026-11-21", modified: "2026-11-21" },
+    sections: [
+      {
+        heading: "1. Zu viel Text: Die wichtigen Informationen gehen unter",
+        paragraphs: [
+          "Ein Lebenslauf soll einen Überblick über den beruflichen Werdegang geben und nicht jede einzelne Aufgabe ausführlich beschreiben.",
+          "Besonders bei Berufserfahrenen sammeln sich im Laufe der Jahre viele Tätigkeiten und Verantwortungsbereiche an. Wer alles aufführt, riskiert, dass die für die gewünschte Stelle relevanten Informationen untergehen.",
+        ],
+        subsections: [
+          {
+            title: "So wird es übersichtlicher:",
+            list: [
+              "Verwenden Sie kurze, aussagekräftige Stichpunkte.",
+              "Beschränken Sie sich auf die wichtigsten Aufgaben und Erfahrungen.",
+              "Beschreiben Sie aktuelle und relevante Positionen ausführlicher als weit zurückliegende Tätigkeiten.",
+              "Vermeiden Sie lange Fliesstexte.",
+            ],
+          },
+        ],
+        examples: [
+          { label: "Weniger aussagekräftig:", lines: ["«Ich war für verschiedene administrative Tätigkeiten zuständig, habe Dokumente bearbeitet, mit Kunden kommuniziert und unterschiedliche interne Prozesse unterstützt.»"] },
+          { label: "Besser:", lines: ["Administrative Betreuung von Kundenaufträgen", "Erstellung und Prüfung von Vertragsunterlagen", "Koordination zwischen Kunden und internen Fachabteilungen"] },
+        ],
+      },
+      {
+        heading: "2. Es ist nicht erkennbar, warum Sie zur Stelle passen",
+        paragraphs: [
+          "Ein häufiger Schwachpunkt ist ein Lebenslauf, der für jede Bewerbung unverändert verwendet wird.",
+          "Natürlich müssen Sie Ihren CV nicht jedes Mal vollständig neu erstellen. Aber die wichtigsten Anforderungen einer Stelle sollten sich in Ihrem Lebenslauf wiederfinden – sofern Sie die entsprechenden Erfahrungen tatsächlich mitbringen.",
+        ],
+        examples: [
+          { label: "Beispiel:", lines: ["Sie bewerben sich auf eine Stelle im Finanzbereich. Im Inserat werden Kenntnisse in der Rechnungsprüfung, Excel und der Zusammenarbeit mit verschiedenen Fachabteilungen verlangt. Diese Erfahrungen sind in Ihrem Lebenslauf vorhanden, stehen aber zwischen zahlreichen anderen Aufgaben. Hier hilft es, die relevanten Kompetenzen weiter oben zu platzieren und bei der Berufserfahrung deutlicher hervorzuheben."] },
+        ],
+      },
+      {
+        heading: "3. Sie beschreiben nur Aufgaben statt Ihren Beitrag",
+        paragraphs: [
+          "«Verantwortlich für Projekte.» «Bearbeitung von Kundenanfragen.» «Mitarbeit im Tagesgeschäft.» Solche Aussagen sind nicht grundsätzlich falsch. Sie bleiben aber sehr allgemein.",
+          "Ein überzeugender Lebenslauf sollte möglichst konkret zeigen, welche Verantwortung Sie übernommen haben und welchen Beitrag Sie im Unternehmen geleistet haben.",
+        ],
+        examples: [
+          { label: "Back Office", lines: ["Statt: «Allgemeine administrative Tätigkeiten»", "Besser: «Selbstständige Bearbeitung von Kundenaufträgen sowie Koordination mit internen Fachabteilungen»"] },
+          { label: "Finance", lines: ["Statt: «Zuständig für das Reporting»", "Besser: «Erstellung monatlicher Finanzreportings und Aufbereitung von Abweichungsanalysen für die Bereichsleitung»"] },
+          { label: "IT", lines: ["Statt: «Entwicklung von Software»", "Besser: «Entwicklung und Wartung interner Webanwendungen sowie Analyse und Behebung technischer Fehler»"] },
+        ],
+      },
+      {
+        heading: "4. Allgemeine Stärken werden nicht belegt",
+        paragraphs: [
+          "Teamfähig, belastbar, motiviert, zuverlässig. Diese Eigenschaften finden sich in vielen Lebensläufen. Ohne konkreten Zusammenhang sagen sie allerdings wenig darüber aus, wie jemand arbeitet.",
+          "Statt möglichst viele persönliche Stärken aufzuzählen, sollten Sie überlegen, wie Sie diese anhand Ihrer beruflichen Erfahrungen sichtbar machen können.",
+        ],
+        examples: [
+          { label: "Beispiel:", lines: ["Statt lediglich «organisationsstark» aufzuführen, können Sie bei einer passenden beruflichen Station erwähnen: «Eigenständige Organisation und Koordination von Terminen, Sitzungen und administrativen Abläufen für mehrere Fachabteilungen.» Damit wird nachvollziehbarer, worauf die genannte Stärke beruht."] },
+        ],
+      },
+      {
+        heading: "5. Das Design macht den Lebenslauf schwer lesbar",
+        paragraphs: [
+          "Ein modernes Layout kann einen Lebenslauf aufwerten. Zu viele Farben, Symbole, Grafiken oder ungewöhnliche Schriftarten können jedoch vom Inhalt ablenken.",
+          "Auch eine aufwendige Vorlage ist nicht automatisch besser als ein schlicht gestalteter CV.",
+        ],
+        subsections: [
+          {
+            title: "Worauf Sie achten sollten:",
+            list: [
+              "Gut lesbare Schrift und angemessene Schriftgrösse",
+              "Klare Überschriften und einheitliche Formatierung",
+              "Genügend Abstand zwischen den Abschnitten",
+              "Einheitliche Datumsangaben",
+              "Eine nachvollziehbare Reihenfolge der beruflichen Stationen",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "6. Wichtige Angaben fehlen oder sind unklar",
+        paragraphs: ["Manchmal sind es kleine Unklarheiten, die einen Lebenslauf unnötig kompliziert machen. Dazu gehören beispielsweise:"],
+        list: [
+          "Fehlende oder veraltete Kontaktdaten",
+          "Unklare Zeitangaben bei früheren Anstellungen",
+          "Sprachkenntnisse ohne nachvollziehbare Einstufung",
+          "Abkürzungen, die ausserhalb der eigenen Branche nicht verständlich sind",
+          "Fehlende Informationen zu relevanten Weiterbildungen",
+        ],
+      },
+      {
+        heading: "7. Der Lebenslauf klingt zu generisch oder offensichtlich KI-generiert",
+        paragraphs: [
+          "KI-Tools können beim Formulieren eines Lebenslaufs hilfreich sein. Sie können beispielsweise Texte kürzen, die Struktur verbessern oder alternative Formulierungen vorschlagen. Schwierig wird es, wenn Vorschläge ungeprüft übernommen werden.",
+          "Dann entstehen häufig sehr allgemeine Beschreibungen wie: «Ergebnisorientierte Fachperson mit ausgeprägten Kommunikationsfähigkeiten und einer Leidenschaft für innovative Lösungen.» Das klingt professionell, verrät aber kaum etwas über die tatsächliche Erfahrung.",
+        ],
+        examples: [
+          { label: "Besser ist eine konkrete Beschreibung:", lines: ["«Kundenberaterin mit Erfahrung in der Betreuung von Privatkunden, der Bearbeitung komplexer Anfragen und der Zusammenarbeit mit internen Fachabteilungen.» Das zweite Beispiel macht das berufliche Profil verständlicher."] },
+        ],
+      },
+      {
+        heading: "Checkliste: Wie gut ist Ihr Lebenslauf?",
+        paragraphs: ["Bevor Sie Ihre nächste Bewerbung verschicken, nehmen Sie sich einige Minuten für diese Fragen:"],
+        checklist: [
+          "Sind meine wichtigsten Stärken und Erfahrungen sofort erkennbar?",
+          "Ist mein Lebenslauf übersichtlich und angenehm zu lesen?",
+          "Sind die relevantesten Qualifikationen auf die gewünschte Stelle ausgerichtet?",
+          "Beschreibe ich meine Aufgaben und Verantwortungsbereiche konkret?",
+          "Sind alle wichtigen Angaben aktuell, korrekt und nachvollziehbar?",
+          "Habe ich allgemeine Floskeln und unnötige Wiederholungen entfernt?",
+          "Ist mein CV frei von Rechtschreibfehlern und korrekt als PDF gespeichert?",
+        ],
+      },
+      {
+        heading: "Wann lohnt sich ein professioneller CV-Check?",
+        paragraphs: [
+          "Nicht jeder Lebenslauf muss komplett neu geschrieben werden. Oft ist bereits eine gute Grundlage vorhanden. Trotzdem kann es schwierig sein, den eigenen Werdegang aus einer neutralen Perspektive zu betrachten.",
+          "Eine persönliche Überprüfung ist beispielsweise sinnvoll, wenn Sie:",
+        ],
+        list: [
+          "sich schon länger bewerben und unsicher sind, ob Ihr CV Ihre Stärken ausreichend zeigt;",
+          "nach mehreren Jahren einen Stellenwechsel planen;",
+          "sich beruflich neu orientieren möchten;",
+          "sich aus dem Ausland auf Stellen in der Schweiz bewerben;",
+          "Ihren Lebenslauf gezielt auf eine bestimmte Position ausrichten möchten.",
+        ],
+      },
+      {
+        heading: "Persönliche CV-Beratung bei der Bewerbungswerkstatt",
+        links: [
+          { before: "Weitere Informationen finden Sie auf unserer Seite zur ", text: "persönlichen Lebenslauf-Beratung in der Schweiz", to: "/lebenslauf-schreiben-lassen", after: "." },
+          { before: "Wenn Sie sich erstmals mit dem Schweizer Bewerbungsprozess beschäftigen, empfehlen wir zusätzlich unseren ", text: "Ratgeber zum Bewerben in der Schweiz", to: "/ratgeber/bewerben-in-der-schweiz", after: "." },
+        ],
+        paragraphs: [
+          "Bei der Bewerbungswerkstatt prüfen wir bestehende Lebensläufe persönlich und besprechen, wo Verbesserungen sinnvoll sind. Dabei berücksichtigen wir Ihren beruflichen Hintergrund, Ihre Erfahrungen und die Stellen, auf die Sie sich bewerben möchten.",
+          "Das Online-Analysegespräch dauert bis zu 45 Minuten und kostet CHF 95. Für eine anschliessende Überarbeitung des Lebenslaufs gilt ein Stundensatz von CHF 75.",
+        ],
+      },
+      {
+        heading: "Fazit: Ein guter Lebenslauf zeigt, was Sie wirklich mitbringen",
+        links: [{ before: "Die Bewerbungswerkstatt unterstützt Sie mit einer persönlichen Analyse und konkreten Verbesserungsvorschlägen: ", text: "Jetzt Lebenslauf prüfen lassen und Kontakt aufnehmen", to: "/lebenslauf-schreiben-lassen", after: "." }],
+        paragraphs: [
+          "Ein überzeugender Lebenslauf braucht keine komplizierten Formulierungen und kein aussergewöhnliches Design. Er soll verständlich zeigen, was Sie können, welche Erfahrungen Sie mitbringen und warum Ihr Profil für eine bestimmte Stelle interessant ist.",
+        ],
+      },
+      {
+        heading: "Quellen und weiterführende Informationen",
+        paragraphs: [],
+        sources: [
+          { label: "arbeit.swiss – Bewerbungstipps des Staatssekretariats für Wirtschaft (SECO)", href: "https://www.arbeit.swiss/de/stellensuchende/bewerbungstipps" },
+          { label: "ZHAW Career Services – Bewerbungsunterlagen für die Schweiz", href: "https://www.zhaw.ch/de/studium/nach-dem-studium/career-services/bewerbungsunterlagen" },
+          { label: "jobs.ch – Lebenslauf erstellen", href: "https://www.jobs.ch/de/job-coach/ratgeber-checklisten/lebenslauf-erstellen/" },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Wie lang sollte ein Lebenslauf in der Schweiz sein?", a: "Für viele Bewerbungen sind ein bis zwei Seiten ausreichend. Bei umfangreicher Berufserfahrung kann auch eine dritte Seite sinnvoll sein. Entscheidend sind Übersichtlichkeit und Relevanz, nicht eine starre Seitenzahl." },
+      { q: "Brauche ich ein Bewerbungsfoto?", a: "Ein Bewerbungsfoto ist in der Schweiz weiterhin üblich, aber nicht gesetzlich vorgeschrieben. Wenn Sie ein Foto verwenden, sollte es aktuell und professionell sein." },
+      { q: "Kann ich meinen Lebenslauf mit ChatGPT erstellen?", a: "Ja. KI kann bei Formulierungen und der Struktur helfen. Prüfen Sie jedoch alle Angaben sorgfältig und übernehmen Sie keine erfundenen Erfahrungen oder übertriebenen Aussagen." },
+      { q: "Was ist der Unterschied zwischen CV-Check und Lebenslauf-Erstellung?", a: "Bei einem CV-Check wird ein bestehender Lebenslauf überprüft und es werden Verbesserungspotenziale aufgezeigt. Bei einer vollständigen Neuerstellung wird der Lebenslauf auf Basis Ihrer Informationen und Erfahrungen neu aufgebaut." },
+      { q: "Muss ich meinen Lebenslauf für jede Stelle anpassen?", a: "Eine komplette Neuerstellung ist meistens nicht erforderlich. Es empfiehlt sich aber, die besonders relevanten Fähigkeiten, Erfahrungen und Fachkenntnisse passend zur ausgeschriebenen Stelle hervorzuheben." },
+    ],
+    ctaTitle: "Sie möchten Ihren bestehenden Lebenslauf professionell prüfen lassen?",
+    ctaText: "Der Erstkontakt ist kostenlos und unverbindlich; das separate Analysegespräch kostet CHF 95.",
+  }),
 } satisfies Record<string, SeoPage>;
 
 export const pagesByLang = (lang: Lang) => Object.values(seoPages).filter((p) => p.lang === lang);
@@ -444,6 +622,16 @@ export function seoHead(page: SeoPage) {
   const de = SITE + (page.lang === "de" ? page.path : page.alternate);
   const en = SITE + (page.lang === "en" ? page.path : page.alternate);
   const self = SITE + page.path;
+  const alternates = page.noEnAlternate
+    ? [
+        { rel: "alternate", hrefLang: "de-CH", href: de },
+        { rel: "alternate", hrefLang: "x-default", href: de },
+      ]
+    : [
+        { rel: "alternate", hrefLang: "de-CH", href: de },
+        { rel: "alternate", hrefLang: "en", href: en },
+        { rel: "alternate", hrefLang: "x-default", href: de },
+      ];
   return {
     meta: [
       { title: page.title },
@@ -455,18 +643,21 @@ export function seoHead(page: SeoPage) {
       { property: "og:locale", content: page.lang === "de" ? "de_CH" : "en_GB" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      { rel: "canonical", href: self },
-      { rel: "alternate", hrefLang: "de-CH", href: de },
-      { rel: "alternate", hrefLang: "en", href: en },
-      { rel: "alternate", hrefLang: "x-default", href: de },
-    ],
+    links: [{ rel: "canonical", href: self }, ...alternates],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify(
           page.type === "article"
-            ? { "@context": "https://schema.org", "@type": "Article", headline: page.h1, description: page.description, inLanguage: page.lang, author: { "@type": "Organization", name: "Bewerbungswerkstatt" } }
+            ? {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                headline: page.h1,
+                description: page.description,
+                inLanguage: page.lang === "de" ? "de-CH" : "en",
+                author: { "@type": "Organization", name: "Bewerbungswerkstatt" },
+                ...(page.dates ? { datePublished: page.dates.published, dateModified: page.dates.modified } : {}),
+              }
             : { "@context": "https://schema.org", "@type": "Service", name: page.h1, description: page.description, inLanguage: page.lang, areaServed: "CH", provider: { "@type": "ProfessionalService", name: "Bewerbungswerkstatt", telephone: "+41 76 629 50 56", email: "audelia@bewerbungswerkstatt.ch", address: { "@type": "PostalAddress", postalCode: "6418", addressLocality: "Rothenthurm", addressCountry: "CH" } } },
         ),
       },

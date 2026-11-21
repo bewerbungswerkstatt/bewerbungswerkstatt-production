@@ -17,7 +17,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
           <nav aria-label={de ? "Navigation" : "Navigation"}>
             <a href={home}>{de ? "Startseite" : "Home"}</a>
             <Link to={de ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{de ? "Ratgeber" : "Guides"}</Link>
-            <a href={page.alternate} hrefLang={de ? "en" : "de"} className="lang-switch">{de ? "EN" : "DE"}</a>
+            {page.noEnAlternate ? null : <a href={page.alternate} hrefLang={de ? "en" : "de"} className="lang-switch">{de ? "EN" : "DE"}</a>}
             <a className="button button--primary" href={contact}>{de ? "Erstkontakt anfragen" : "Request first contact"}</a>
           </nav>
         </header>
@@ -33,8 +33,31 @@ export function ContentPage({ page }: { page: SeoPage }) {
             <section key={s.heading}>
               <h2>{s.heading}</h2>
               {s.paragraphs.map((p) => <p key={p}>{p}</p>)}
+              {s.subsections?.map((sub) => (
+                <div key={sub.title}>
+                  <h3>{sub.title}</h3>
+                  {sub.paragraphs?.map((p) => <p key={p}>{p}</p>)}
+                  {sub.list ? <ul>{sub.list.map((li) => <li key={li}><Check />{li}</li>)}</ul> : null}
+                </div>
+              ))}
+              {s.examples?.map((ex) => (
+                <div className="content-example" key={ex.label}>
+                  <p className="content-example__label">{ex.label}</p>
+                  {ex.lines.map((line) => <p key={line}>{line}</p>)}
+                </div>
+              ))}
               {s.list ? <ul>{s.list.map((li) => <li key={li}><Check />{li}</li>)}</ul> : null}
+              {s.checklist ? (
+                <ul className="content-checklist">
+                  {s.checklist.map((item) => <li key={item}><span className="content-checklist__box" aria-hidden="true" />{item}</li>)}
+                </ul>
+              ) : null}
               {s.links?.map((link) => <p key={link.to}>{link.before}<Link className="contextual-link" to={link.to}>{link.text}</Link>{link.after}</p>)}
+              {s.sources ? (
+                <ul className="content-sources">
+                  {s.sources.map((src) => <li key={src.href}><a href={src.href} target="_blank" rel="noopener noreferrer">{src.label}</a></li>)}
+                </ul>
+              ) : null}
             </section>
           ))}
           {page.faq ? (
