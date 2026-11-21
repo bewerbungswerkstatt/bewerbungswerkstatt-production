@@ -19,10 +19,12 @@ import { Route as EnIndexRouteImport } from './routes/en.index'
 import { Route as EnCoverLetterSwitzerlandRouteImport } from './routes/en.cover-letter-switzerland'
 import { Route as EnJobApplicationSwitzerlandRouteImport } from './routes/en.job-application-switzerland'
 import { Route as EnSwissCvWritingRouteImport } from './routes/en.swiss-cv-writing'
+import { Route as RatgeberIndexRouteImport } from './routes/ratgeber.index'
 import { Route as RatgeberArbeitszeugnisSchweizRouteImport } from './routes/ratgeber.arbeitszeugnis-schweiz'
 import { Route as RatgeberBewerbenInDerSchweizRouteImport } from './routes/ratgeber.bewerben-in-der-schweiz'
 import { Route as RatgeberBewerbenInDerSchweizAusDeutschlandRouteImport } from './routes/ratgeber.bewerben-in-der-schweiz-aus-deutschland'
 import { Route as RatgeberLebenslaufFehlerSchweizRouteImport } from './routes/ratgeber.lebenslauf-fehler-schweiz'
+import { Route as EnGuideIndexRouteImport } from './routes/en.guide.index'
 import { Route as EnGuideApplyingForJobsInSwitzerlandRouteImport } from './routes/en.guide.applying-for-jobs-in-switzerland'
 import { Route as EnGuideApplyingToSwitzerlandFromAbroadRouteImport } from './routes/en.guide.applying-to-switzerland-from-abroad'
 import { Route as EnGuideSwissReferenceLetterRouteImport } from './routes/en.guide.swiss-reference-letter'
@@ -82,6 +84,11 @@ const EnSwissCvWritingRoute = EnSwissCvWritingRouteImport.update({
   path: '/en/swiss-cv-writing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RatgeberIndexRoute = RatgeberIndexRouteImport.update({
+  id: '/ratgeber/',
+  path: '/ratgeber/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RatgeberArbeitszeugnisSchweizRoute =
   RatgeberArbeitszeugnisSchweizRouteImport.update({
     id: '/ratgeber/arbeitszeugnis-schweiz',
@@ -106,6 +113,11 @@ const RatgeberLebenslaufFehlerSchweizRoute =
     path: '/ratgeber/lebenslauf-fehler-schweiz',
     getParentRoute: () => rootRouteImport,
   } as any)
+const EnGuideIndexRoute = EnGuideIndexRouteImport.update({
+  id: '/en/guide/',
+  path: '/en/guide/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EnGuideApplyingForJobsInSwitzerlandRoute =
   EnGuideApplyingForJobsInSwitzerlandRouteImport.update({
     id: '/en/guide/applying-for-jobs-in-switzerland',
@@ -140,9 +152,11 @@ export interface FileRoutesByFullPath {
   '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/ratgeber/lebenslauf-fehler-schweiz': typeof RatgeberLebenslaufFehlerSchweizRoute
   '/en/': typeof EnIndexRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
   '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
   '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
+  '/en/guide/': typeof EnGuideIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -159,9 +173,11 @@ export interface FileRoutesByTo {
   '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/ratgeber/lebenslauf-fehler-schweiz': typeof RatgeberLebenslaufFehlerSchweizRoute
   '/en': typeof EnIndexRoute
+  '/ratgeber': typeof RatgeberIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
   '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
   '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
+  '/en/guide': typeof EnGuideIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -179,9 +195,11 @@ export interface FileRoutesById {
   '/ratgeber/bewerben-in-der-schweiz-aus-deutschland': typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   '/ratgeber/lebenslauf-fehler-schweiz': typeof RatgeberLebenslaufFehlerSchweizRoute
   '/en/': typeof EnIndexRoute
+  '/ratgeber/': typeof RatgeberIndexRoute
   '/en/guide/applying-for-jobs-in-switzerland': typeof EnGuideApplyingForJobsInSwitzerlandRoute
   '/en/guide/applying-to-switzerland-from-abroad': typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
   '/en/guide/swiss-reference-letter': typeof EnGuideSwissReferenceLetterRoute
+  '/en/guide/': typeof EnGuideIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,9 +218,11 @@ export interface FileRouteTypes {
     | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/ratgeber/lebenslauf-fehler-schweiz'
     | '/en/'
+    | '/ratgeber/'
     | '/en/guide/applying-for-jobs-in-switzerland'
     | '/en/guide/applying-to-switzerland-from-abroad'
     | '/en/guide/swiss-reference-letter'
+    | '/en/guide/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -219,9 +239,11 @@ export interface FileRouteTypes {
     | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/ratgeber/lebenslauf-fehler-schweiz'
     | '/en'
+    | '/ratgeber'
     | '/en/guide/applying-for-jobs-in-switzerland'
     | '/en/guide/applying-to-switzerland-from-abroad'
     | '/en/guide/swiss-reference-letter'
+    | '/en/guide'
   id:
     | '__root__'
     | '/'
@@ -238,9 +260,11 @@ export interface FileRouteTypes {
     | '/ratgeber/bewerben-in-der-schweiz-aus-deutschland'
     | '/ratgeber/lebenslauf-fehler-schweiz'
     | '/en/'
+    | '/ratgeber/'
     | '/en/guide/applying-for-jobs-in-switzerland'
     | '/en/guide/applying-to-switzerland-from-abroad'
     | '/en/guide/swiss-reference-letter'
+    | '/en/guide/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -258,9 +282,11 @@ export interface RootRouteChildren {
   RatgeberBewerbenInDerSchweizAusDeutschlandRoute: typeof RatgeberBewerbenInDerSchweizAusDeutschlandRoute
   RatgeberLebenslaufFehlerSchweizRoute: typeof RatgeberLebenslaufFehlerSchweizRoute
   EnIndexRoute: typeof EnIndexRoute
+  RatgeberIndexRoute: typeof RatgeberIndexRoute
   EnGuideApplyingForJobsInSwitzerlandRoute: typeof EnGuideApplyingForJobsInSwitzerlandRoute
   EnGuideApplyingToSwitzerlandFromAbroadRoute: typeof EnGuideApplyingToSwitzerlandFromAbroadRoute
   EnGuideSwissReferenceLetterRoute: typeof EnGuideSwissReferenceLetterRoute
+  EnGuideIndexRoute: typeof EnGuideIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -335,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnSwissCvWritingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ratgeber/': {
+      id: '/ratgeber/'
+      path: '/ratgeber'
+      fullPath: '/ratgeber/'
+      preLoaderRoute: typeof RatgeberIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ratgeber/arbeitszeugnis-schweiz': {
       id: '/ratgeber/arbeitszeugnis-schweiz'
       path: '/ratgeber/arbeitszeugnis-schweiz'
@@ -361,6 +394,13 @@ declare module '@tanstack/react-router' {
       path: '/ratgeber/lebenslauf-fehler-schweiz'
       fullPath: '/ratgeber/lebenslauf-fehler-schweiz'
       preLoaderRoute: typeof RatgeberLebenslaufFehlerSchweizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/guide/': {
+      id: '/en/guide/'
+      path: '/en/guide'
+      fullPath: '/en/guide/'
+      preLoaderRoute: typeof EnGuideIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/guide/applying-for-jobs-in-switzerland': {
@@ -404,11 +444,13 @@ const rootRouteChildren: RootRouteChildren = {
     RatgeberBewerbenInDerSchweizAusDeutschlandRoute,
   RatgeberLebenslaufFehlerSchweizRoute: RatgeberLebenslaufFehlerSchweizRoute,
   EnIndexRoute: EnIndexRoute,
+  RatgeberIndexRoute: RatgeberIndexRoute,
   EnGuideApplyingForJobsInSwitzerlandRoute:
     EnGuideApplyingForJobsInSwitzerlandRoute,
   EnGuideApplyingToSwitzerlandFromAbroadRoute:
     EnGuideApplyingToSwitzerlandFromAbroadRoute,
   EnGuideSwissReferenceLetterRoute: EnGuideSwissReferenceLetterRoute,
+  EnGuideIndexRoute: EnGuideIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -11,6 +11,8 @@
 
 ## Project architecture
 
+- Main Ratgeber/Guides navigation targets bilingual card overviews at `/ratgeber` and `/en/guide`; retain existing article URLs and contextual links to preserve indexed content.
+
 - Render labour-market figures as stable SSR text and source them with consultation prices from `verified-facts.ts`; card reveal animations remain independent so crawlers never capture transient numerical values.
 - Source consultation duration and all DE/EN price copy, including SEO descriptions, from `verified-facts.ts` so offer changes stay consistent across pages.
 

@@ -1,5 +1,7 @@
 # Suchoptimierungen
 
+- [x] Ratgeber als kurze DE/EN-Kachelübersicht für Schweizer und internationale Bewerbende angelegt; alle Artikel separat erhalten und Desktop/Mobil-Navigation geprüft.
+
 - [x] Sprachwechsel überall als Symbol + EN/DE, Kontaktbutton und Angebotspreise/-dauer aktualisiert; Desktop/Mobil und sieben Regeltests erfolgreich geprüft.
 
 - [x] Abschliessender Live-Audit: DE-Menü, initiales HTML, Quellen, Preise und Indexierbarkeit.

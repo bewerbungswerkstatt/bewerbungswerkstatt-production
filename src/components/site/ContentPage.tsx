@@ -16,7 +16,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
           <a href={home} aria-label="Bewerbungswerkstatt"><img className="brand-logo" src="/images/logo_darkmode.png" alt="Bewerbungswerkstatt" /></a>
           <nav aria-label={de ? "Navigation" : "Navigation"}>
             <a href={home}>{de ? "Startseite" : "Home"}</a>
-            <Link to={de ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{de ? "Ratgeber" : "Guides"}</Link>
+            <Link to={de ? "/ratgeber" : "/en/guide"}>{de ? "Ratgeber" : "Guides"}</Link>
             {page.noEnAlternate ? null : <a href={page.alternate} hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"} className="lang-switch language-link"><Languages aria-hidden="true" />{de ? "EN" : "DE"}</a>}
             <a className="button button--primary" href={contact}>{de ? "Kontakt aufnehmen" : "Get in touch"}</a>
           </nav>

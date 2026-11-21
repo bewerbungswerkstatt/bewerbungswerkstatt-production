@@ -173,7 +173,7 @@ function Header({ t }: { t: HomeContent }) {
         <BrandLogo dark />
         <nav aria-label={t.navLabel}>
           {t.menu.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
-          <Link to={t.switchText === "EN" ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
+          <Link to={t.switchText === "EN" ? "/ratgeber" : "/en/guide"}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
           <a href={t.switchHref} className="lang-switch language-link" aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}><Languages aria-hidden="true" />{t.switchText}</a>
         </nav>
         <a className="button button--primary hero-header__cta" href={contactHref}>{t.cta}</a>
@@ -194,7 +194,7 @@ function Header({ t }: { t: HomeContent }) {
           <button className="menu-close" type="button" aria-label={t.menuClose} onClick={() => setMenuOpen(false)}><X /></button>
           <nav>
             {t.menu.map(([href, label]) => <a href={href} key={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-            <Link to={t.switchText === "EN" ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"} onClick={() => setMenuOpen(false)}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
+            <Link to={t.switchText === "EN" ? "/ratgeber" : "/en/guide"} onClick={() => setMenuOpen(false)}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
             <a className="language-link" href={t.switchHref} aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()}><Languages aria-hidden="true" />{t.switchText}</a>
           </nav>
           <a className="button button--primary button--wide" href={contactHref} onClick={() => setMenuOpen(false)}>{t.cta}</a>
