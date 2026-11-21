@@ -1,6 +1,7 @@
+import type { LinkProps } from "@tanstack/react-router";
 import type { Lang } from "@/lib/home-content";
 
-export type SeoSection = { heading: string; paragraphs: string[]; list?: string[] };
+export type SeoSection = { heading: string; paragraphs: string[]; list?: string[]; links?: { before: string; text: string; to: NonNullable<LinkProps["to"]>; after: string }[] };
 
 export type SeoFaq = { q: string; a: string };
 
@@ -38,6 +39,7 @@ export const seoPages = {
     sections: [
       {
         heading: "Was ein guter Schweizer Lebenslauf braucht",
+        links: [{"before": "Welche Unterlagen dazugehören, zeigt unser ", "text": "Ratgeber zum Bewerben in der Schweiz", "to": "/ratgeber/bewerben-in-der-schweiz", "after": "."}],
         paragraphs: ["Ein Schweizer CV ist übersichtlich, vollständig und auf die Zielstelle ausgerichtet. Fliesstext wird selten gelesen – entscheidend sind klare Abschnitte und prägnante Stichworte."],
         list: [
           "Eine «Das bringe ich mit»-Übersicht mit Ihren wichtigsten Stärken",
@@ -49,6 +51,7 @@ export const seoPages = {
       },
       {
         heading: "So arbeiten wir",
+        links: [{"before": "Wenn Sie aus dem Ausland kommen, finden Sie ergänzende ", "text": "Tipps für Bewerbungen aus Deutschland und Österreich", "to": "/ratgeber/bewerben-in-der-schweiz-aus-deutschland", "after": "."}],
         paragraphs: [
           "Im Erstgespräch (bis zu 45 Minuten, online) analysieren wir Ihre aktuellen Unterlagen und zeigen die grössten Verbesserungspotenziale. Danach überarbeiten wir Ihren Lebenslauf gemeinsam oder erstellen ihn komplett neu – auf Ihre Zielbranche zugeschnitten.",
           "Wir sind spezialisiert auf Finance, Versicherungen, Back Office und IT und beraten Sie auf Deutsch oder Englisch.",
@@ -76,6 +79,7 @@ export const seoPages = {
     sections: [
       {
         heading: "Typische Fehler, die wir vermeiden",
+        links: [{"before": "Weitere sprachliche Unterschiede erklärt der ", "text": "Ratgeber für Bewerbungen aus Deutschland und Österreich", "to": "/ratgeber/bewerben-in-der-schweiz-aus-deutschland", "after": "."}],
         paragraphs: ["Viele Motivationsschreiben scheitern nicht am Inhalt, sondern an austauschbaren Formulierungen."],
         list: [
           "«Sehr geehrte Damen und Herren» statt einer namentlichen Anrede",
@@ -86,6 +90,7 @@ export const seoPages = {
       },
       {
         heading: "Unser Vorgehen",
+        links: [{"before": "Zum Zusammenspiel von Anschreiben und weiteren Unterlagen lesen Sie unseren ", "text": "Ratgeber zum Schweizer Bewerbungsdossier", "to": "/ratgeber/bewerben-in-der-schweiz", "after": "."}],
         paragraphs: [
           "Wir lesen das Stelleninserat mit Ihnen, finden die passenden Argumente aus Ihrer Laufbahn und formulieren einen Einstieg, der sofort Ihren Mehrwert zeigt. Kein KI-Text von der Stange, sondern ein Schreiben, das nach Ihnen klingt.",
           "Auf Wunsch erstellen wir das Motivationsschreiben auf Deutsch oder Englisch.",
@@ -109,11 +114,13 @@ export const seoPages = {
     sections: [
       {
         heading: "Was Ihr Dossier umfasst",
+        links: [{"before": "Wie Sie die Beilagen einordnen, erklärt unser ", "text": "Ratgeber zu Arbeitszeugnissen in der Schweiz", "to": "/ratgeber/arbeitszeugnis-schweiz", "after": "."}],
         paragraphs: ["Ein Schweizer Bewerbungsdossier ist mehr als ein CV. Wir sorgen dafür, dass alle Teile zusammenpassen und eine klare Geschichte erzählen."],
         list: ["Lebenslauf mit klarer Struktur und Kernkompetenzen", "Auf die Stelle zugeschnittenes Motivationsschreiben", "Hinweise zur Zusammenstellung von Arbeitszeugnissen und Diplomen", "Laufende Anpassungen und Feedback für weitere Bewerbungen"],
       },
       {
         heading: "Für wen wir arbeiten",
+        links: [{"before": "Für den Wechsel aus dem Ausland helfen unsere ", "text": "Tipps zum Bewerben in der Schweiz", "to": "/ratgeber/bewerben-in-der-schweiz", "after": "."}],
         paragraphs: ["Wir begleiten Professionals in Tech, Finance, Versicherungen und Back Office – vom Berufseinstieg bis zur erfahrenen Fachkraft. Audelia Babbev-Pittet hat über 5 Jahre Erfahrung in der Beratung von Stellensuchenden, Daniel Babbev ist Softwareingenieur mit über 10 Jahren Erfahrung."],
       },
       {
@@ -137,6 +144,7 @@ export const seoPages = {
     sections: [
       {
         heading: "Das Schweizer Bewerbungsdossier",
+        links: [{"before": "Wenn Sie Unterstützung bei allen Unterlagen wünschen, können Sie Ihr ", "text": "Bewerbungsdossier persönlich überarbeiten lassen", "to": "/bewerbung-schreiben-lassen", "after": "."}],
         paragraphs: ["Arbeitgeber erwarten in der Regel ein vollständiges Dossier:"],
         list: ["Motivationsschreiben", "Lebenslauf (CV), meist mit Foto", "Arbeitszeugnisse früherer Arbeitgeber", "Diplome und relevante Zertifikate"],
       },
@@ -146,6 +154,7 @@ export const seoPages = {
       },
       {
         heading: "Angaben, die ausländische Bewerbende ergänzen sollten",
+        links: [{"before": "Für die passende Darstellung Ihres Profils bieten wir ", "text": "persönliche CV-Beratung für die Schweiz", "to": "/lebenslauf-schreiben-lassen", "after": "."}],
         paragraphs: ["Machen Sie es Recruitern leicht, Ihren Hintergrund einzuordnen:"],
         list: ["Ihren Aufenthalts- bzw. Bewilligungsstatus oder Ihre Nationalität", "Sprachkenntnisse mit Niveau (z. B. nach GER: B2, C1)", "Kurze Erklärungen zu ausländischen Abschlüssen und Arbeitgebern", "Ihre Verfügbarkeit und Ihren gewünschten Arbeitsort"],
       },
@@ -170,11 +179,13 @@ export const seoPages = {
     sections: [
       {
         heading: "What a Swiss CV needs",
+        links: [{"before": "For the complete set of documents, read our ", "text": "guide to applying for jobs in Switzerland", "to": "/en/guide/applying-for-jobs-in-switzerland", "after": "."}],
         paragraphs: ["A Swiss CV is clear, complete and focused on the target role. Long paragraphs are rarely read – clear sections and concise bullet points are what count."],
         list: ["A “what I bring” summary of your key strengths", "Complete work experience in reverse chronological order", "Education, further training and language skills with levels", "A professional photo facing towards the text", "Your residence or work permit status, if you are moving from abroad"],
       },
       {
         heading: "How we work",
+        links: [{"before": "Moving from another country? See our ", "text": "CV tips for applicants from abroad", "to": "/en/guide/applying-to-switzerland-from-abroad", "after": "."}],
         paragraphs: [
           "In a first online meeting (up to 45 minutes) we analyse your current documents and show you the biggest improvement potential. Then we revise your CV together or create a new one – tailored to your target industry.",
           "We specialise in finance, insurance, back office and IT roles in German-speaking Switzerland, including Zurich.",
@@ -201,11 +212,13 @@ export const seoPages = {
     sections: [
       {
         heading: "Common mistakes we avoid",
+        links: [{"before": "Our ", "text": "guide to applying from abroad", "to": "/en/guide/applying-to-switzerland-from-abroad", "after": " explains further Swiss conventions."}],
         paragraphs: ["Many cover letters fail not because of their content, but because of interchangeable phrases."],
         list: ["“Dear Sir or Madam” instead of addressing the contact person by name", "Clichés like “team player, motivated and resilient” without proof", "No link to the requirements in the job ad", "Ignoring Swiss conventions when writing in German, such as “Freundliche Grüsse” without a comma"],
       },
       {
         heading: "Our approach",
+        links: [{"before": "See how your letter fits with the other documents in our ", "text": "Swiss job application guide", "to": "/en/guide/applying-for-jobs-in-switzerland", "after": "."}],
         paragraphs: ["We go through the job ad with you, find the right arguments from your career and write an opening that shows your value immediately. No off-the-shelf AI text, but a letter that sounds like you – in English or German."],
       },
     ],
@@ -225,11 +238,13 @@ export const seoPages = {
     sections: [
       {
         heading: "What your dossier includes",
+        links: [{"before": "Our ", "text": "guide to Swiss reference letters", "to": "/en/guide/swiss-reference-letter", "after": " explains how to understand these documents."}],
         paragraphs: ["A Swiss application dossier is more than a CV. We make sure all parts fit together and tell a clear story."],
         list: ["A CV with a clear structure and core competencies", "A cover letter tailored to the role", "Advice on compiling references (Arbeitszeugnisse) and diplomas", "Ongoing adjustments and feedback for further applications"],
       },
       {
         heading: "Who we work with",
+        links: [{"before": "For a move to Switzerland, start with our ", "text": "guide for international job applicants", "to": "/en/guide/applying-for-jobs-in-switzerland", "after": "."}],
         paragraphs: ["We support professionals in tech, finance, insurance and back office. Audelia Babbev-Pittet has more than 5 years of experience advising job seekers; Daniel Babbev is a software engineer with more than 10 years of experience."],
       },
       {
@@ -253,11 +268,13 @@ export const seoPages = {
     sections: [
       {
         heading: "The Swiss application dossier",
+        links: [{"before": "For personal help with all your documents, explore our ", "text": "Swiss application dossier service", "to": "/en/job-application-switzerland", "after": "."}],
         paragraphs: ["Employers usually expect a complete dossier:"],
         list: ["Cover letter", "CV, usually with a photo", "Reference letters from previous employers (Arbeitszeugnisse)", "Diplomas and relevant certificates"],
       },
       {
         heading: "Details international applicants should add",
+        links: [{"before": "Our ", "text": "Swiss CV writing and review service", "to": "/en/swiss-cv-writing", "after": " helps present your background clearly."}],
         paragraphs: ["Make it easy for recruiters to understand your background:"],
         list: ["Your nationality or Swiss permit status", "Language skills with levels (e.g. CEFR: B2, C1) – German is often required in German-speaking Switzerland", "Short explanations of foreign degrees and employers", "Your availability and preferred work location"],
       },
@@ -290,6 +307,7 @@ export const seoPages = {
       },
       {
         heading: "Was ein gutes Zeugnis enthält",
+        links: [{"before": "Für eine stimmige Zusammenstellung können Sie Ihr ", "text": "komplettes Bewerbungsdossier überarbeiten lassen", "to": "/bewerbung-schreiben-lassen", "after": "."}],
         paragraphs: ["Ein aussagekräftiges Vollzeugnis umfasst typischerweise:"],
         list: ["Funktion, Dauer und wichtigste Aufgaben", "Beurteilung von Leistung und Fachwissen", "Beurteilung des Verhaltens gegenüber Vorgesetzten, Kollegen und Kunden", "Grund des Austritts (auf Wunsch) und eine Schlussformel mit Dank und guten Wünschen"],
       },
@@ -299,6 +317,7 @@ export const seoPages = {
       },
       {
         heading: "Wann Sie eine Berichtigung verlangen sollten",
+        links: [{"before": "Ihre Erfahrungen und Stärken lassen sich zudem in einem ", "text": "individuell formulierten Motivationsschreiben", "to": "/motivationsschreiben-schreiben-lassen", "after": " hervorheben."}],
         paragraphs: ["Sind Angaben falsch oder unvollständig, dürfen Sie eine Korrektur verlangen. Am besten schlagen Sie konkrete Formulierungen vor – sachlich und mit Belegen. Gerne prüfen wir Ihr Zeugnis und helfen bei der Formulierung."],
       },
     ],
@@ -322,6 +341,7 @@ export const seoPages = {
     sections: [
       {
         heading: "Die wichtigsten Unterschiede",
+        links: [{"before": "Bei der passenden Wortwahl unterstützt Sie unser ", "text": "Service für Schweizer Motivationsschreiben", "to": "/motivationsschreiben-schreiben-lassen", "after": "."}],
         paragraphs: ["Inhaltlich ähneln sich die Unterlagen, doch Details machen den Unterschied:"],
         list: ["Kein «ß» – in der Schweiz schreibt man immer «ss»", "«Freundliche Grüsse» ohne Komma statt «Mit freundlichen Grüßen,»", "Arbeitszeugnisse sind fester Bestandteil des Dossiers", "Ein sachlicher, eher zurückhaltender Ton wirkt besser als Selbstlob"],
       },
@@ -331,6 +351,7 @@ export const seoPages = {
       },
       {
         heading: "Abschlüsse verständlich machen",
+        links: [{"before": "Wir helfen Ihnen, Ihre Laufbahn mit einer ", "text": "persönlichen Schweizer Lebenslauf-Beratung", "to": "/lebenslauf-schreiben-lassen", "after": " verständlich darzustellen."}],
         paragraphs: ["Nicht jeder Schweizer Recruiter kennt ausländische Abschlüsse oder Arbeitgeber. Eine kurze Einordnung (z. B. Branche, Grösse des Unternehmens, vergleichbarer Schweizer Abschluss) hilft, Ihr Profil richtig einzuschätzen."],
       },
     ],
@@ -358,6 +379,7 @@ export const seoPages = {
       },
       {
         heading: "What a good reference contains",
+        links: [{"before": "For a coherent set of documents, we offer ", "text": "complete Swiss application dossier support", "to": "/en/job-application-switzerland", "after": "."}],
         paragraphs: ["A meaningful full reference usually includes:"],
         list: ["Job title, duration and key responsibilities", "An assessment of performance and expertise", "An assessment of conduct towards managers, colleagues and clients", "A closing statement with thanks and good wishes"],
       },
@@ -367,6 +389,7 @@ export const seoPages = {
       },
       {
         heading: "When to ask for a correction",
+        links: [{"before": "You can also highlight your strengths with our ", "text": "tailored cover letter writing service", "to": "/en/cover-letter-switzerland", "after": "."}],
         paragraphs: ["If information is wrong or incomplete, you may ask for a correction. Suggest concrete wording, politely and with evidence. We are happy to review your reference and help you phrase the request."],
       },
     ],
@@ -390,6 +413,7 @@ export const seoPages = {
     sections: [
       {
         heading: "The key differences",
+        links: [{"before": "For wording that fits Swiss expectations, explore our ", "text": "cover letter writing service for Swiss jobs", "to": "/en/cover-letter-switzerland", "after": "."}],
         paragraphs: ["The content is similar to other countries, but details matter:"],
         list: ["Reference letters (Arbeitszeugnisse) are a standard part of the dossier", "A professional photo on the CV is still common", "A factual, modest tone works better than self-praise", "In German applications: “ss” instead of “ß” and “Freundliche Grüsse” without a comma"],
       },
@@ -399,6 +423,7 @@ export const seoPages = {
       },
       {
         heading: "Make your background easy to understand",
+        links: [{"before": "Our ", "text": "personal Swiss CV consulting service", "to": "/en/swiss-cv-writing", "after": " helps make your experience and qualifications clear."}],
         paragraphs: ["Swiss recruiters may not know foreign degrees or employers. A short explanation – industry, company size, comparable Swiss qualification – helps them place your profile correctly."],
       },
     ],

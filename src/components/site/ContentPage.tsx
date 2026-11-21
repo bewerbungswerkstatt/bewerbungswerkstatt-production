@@ -1,4 +1,5 @@
 import { ArrowRight, Check } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { SeoPage } from "@/lib/seo-pages";
 import { pagesByLang } from "@/lib/seo-pages";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -15,6 +16,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
           <a href={home} aria-label="Bewerbungswerkstatt"><img className="brand-logo" src="/images/logo_darkmode.png" alt="Bewerbungswerkstatt" /></a>
           <nav aria-label={de ? "Navigation" : "Navigation"}>
             <a href={home}>{de ? "Startseite" : "Home"}</a>
+            <Link to={de ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{de ? "Ratgeber" : "Guides"}</Link>
             <a href={page.alternate} hrefLang={de ? "en" : "de"} className="lang-switch">{de ? "EN" : "DE"}</a>
             <a className="button button--primary" href={contact}>{de ? "Erstgespräch buchen" : "Book a first call"}</a>
           </nav>
@@ -32,6 +34,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
               <h2>{s.heading}</h2>
               {s.paragraphs.map((p) => <p key={p}>{p}</p>)}
               {s.list ? <ul>{s.list.map((li) => <li key={li}><Check />{li}</li>)}</ul> : null}
+              {s.links?.map((link) => <p key={link.to}>{link.before}<Link className="contextual-link" to={link.to}>{link.text}</Link>{link.after}</p>)}
             </section>
           ))}
           {page.faq ? (
