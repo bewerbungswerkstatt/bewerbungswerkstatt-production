@@ -22,7 +22,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { contactSchema } from "@/lib/contact-schema";
 import { homeContent, type HomeContent, type Lang } from "@/lib/home-content";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { consultationPrices, labourMarket, registeredSeekersPerReportedVacancy } from "@/lib/verified-facts";
+import { consultationPrices, labourMarket, formatSeekersPerVacancy } from "@/lib/verified-facts";
 const audeliaAsset = { url: "/images/audelia.jpg" };
 const danielAsset = { url: "/images/daniel.jpg" };
 const darkLogoAsset = { url: "/images/logo_darkmode.png" };
@@ -51,7 +51,7 @@ function BrandLogo({ dark = false }: { dark?: boolean }) {
   );
 }
 
-function MarketStats({ t }: { t: HomeContent }) {
+function MarketStats({ t, lang }: { t: HomeContent; lang: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -70,7 +70,7 @@ function MarketStats({ t }: { t: HomeContent }) {
 
   return (
     <div ref={ref} className={`market-grid ${visible ? "market-grid--visible" : ""}`}>
-      <article className="stat-card"><div className="stat"><span>≈{Math.round(registeredSeekersPerReportedVacancy)}</span><sup>*</sup></div><h3>{t.stats[0][0]}</h3><p>{t.stats[0][1]}</p></article>
+      <article className="stat-card"><div className="stat"><span>≈ {formatSeekersPerVacancy(lang)}</span><sup>*</sup></div><h3>{t.stats[0][0]}</h3><p>{t.stats[0][1]}</p></article>
       <article className="stat-card"><div className="stat stat--word">{t.stats[1][0]}</div><h3>{t.stats[1][1]}</h3><p>{t.stats[1][2]}</p></article>
       <article className="stat-card"><div className="stat stat--word"><span>{String(labourMarket.reportedVacancies).replace(/\B(?=(\d{3})+(?!\d))/g, "’")}</span><sup>*</sup></div><h3>{t.stats[2][0]}</h3><p>{t.stats[2][1]}</p></article>
     </div>
@@ -339,7 +339,7 @@ export function HomePage({ lang }: { lang: Lang }) {
       <section className="market section-light" id={id(0)}>
         <div className="container">
           <SectionHeading subline={t.marketSub}>{t.marketTitle}</SectionHeading>
-          <MarketStats t={t} />
+          <MarketStats t={t} lang={lang} />
           <p className="market-copy">{t.marketCopy}</p>
           <div className="sources"><a href={labourMarket.source} target="_blank" rel="noreferrer">{t.sources[0]}</a></div>
         </div>

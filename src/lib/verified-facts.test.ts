@@ -1,16 +1,24 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
-import { consultationPrices, consultationTerms, labourMarket, registeredSeekersPerReportedVacancy } from "./verified-facts";
+import { consultationPrices, consultationTerms, labourMarket, registeredSeekersPerReportedVacancy, formatSeekersPerVacancy } from "./verified-facts";
 
-describe("Verified labour market data, March 2026", () => {
-  test("SECO reports 234815 registered job seekers and 48843 reported vacancies", () => {
-    assert.equal(labourMarket.registeredJobSeekers, 234815);
-    assert.equal(labourMarket.reportedVacancies, 48843);
-    assert.equal(labourMarket.period, "2026-03");
+describe("Verified labour market data, October 2026", () => {
+  test("SECO reports 230001 registered job seekers", () => {
+    assert.equal(labourMarket.registeredJobSeekers, 230001);
   });
-  test("the rounded five is a ratio of reported stocks, not applications per job", () => {
-    assert.ok(Math.abs(registeredSeekersPerReportedVacancy - 4.8075466) < 0.00001);
-    assert.equal(Math.round(registeredSeekersPerReportedVacancy), 5);
+  test("SECO reports 40462 reported vacancies", () => {
+    assert.equal(labourMarket.reportedVacancies, 40462);
+  });
+  test("figures refer to October 2026", () => {
+    assert.equal(labourMarket.period, "2026-10");
+  });
+  test("report was published on November 5, 2026", () => {
+    assert.equal(labourMarket.published, "2026-11-05");
+  });
+  test("the ratio of registered stocks rounds to 5.7, not applications per job", () => {
+    assert.ok(Math.abs(registeredSeekersPerReportedVacancy - 5.6843725) < 0.00001);
+    assert.equal(formatSeekersPerVacancy("de"), "5,7");
+    assert.equal(formatSeekersPerVacancy("en"), "5.7");
   });
 });
 

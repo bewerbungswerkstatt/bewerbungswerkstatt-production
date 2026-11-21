@@ -1,4 +1,4 @@
-import { consultationPrices, consultationTerms } from "@/lib/verified-facts";
+import { consultationPrices, consultationTerms, labourMarket, formatSeekersPerVacancy } from "@/lib/verified-facts";
 import type { ReactNode } from "react";
 
 export type Lang = "de" | "en";
@@ -88,14 +88,14 @@ export const homeContent: Record<Lang, HomeContent> = {
     heroLead: <>Wir helfen Ihnen, Ihren besten Lebenslauf zu schreiben — authentisch,<br className="desktop-break" /> überzeugend und menschlich. Keine generischen Phrasen, sondern<br className="desktop-break" /> echte Worte, die Recruiter überzeugen.</>,
     heroCaption: "Standardformulierungen oder ein persönliches Profil: Was macht Ihre Bewerbung aus?",
     marketTitle: "Die Realität des Schweizer Arbeitsmarkts",
-    marketSub: "Ein Blick auf gemeldete Stellensuchende und offene Stellen – Stand März 2026.",
+    marketSub: "Ein Blick auf gemeldete Stellensuchende und offene Stellen – Stand Oktober 2026.",
     stats: [
-      ["Registrierte Stellensuchende je gemeldeter Stelle", "Verhältnis der RAV-Bestände im März 2026; keine Zahl der Bewerbungen je Stelle."],
+      ["Registrierte Stellensuchende je gemeldeter Stelle", "Verhältnis der RAV-Bestände im Oktober 2026. Die Zahl entspricht nicht der Anzahl Bewerbungen pro ausgeschriebener Stelle."],
       ["KI", "ersetzt kein persönliches Profil", "Standardformulierungen können austauschbar wirken. Konkrete Erfahrungen machen Ihr Profil greifbar."],
-      ["Offene Stellen bei den RAV gemeldet", "Stand März 2026. Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots ab."],
+      ["Offene Stellen bei den RAV gemeldet", "Stand Oktober 2026. Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots in der Schweiz ab."],
     ],
-    marketCopy: <>Laut SECO waren im März 2026 insgesamt 234’815 Stellensuchende und 48’843 offene Stellen bei den RAV registriert. Das ergibt rechnerisch rund 4,8 Stellensuchende je gemeldeter Stelle.<br />Die Stellenzahl umfasst nur einen Teil des Stellenangebots, einschliesslich 172 Stellen im grenznahen Ausland. Das Verhältnis sagt weder aus, wie viele Personen sich auf eine einzelne Stelle bewerben, noch wie gross der Wettbewerb in einer bestimmten Branche ist.</>,
-    sources: ["* SECO: Die Lage auf dem Arbeitsmarkt, März 2026 – Tabellen 1 und 23"],
+    marketCopy: <>Laut SECO waren im Oktober 2026 insgesamt {labourMarket.registeredJobSeekers.toLocaleString("de-CH")} Stellensuchende und {labourMarket.reportedVacancies.toLocaleString("de-CH")} offene Stellen bei den RAV registriert. Das ergibt rechnerisch rund {formatSeekersPerVacancy("de")} Stellensuchende je gemeldeter Stelle.<br />Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots in der Schweiz ab. Das Verhältnis sagt weder aus, wie viele Personen sich auf eine einzelne Stelle bewerben, noch wie gross der Wettbewerb in einer bestimmten Branche ist.</>,
+    sources: ["Quelle: Staatssekretariat für Wirtschaft (SECO), Arbeitsmarktstatistik Oktober 2026, veröffentlicht am 5. November 2026."],
     diffTitle: "So machen Sie den Unterschied",
     diffSub: "Drei Schritte zu einer Bewerbung, die wirklich überzeugt.",
     steps: [
@@ -188,14 +188,14 @@ export const homeContent: Record<Lang, HomeContent> = {
     heroLead: <>We help you write your best CV for the Swiss job market — authentic,<br className="desktop-break" /> convincing and human. No generic phrases, but<br className="desktop-break" /> real words that win over recruiters.</>,
     heroCaption: "Standard phrases or a personal profile: what makes your application yours?",
     marketTitle: "The reality of the Swiss job market",
-    marketSub: "Registered job seekers and reported vacancies – a snapshot from March 2026.",
+    marketSub: "Registered job seekers and reported vacancies – a snapshot from October 2026.",
     stats: [
-      ["Registered job seekers per reported vacancy", "Ratio of RAV registers in March 2026; not the number of applications per job."],
+      ["Registered job seekers per reported vacancy", "Ratio of RAV registers in October 2026. This figure is not the number of applications per advertised job."],
       ["AI", "cannot replace your personal profile", "Standard phrases can sound interchangeable. Concrete experience makes your profile tangible."],
-      ["Vacancies reported to the RAV", "March 2026. Reported vacancies cover only part of the overall job market."],
+      ["Vacancies reported to the RAV", "October 2026. Reported vacancies cover only part of the overall job market in Switzerland."],
     ],
-    marketCopy: <>SECO recorded 234,815 registered job seekers and 48,843 vacancies reported to the RAV in March 2026: a calculated ratio of roughly 4.8 job seekers per reported vacancy.<br />Reported vacancies cover only part of the job market, including 172 positions in neighbouring countries. This ratio does not measure applications per job or competition in a particular industry.</>,
-    sources: ["* SECO: Labour market report, March 2026 – tables 1 and 23 (German)"],
+    marketCopy: <>SECO recorded {labourMarket.registeredJobSeekers.toLocaleString("en-GB")} registered job seekers and {labourMarket.reportedVacancies.toLocaleString("en-GB")} vacancies reported to the RAV in October 2026: a calculated ratio of roughly {formatSeekersPerVacancy("en")} job seekers per reported vacancy.<br />Reported vacancies cover only part of the overall job market in Switzerland. This ratio does not measure applications per job or competition in a particular industry.</>,
+    sources: ["Source: State Secretariat for Economic Affairs (SECO), October 2026 labour market statistics, published on 5 November 2026 (German)."],
     diffTitle: "How you make the difference",
     diffSub: "Three steps to an application that truly convinces.",
     steps: [
