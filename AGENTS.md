@@ -11,6 +11,8 @@
 
 ## Project architecture
 
+- Render labour-market figures as stable SSR text and source them with consultation prices from `verified-facts.ts`; card reveal animations remain independent so crawlers never capture transient numerical values.
+
 - Keep contextual service/guide links on their relevant section in `seo-pages.ts` and render them with typed router links in `ContentPage`; this preserves existing prose and makes thematic cross-links explicit.
 
 - The homepage stays one anchor-navigated landing page (rendered by `src/components/site/HomePage.tsx` for `/` in German and `/en` in English, copy in `src/lib/home-content.tsx`); SEO subpages are separate routes driven by data in `src/lib/seo-pages.ts` and rendered by `ContentPage`, each with canonical + hreflang alternates, because search visibility for DE and international visitors needs distinct indexable URLs.

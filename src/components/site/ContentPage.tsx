@@ -18,7 +18,7 @@ export function ContentPage({ page }: { page: SeoPage }) {
             <a href={home}>{de ? "Startseite" : "Home"}</a>
             <Link to={de ? "/ratgeber/bewerben-in-der-schweiz" : "/en/guide/applying-for-jobs-in-switzerland"}>{de ? "Ratgeber" : "Guides"}</Link>
             <a href={page.alternate} hrefLang={de ? "en" : "de"} className="lang-switch">{de ? "EN" : "DE"}</a>
-            <a className="button button--primary" href={contact}>{de ? "Erstgespräch buchen" : "Book a first call"}</a>
+            <a className="button button--primary" href={contact}>{de ? "Erstkontakt anfragen" : "Request first contact"}</a>
           </nav>
         </header>
         <div className="content-hero__copy container container--narrow">

@@ -21,6 +21,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { contactSchema } from "@/lib/contact-schema";
 import { homeContent, type HomeContent, type Lang } from "@/lib/home-content";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { consultationPrices, labourMarket, registeredSeekersPerReportedVacancy } from "@/lib/verified-facts";
 const audeliaAsset = { url: "/images/audelia.jpg" };
 const danielAsset = { url: "/images/daniel.jpg" };
 const darkLogoAsset = { url: "/images/logo_darkmode.png" };
@@ -49,38 +50,6 @@ function BrandLogo({ dark = false }: { dark?: boolean }) {
   );
 }
 
-function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(target);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry?.isIntersecting) setStarted(true);
-    }, { threshold: 0.5 });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 650;
-    const startedAt = performance.now();
-    let frame = 0;
-    const tick = (now: number) => {
-      const progress = Math.min((now - startedAt) / duration, 1);
-      setValue(Math.round(target * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [started, target]);
-
-  return <span ref={ref}>{value}{suffix}</span>;
-}
-
 function MarketStats({ t }: { t: HomeContent }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -100,9 +69,9 @@ function MarketStats({ t }: { t: HomeContent }) {
 
   return (
     <div ref={ref} className={`market-grid ${visible ? "market-grid--visible" : ""}`}>
-      <article className="stat-card"><div className="stat"><CountUp target={5} /><sup>*</sup></div><h3>{t.stats[0][0]}</h3><p>{t.stats[0][1]}</p></article>
+      <article className="stat-card"><div className="stat"><span>≈{Math.round(registeredSeekersPerReportedVacancy)}</span><sup>*</sup></div><h3>{t.stats[0][0]}</h3><p>{t.stats[0][1]}</p></article>
       <article className="stat-card"><div className="stat stat--word">{t.stats[1][0]}</div><h3>{t.stats[1][1]}</h3><p>{t.stats[1][2]}</p></article>
-      <article className="stat-card"><div className="stat"><CountUp target={200} suffix="+" /><sup>**</sup></div><h3>{t.stats[2][0]}</h3><p>{t.stats[2][1]}</p></article>
+      <article className="stat-card"><div className="stat stat--word"><span>{String(labourMarket.reportedVacancies).replace(/\B(?=(\d{3})+(?!\d))/g, "’")}</span><sup>*</sup></div><h3>{t.stats[2][0]}</h3><p>{t.stats[2][1]}</p></article>
     </div>
   );
 }
@@ -371,7 +340,7 @@ export function HomePage({ lang }: { lang: Lang }) {
           <SectionHeading subline={t.marketSub}>{t.marketTitle}</SectionHeading>
           <MarketStats t={t} />
           <p className="market-copy">{t.marketCopy}</p>
-          <div className="sources"><a href="https://www.seco.admin.ch/seco/de/home/Publikationen_Dienstleistungen/Publikationen_und_Formulare/Arbeit/Arbeitslosenversicherung/Die_Lage_auf_dem_Arbeitsmarkt/lage_arbeitsmarkt_2026.html" target="_blank" rel="noreferrer">{t.sources[0]}</a><a href="https://economicgraph.linkedin.com/" target="_blank" rel="noreferrer">{t.sources[1]}</a></div>
+          <div className="sources"><a href={labourMarket.source} target="_blank" rel="noreferrer">{t.sources[0]}</a></div>
         </div>
       </section>
 
@@ -413,8 +382,8 @@ export function HomePage({ lang }: { lang: Lang }) {
         <div className="container container--pricing">
           <SectionHeading subline={t.pricingSub}>{t.pricingTitle}</SectionHeading>
           <div className="pricing-grid">
-            <RevealBlock className="price-card price-card--featured"><span className="pill">{t.price1.pill}</span><h3>{t.price1.title}</h3><div className="price">95 <small>CHF</small></div><p>{t.price1.unit}</p><ul>{t.price1.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--primary button--wide" href={contactHref}>{t.price1.button}</a><small className="refund"><ShieldCheck /> {t.price1.refund}</small></RevealBlock>
-            <RevealBlock className="price-card" delay={1}><span className="pill pill--muted">{t.price2.pill}</span><h3>{t.price2.title}</h3><div className="price">75 <small>CHF</small></div><p>{t.price2.unit}</p><ul>{t.price2.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--outline button--wide" href={contactHref}>{t.price2.button}</a></RevealBlock>
+            <RevealBlock className="price-card price-card--featured"><span className="pill">{t.price1.pill}</span><h3>{t.price1.title}</h3><div className="price">{consultationPrices.analysis} <small>CHF</small></div><p>{t.price1.unit}</p><ul>{t.price1.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--primary button--wide" href={contactHref}>{t.price1.button}</a><small className="refund"><ShieldCheck /> {t.price1.refund}</small></RevealBlock>
+            <RevealBlock className="price-card" delay={1}><span className="pill pill--muted">{t.price2.pill}</span><h3>{t.price2.title}</h3><div className="price">{consultationPrices.editingPerHour} <small>CHF</small></div><p>{t.price2.unit}</p><ul>{t.price2.items.map(item => <li key={item}><Check />{item}</li>)}</ul><a className="button button--outline button--wide" href={contactHref}>{t.price2.button}</a></RevealBlock>
           </div>
         </div>
       </section>

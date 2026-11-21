@@ -22,7 +22,7 @@ export type HomeContent = {
   marketSub: string;
   stats: [[string, string], [string, string, string], [string, string]];
   marketCopy: ReactNode;
-  sources: [string, string];
+  sources: [string];
   diffTitle: string;
   diffSub: string;
   steps: Array<[string, string]>;
@@ -74,7 +74,7 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["#experten", "Experten"],
       ["#kontakt", "Kontakt"],
     ],
-    cta: "Erstgespräch buchen",
+    cta: "Erstkontakt anfragen",
     menuOpen: "Menü öffnen",
     menuClose: "Menü schliessen",
     navLabel: "Hauptnavigation",
@@ -85,21 +85,21 @@ export const homeContent: Record<Lang, HomeContent> = {
     heroEyebrow: "Für Professionals in Tech, Finance & Back Office",
     heroTitle: <>Heben Sie sich ab <strong>von der KI-generierten<br />Masse</strong></>,
     heroLead: <>Wir helfen Ihnen, Ihren besten Lebenslauf zu schreiben — authentisch,<br className="desktop-break" /> überzeugend und menschlich. Keine generischen Phrasen, sondern<br className="desktop-break" /> echte Worte, die Recruiter überzeugen.</>,
-    heroCaption: "Hunderte Bewerbungen. Fast alle identisch. Welche sticht heraus?",
+    heroCaption: "Standardformulierungen oder ein persönliches Profil: Was macht Ihre Bewerbung aus?",
     marketTitle: "Die Realität des Schweizer Arbeitsmarkts",
-    marketSub: "Kennen Sie das? Hunderte Bewerbungen verschickt, nur generische Absagen erhalten.",
+    marketSub: "Ein Blick auf gemeldete Stellensuchende und offene Stellen – Stand März 2026.",
     stats: [
-      ["Stellensuchende pro offene Stelle", "Der Schweizer Arbeitsmarkt erlebt einen sehr hohen Wettbewerb."],
-      ["Mehrheit", "der Bewerbungen sind identische KI-Lebensläufe", "ChatGPT, gleiche Prompts, gleiche Resultate."],
-      ["Bewerbungen auf beliebte Finance-Stellen", "Bei Rollen in Tech, Banking & Finance ist der Wettbewerb besonders hart."],
+      ["Registrierte Stellensuchende je gemeldeter Stelle", "Verhältnis der RAV-Bestände im März 2026; keine Zahl der Bewerbungen je Stelle."],
+      ["KI", "ersetzt kein persönliches Profil", "Standardformulierungen können austauschbar wirken. Konkrete Erfahrungen machen Ihr Profil greifbar."],
+      ["Offene Stellen bei den RAV gemeldet", "Stand März 2026. Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots ab."],
     ],
-    marketCopy: <>Der Schweizer Arbeitsmarkt bleibt hart umkämpft: Im März 2026 standen 234’815 registrierten Stellensuchenden 48’843 beim RAV gemeldete offene Stellen gegenüber.<br />Alle benutzen dieselben KI-Tools, um dieselben generischen Lebensläufe und Motivationsschreiben zu erstellen. Ihr CV sieht aus wie jeder andere — und landet auf demselben Stapel.</>,
-    sources: ["* Offizieller Arbeitsmarktbericht 2026 (SECO)", "** LinkedIn Economic Graph"],
+    marketCopy: <>Laut SECO waren im März 2026 insgesamt 234’815 Stellensuchende und 48’843 offene Stellen bei den RAV registriert. Das ergibt rechnerisch rund 4,8 Stellensuchende je gemeldeter Stelle.<br />Die Stellenzahl umfasst nur einen Teil des Stellenangebots, einschliesslich 172 Stellen im grenznahen Ausland. Das Verhältnis sagt weder aus, wie viele Personen sich auf eine einzelne Stelle bewerben, noch wie gross der Wettbewerb in einer bestimmten Branche ist.</>,
+    sources: ["* SECO: Die Lage auf dem Arbeitsmarkt, März 2026 – Tabellen 1 und 23"],
     diffTitle: "So machen Sie den Unterschied",
     diffSub: "Drei Schritte zu einer Bewerbung, die wirklich überzeugt.",
     steps: [
       ["Menschliche Analyse", "Ein echter Experte analysiert Ihren Lebenslauf — nicht ein Algorithmus, sondern jemand, der den Schweizer Arbeitsmarkt kennt."],
-      ["Erster Eindruck optimieren", "Struktur, Layout, Kernaussagen — wir optimieren alles, was in den ersten 8 Sekunden zählt."],
+      ["Erster Eindruck optimieren", "Struktur, Layout, Kernaussagen — wir optimieren alles, beim ersten Eindruck zählt."],
       ["Ehrlicher, menschlicher Text", "Keine generischen KI-Phrasen. Echte Worte, die Ihre tatsächlichen Stärken und Erfahrungen zeigen."],
     ],
     compTitle: "Der Unterschied auf einen Blick",
@@ -131,8 +131,8 @@ export const homeContent: Record<Lang, HomeContent> = {
     bannerText: "Unsere Berater leben und arbeiten in der Deutschschweiz — sie kennen den Markt, die Kultur und die Erwartungen Ihrer zukünftigen Arbeitgeber.",
     reviewsTitle: "Das sagen unsere Kunden",
     pricingTitle: "Transparente Preise",
-    pricingSub: "Faire Stundensätze, keine versteckten Kosten.",
-    price1: { pill: "Einstieg", title: "Analyse & Erstgespräch", unit: "Online Besprechung bis zu 45 Minuten", items: ["Analyse Ihrer aktuellen Unterlagen", "Identifikation der grössten Verbesserungspotenziale", "Konkreter Massnahmenplan", "Vollständig online", "Unverbindlich"], button: "Termin vereinbaren", refund: "Nicht zufrieden? Volle Rückerstattung." },
+    pricingSub: "Erstkontakt kostenlos. Analysegespräch CHF 95; anschliessende Bearbeitung CHF 75 pro Stunde.",
+    price1: { pill: "Einstieg", title: "Analysegespräch", unit: "Online Besprechung bis zu 45 Minuten", items: ["Analyse Ihrer aktuellen Unterlagen", "Identifikation der grössten Verbesserungspotenziale", "Konkreter Massnahmenplan", "Vollständig online", "Keine Verpflichtung zur Weiterbearbeitung"], button: "Termin vereinbaren", refund: "Nicht zufrieden? Volle Rückerstattung." },
     price2: { pill: "Weiterführend", title: "CV-Review & Bearbeitung", unit: "pro Stunde", items: ["Detaillierte Überarbeitung Lebenslauf", "Motivationsschreiben Optimierung", "Laufende Anpassungen & Feedback", "Auf Ihre Zielbranche zugeschnitten"], button: "Kontakt aufnehmen" },
     expertsTitle: "Ihre Experten",
     audelia: {
@@ -150,7 +150,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     contact: {
       eyebrow: "Persönlich. Unverbindlich. Auf Augenhöhe.",
       title: <>Bereit für den nächsten<br />Karriereschritt?</>,
-      text: "Kontaktieren Sie uns für ein unverbindliches Erstgespräch.",
+      text: "Der Erstkontakt zur Klärung Ihres Anliegens ist kostenlos und unverbindlich. Die separate Analyse Ihrer Unterlagen im Gespräch (bis zu 45 Minuten) kostet CHF 95.",
       email: "E-Mail",
       phone: "Telefon",
       location: "Standort",
@@ -174,7 +174,7 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["#experts", "Experts"],
       ["#contact", "Contact"],
     ],
-    cta: "Book a first call",
+    cta: "Request first contact",
     menuOpen: "Open menu",
     menuClose: "Close menu",
     navLabel: "Main navigation",
@@ -185,21 +185,21 @@ export const homeContent: Record<Lang, HomeContent> = {
     heroEyebrow: "For professionals in tech, finance & back office",
     heroTitle: <>Stand out <strong>from the AI-generated<br />crowd</strong></>,
     heroLead: <>We help you write your best CV for the Swiss job market — authentic,<br className="desktop-break" /> convincing and human. No generic phrases, but<br className="desktop-break" /> real words that win over recruiters.</>,
-    heroCaption: "Hundreds of applications. Almost all identical. Which one stands out?",
+    heroCaption: "Standard phrases or a personal profile: what makes your application yours?",
     marketTitle: "The reality of the Swiss job market",
-    marketSub: "Sound familiar? Hundreds of applications sent, only generic rejections received.",
+    marketSub: "Registered job seekers and reported vacancies – a snapshot from March 2026.",
     stats: [
-      ["job seekers per open position", "The Swiss job market is extremely competitive."],
-      ["Majority", "of applications are identical AI CVs", "ChatGPT, same prompts, same results."],
-      ["applications for popular finance roles", "Competition is especially tough for roles in tech, banking & finance."],
+      ["Registered job seekers per reported vacancy", "Ratio of RAV registers in March 2026; not the number of applications per job."],
+      ["AI", "cannot replace your personal profile", "Standard phrases can sound interchangeable. Concrete experience makes your profile tangible."],
+      ["Vacancies reported to the RAV", "March 2026. Reported vacancies cover only part of the overall job market."],
     ],
-    marketCopy: <>The Swiss job market remains highly competitive: in March 2026, 234,815 registered job seekers faced 48,843 open positions reported to the RAV (regional employment centres).<br />Everyone uses the same AI tools to create the same generic CVs and cover letters. Your CV looks like everyone else's — and ends up on the same pile.</>,
-    sources: ["* Official labour market report 2026 (SECO)", "** LinkedIn Economic Graph"],
+    marketCopy: <>SECO recorded 234,815 registered job seekers and 48,843 vacancies reported to the RAV in March 2026: a calculated ratio of roughly 4.8 job seekers per reported vacancy.<br />Reported vacancies cover only part of the job market, including 172 positions in neighbouring countries. This ratio does not measure applications per job or competition in a particular industry.</>,
+    sources: ["* SECO: Labour market report, March 2026 – tables 1 and 23 (German)"],
     diffTitle: "How you make the difference",
     diffSub: "Three steps to an application that truly convinces.",
     steps: [
       ["Human analysis", "A real expert reviews your CV — not an algorithm, but someone who knows the Swiss job market."],
-      ["Optimise the first impression", "Structure, layout, key messages — we optimise everything that counts in the first 8 seconds."],
+      ["Optimise the first impression", "Structure, layout, key messages — we optimise everything that counts for the first impression."],
       ["Honest, human writing", "No generic AI phrases. Real words that show your actual strengths and experience."],
     ],
     compTitle: "The difference at a glance",
@@ -231,8 +231,8 @@ export const homeContent: Record<Lang, HomeContent> = {
     bannerText: "Our consultants live and work in German-speaking Switzerland — they know the market, the culture and the expectations of your future employers.",
     reviewsTitle: "What our clients say",
     pricingTitle: "Transparent pricing",
-    pricingSub: "Fair hourly rates, no hidden costs.",
-    price1: { pill: "Starter", title: "Analysis & first call", unit: "Online meeting of up to 45 minutes", items: ["Analysis of your current documents", "Identification of the biggest improvement potential", "Concrete action plan", "Fully online", "No obligation"], button: "Book an appointment", refund: "Not satisfied? Full refund." },
+    pricingSub: "First contact is free. Analysis meeting CHF 95; subsequent editing CHF 75 per hour.",
+    price1: { pill: "Starter", title: "Analysis meeting", unit: "Online meeting of up to 45 minutes", items: ["Analysis of your current documents", "Identification of the biggest improvement potential", "Concrete action plan", "Fully online", "No obligation to book further editing"], button: "Book an appointment", refund: "Not satisfied? Full refund." },
     price2: { pill: "Advanced", title: "CV review & editing", unit: "per hour", items: ["Detailed revision of your CV", "Cover letter optimisation", "Ongoing adjustments & feedback", "Tailored to your target industry"], button: "Get in touch" },
     expertsTitle: "Your experts",
     audelia: {
@@ -250,7 +250,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     contact: {
       eyebrow: "Personal. No obligation. On equal terms.",
       title: <>Ready for your next<br />career step?</>,
-      text: "Contact us for a free, no-obligation first conversation — in English or German.",
+      text: "First contact to discuss your needs is free and without obligation, in English or German. The separate document analysis meeting (up to 45 minutes) costs CHF 95.",
       email: "Email",
       phone: "Phone",
       location: "Location",

@@ -22,3 +22,29 @@
 ## Noch offen
 
 Die **neuen Menü- und Kontextlinks sind noch nicht auf Vercel veröffentlicht**. Der bestehende öffentliche Stand wurde erfolgreich geprüft, aber eine Prüfung *nach Veröffentlichung dieser Änderungen* ist damit noch nicht abgeschlossen. Dafür ist zuerst ein Vercel-Deployment erforderlich; dieses wurde in dieser Sitzung nicht ausgelöst. Nach dem Deployment erneut Menü, Kontextlinks, Kennzahlen und Metadaten auf den öffentlichen DE-/EN-Seiten prüfen.
+
+## Abschliessender Audit – 21. November 2026, ab 08:46 UTC
+
+Dieser Abschnitt aktualisiert den obigen Veröffentlichungsstand.
+
+### Öffentlich bestätigt
+
+- Ratgeber und Guides sind nun auf den öffentlichen Startseiten vorhanden, auch im Mobilmenü. Im aktuellen Quellcode fehlt kein deutscher Menüpunkt; ein zweiter Eintrag wurde deshalb nicht angelegt.
+- Frischer Netzwerkabruf über Chromium, jeweils mit und ohne JavaScript: Das initiale HTML enthält auf **beiden** Startseiten 5* und 200+**. Nach der Animation sind diese Werte ebenfalls korrekt. Ein spezifischer deutscher SSR-Nullfehler war nicht reproduzierbar.
+- Ein automatischer, JavaScript-gerenderter Abruf lieferte dagegen sogar negative Zwischenwerte in beiden Sprachen. Diese Ergebnisse sind nicht das initiale Server-HTML. Die laufende Zählanimation ist für unterschiedliche Abrufstände anfällig; der konkrete frühere 0-Abruf konnte nicht rekonstruiert werden.
+- Alle 14 öffentlichen Inhaltsseiten liefern HTTP 200 und lesbaren Inhalt. Selbstreferenzierende absolute www-Canonicals, wechselseitige de-CH/en-Hreflang-Verweise und x-default stimmen. Keine beobachteten noindex-Meta-Tags oder ausschliessenden X-Robots-Tag-Header.
+- Öffentliche robots.txt und Sitemap liefern HTTP 200. Crawler sind zugelassen; Sitemap enthält alle 14 Inhalts-URLs mit Sprachalternativen. Der Unterschied zwischen de in der Sitemap und de-CH im HTML ist zulässig und erfordert keine Korrektur.
+- Technische Indexierbarkeit ist geprüft, nicht die tatsächliche Aufnahme oder Platzierung im Google-Index.
+
+### Jetzt korrigiert, noch nicht öffentlich veröffentlicht
+
+- Zählanimation entfernt; die Einblendanimation der gleich grossen Karten bleibt. Zahlen sind dauerhaft identisch im initialen HTML und nach JavaScript-Ausführung.
+- Unbelegte Behauptungen über eine Mehrheit identischer KI-CVs und 200+ Bewerbungen auf Finance-Stellen entfernt. Der allgemeine LinkedIn-Economic-Graph-Link belegte weder diese Zahl noch ihre Branche oder Region. Die dritte Karte nennt stattdessen **48’843 gemeldete offene Stellen**, belegt durch den konkreten SECO-Bericht vom März 2026, Tabellen 1 und 23.
+- Erste Karte zeigt **≈5** als gerundetes Verhältnis 234’815 / 48’843 ≈ 4,8. Klarstellung: registrierte Stellensuchende je RAV-gemeldeter Stelle, keine Bewerbungen je Stelle, keine Quote für das gesamte Stellenangebot. Die gemeldeten Stellen umfassen auch 172 Stellen im grenznahen Ausland.
+- Generische KI-Behauptungen und die unbelegte Acht-Sekunden-Angabe sachlicher formuliert. Entsprechende statistische Einordnungen auch auf den beiden vorhandenen allgemeinen Ratgeberseiten berichtigt; keine neuen Artikel.
+- Kostenloser Erstkontakt zur Klärung des Anliegens und separates Analysegespräch (bis zu 45 Minuten) für **CHF 95** sind nun ausdrücklich getrennt: Kontaktbereich, Preisuntertitel, Gesprächsbezeichnung, Kontaktbuttons und betroffene Leistungsseiten. Weitere Bearbeitung bleibt CHF 75/Stunde.
+- Fünf Tests für SECO-Werte, Verhältnis und Gesprächspreise bestanden. Vorschau auf Desktop und Mobilgeräten geprüft: Zahlen ohne JavaScript korrekt, auch nach Einblendung stabil, Menüs funktionieren, keine beobachteten Browserfehler. Projektprüfung erfolgreich.
+
+Quelle: https://www.seco.admin.ch/dam/de/sd-web/C6Htf34KPwjy/2026-03_Die_Lage_auf_dem_Arbeitsmarkt_DE.pdf
+
+**Verbleibend:** Die neuen Korrekturen brauchen ein Vercel-Deployment; es wurde hier nicht ausgelöst. Auf der öffentlichen Website sind zum Prüfzeitpunkt noch die unbelegten 200+-/Mehrheitsangaben und die unklare Erstgespräch-Bezeichnung vorhanden. Nach Veröffentlichung erneut öffentlich kontrollieren.
