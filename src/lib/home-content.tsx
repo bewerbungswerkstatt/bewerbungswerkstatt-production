@@ -94,8 +94,8 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["KI", "ersetzt kein persönliches Profil", "Standardformulierungen können austauschbar wirken. Konkrete Erfahrungen machen Ihr Profil greifbar."],
       ["Offene Stellen bei den RAV gemeldet", "Stand Oktober 2026. Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots in der Schweiz ab."],
     ],
-    marketCopy: <>Laut SECO waren im Oktober 2026 insgesamt {labourMarket.registeredJobSeekers.toLocaleString("de-CH")} Stellensuchende und {labourMarket.reportedVacancies.toLocaleString("de-CH")} offene Stellen bei den RAV registriert. Das ergibt rechnerisch rund {formatSeekersPerVacancy("de")} Stellensuchende je gemeldeter Stelle.<br />Gemeldete Stellen bilden nur einen Teil des gesamten Stellenangebots in der Schweiz ab. Das Verhältnis sagt weder aus, wie viele Personen sich auf eine einzelne Stelle bewerben, noch wie gross der Wettbewerb in einer bestimmten Branche ist.</>,
-    sources: ["Quelle: Staatssekretariat für Wirtschaft (SECO), Arbeitsmarktstatistik Oktober 2026, veröffentlicht am 5. November 2026."],
+    marketCopy: <>Laut SECO waren im Oktober 2026 insgesamt {labourMarket.registeredJobSeekers.toLocaleString("de-CH")} Stellensuchende und {labourMarket.reportedVacancies.toLocaleString("de-CH")} offene Stellen bei den RAV registriert. Das ergibt rechnerisch rund {formatSeekersPerVacancy("de")} Stellensuchende je gemeldeter Stelle.<br /><br />Die gemeldeten offenen Stellen bilden nur einen Teil des gesamten Stellenangebots ab, einschliesslich {labourMarket.reportedVacanciesAbroad} Stellen im grenznahen Ausland. Das Verhältnis zeigt weder, wie viele Personen sich auf eine einzelne Stelle bewerben, noch wie gross der Wettbewerb in einer bestimmten Branche ist.</>,
+    sources: ["Quelle: SECO, Die Lage auf dem Arbeitsmarkt, Oktober 2026 – Tabellen 18 und 24."],
     diffTitle: "So machen Sie den Unterschied",
     diffSub: "Drei Schritte zu einer Bewerbung, die wirklich überzeugt.",
     steps: [
@@ -194,8 +194,8 @@ export const homeContent: Record<Lang, HomeContent> = {
       ["AI", "cannot replace your personal profile", "Standard phrases can sound interchangeable. Concrete experience makes your profile tangible."],
       ["Vacancies reported to the RAV", "October 2026. Reported vacancies cover only part of the overall job market in Switzerland."],
     ],
-    marketCopy: <>SECO recorded {labourMarket.registeredJobSeekers.toLocaleString("en-GB")} registered job seekers and {labourMarket.reportedVacancies.toLocaleString("en-GB")} vacancies reported to the RAV in October 2026: a calculated ratio of roughly {formatSeekersPerVacancy("en")} job seekers per reported vacancy.<br />Reported vacancies cover only part of the overall job market in Switzerland. This ratio does not measure applications per job or competition in a particular industry.</>,
-    sources: ["Source: State Secretariat for Economic Affairs (SECO), October 2026 labour market statistics, published on 5 November 2026 (German)."],
+    marketCopy: <>According to SECO, {labourMarket.registeredJobSeekers.toLocaleString("en-GB")} job seekers and {labourMarket.reportedVacancies.toLocaleString("en-GB")} vacancies were registered with the RAV in October 2026. This gives a calculated ratio of roughly {formatSeekersPerVacancy("en")} job seekers per reported vacancy.<br /><br />Reported vacancies cover only part of the overall job market, including {labourMarket.reportedVacanciesAbroad} positions in neighbouring countries close to the Swiss border. This ratio shows neither how many people apply for an individual job nor the level of competition in a particular industry.</>,
+    sources: ["Source: SECO, Die Lage auf dem Arbeitsmarkt, October 2026 – tables 18 and 24 (German)."],
     diffTitle: "How you make the difference",
     diffSub: "Three steps to an application that truly convinces.",
     steps: [

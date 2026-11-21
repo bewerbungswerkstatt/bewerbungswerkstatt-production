@@ -9,6 +9,9 @@ describe("Verified labour market data, October 2026", () => {
   test("SECO reports 40462 reported vacancies", () => {
     assert.equal(labourMarket.reportedVacancies, 40462);
   });
+  test("reported vacancies include 154 positions in neighbouring countries", () => {
+    assert.equal(labourMarket.reportedVacanciesAbroad, 154);
+  });
   test("figures refer to October 2026", () => {
     assert.equal(labourMarket.period, "2026-10");
   });
