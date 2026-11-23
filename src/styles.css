@@ -63,6 +63,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero { min-height: 760px; position: relative; overflow: hidden; display: flex; flex-direction: column; color: var(--primary-foreground); background: var(--navy); border-top: 3px solid oklch(0.48 0.04 27); }
 .hero-header { height: 72px; width: min(1170px, calc(100% - 48px)); margin: 0 auto; display: grid; grid-template-columns: minmax(150px, 1fr) auto minmax(190px, 1fr); align-items: center; gap: 24px; }
 .sticky-header { height: 72px; width: min(1170px, calc(100% - 48px)); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.sticky-header__actions { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .hero-header nav { display: flex; align-items: center; justify-content: center; gap: 24px; white-space: nowrap; }
 .hero-header nav a { color: oklch(0.78 0.012 255); font-size: .9rem; font-weight: 700; transition: color .2s ease; }
 .hero-header nav a:hover { color: var(--primary); }
@@ -80,7 +81,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .menu-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; display: grid; place-items: center; color: var(--muted-foreground); }
 .mobile-menu nav { display: grid; gap: 22px; margin-bottom: 34px; }
 .mobile-menu nav a { font-size: 1.35rem; font-weight: 500; }
-.sticky-header { position: fixed; z-index: 40; top: 0; left: 0; right: 0; width: 100%; padding: 0 max(24px, calc((100vw - 1170px) / 2)); background: var(--card); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); transform: translateY(-110%); opacity: 0; transition: transform .25s ease, opacity .25s ease; }
+.sticky-header { position: fixed; z-index: 40; top: 0; left: 0; right: 0; width: 100%; padding: 0 max(24px, calc((100vw - 1170px) / 2)); background: var(--card); color: var(--foreground); border-bottom: 1px solid var(--border); box-shadow: var(--shadow); transform: translateY(-110%); opacity: 0; transition: transform .25s ease, opacity .25s ease; }
 .sticky-header--visible { transform: translateY(0); opacity: 1; }
 .hero-copy { position: relative; z-index: 2; text-align: center; margin: 95px auto 0; width: min(850px, calc(100% - 40px)); }
 .eyebrow { margin: 0 0 18px; color: var(--primary); text-transform: uppercase; letter-spacing: .1em; font-size: .82rem; font-weight: 800; }
@@ -268,6 +269,8 @@ footer { min-height: 90px; padding: 20px max(24px, calc((100vw - 1100px) / 2)); 
   .section-heading { margin-bottom: 42px; }
   .section-heading h2, .reviews h2 { font-size: 2.15rem; }
   .hero-header, .sticky-header { width: 100%; padding: 0 16px; }
+  .sticky-header__actions { gap: 6px; }
+  .sticky-header .button { padding-inline: 12px; font-size: .8rem; white-space: nowrap; }
   .hero-copy { margin-top: 72px; }
   .hero h1 { font-size: 2.65rem; }
   .hero-lead { font-size: 1rem; }

@@ -17,3 +17,4 @@
 - [ ] Neue sachliche Statistiktexte, stabile Zahlen und klare Gesprächspreise nach Vercel-Deployment live prüfen (neues Deployment erforderlich).
 - [x] Neuen Ratgeberartikel «Lebenslauf Schweiz: 7 typische Fehler» unter /ratgeber/lebenslauf-fehler-schweiz veröffentlicht (DE-only, Sitemap, BlogPosting-JSON-LD, Rücklink auf Lebenslauf-Leistungsseite).
 - [ ] Neuen Artikel nach Vercel-Deployment live prüfen; Live-Schaltung nur mit ausdrücklicher Freigabe des Kunden.
+- [x] Hauptmenü um «Herausforderung»/«Lösung» (DE) bzw. «Challenge»/«Solution» (EN) gekürzt; Hamburger-Menü neu auch in der fixierten Leiste nach dem Scrollen – DE/EN bei 390/624/1280 px geprüft.

@@ -7,6 +7,7 @@ type Comparison = [string, string, string];
 
 export type HomeContent = {
   menu: Array<[string, string]>;
+  sectionIds: [string, string, string, string, string, string];
   cta: string;
   menuOpen: string;
   menuClose: string;
@@ -68,13 +69,12 @@ export type HomeContent = {
 export const homeContent: Record<Lang, HomeContent> = {
   de: {
     menu: [
-      ["#herausforderung", "Herausforderung"],
-      ["#loesung", "Lösung"],
       ["#angebot", "Angebot"],
       ["#preise", "Preise"],
       ["#experten", "Experten"],
       ["#kontakt", "Kontakt"],
     ],
+    sectionIds: ["herausforderung", "loesung", "angebot", "preise", "experten", "kontakt"],
     cta: "Kontakt aufnehmen",
     menuOpen: "Menü öffnen",
     menuClose: "Menü schliessen",
@@ -168,13 +168,12 @@ export const homeContent: Record<Lang, HomeContent> = {
   },
   en: {
     menu: [
-      ["#challenge", "Challenge"],
-      ["#solution", "Solution"],
       ["#services", "Services"],
       ["#pricing", "Pricing"],
       ["#experts", "Experts"],
       ["#contact", "Contact"],
     ],
+    sectionIds: ["challenge", "solution", "services", "pricing", "experts", "contact"],
     cta: "Get in touch",
     menuOpen: "Open menu",
     menuClose: "Close menu",

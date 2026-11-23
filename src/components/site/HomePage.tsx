@@ -165,7 +165,7 @@ function Header({ t }: { t: HomeContent }) {
     };
   }, [menuOpen]);
 
-  const contactHref = t.menu[5]![0];
+  const contactHref = `#${t.sectionIds[5]}`;
 
   return (
     <>
@@ -202,7 +202,19 @@ function Header({ t }: { t: HomeContent }) {
       </div>
       <header className={`sticky-header ${scrolled ? "sticky-header--visible" : ""}`} aria-hidden={!scrolled}>
         <BrandLogo />
-        <a className="button button--primary" href={contactHref}>{t.cta}</a>
+        <div className="sticky-header__actions">
+          <a className="button button--primary" href={contactHref}>{t.cta}</a>
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={t.menuOpen}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen(true)}
+          >
+            <Menu />
+          </button>
+        </div>
       </header>
     </>
   );
@@ -302,8 +314,8 @@ const stepIcons = [<Search key="a" />, <Star key="b" />, <PenLine key="c" />];
 
 export function HomePage({ lang }: { lang: Lang }) {
   const t = homeContent[lang];
-  const id = (n: number) => t.menu[n]![0].slice(1);
-  const contactHref = t.menu[5]![0];
+  const id = (n: 0 | 1 | 2 | 3 | 4 | 5) => t.sectionIds[n];
+  const contactHref = `#${t.sectionIds[5]}`;
   return (
     <main>
       <section className="hero" aria-labelledby="hero-title">
