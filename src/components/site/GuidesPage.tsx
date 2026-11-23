@@ -1,7 +1,7 @@
-import { ArrowRight, Globe } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import type { Lang } from "@/lib/home-content";
 import { guidesContent } from "@/lib/guides-content";
+import { ContentHeader } from "@/components/site/ContentHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 export function GuidesPage({ lang }: { lang: Lang }) {
@@ -10,15 +10,7 @@ export function GuidesPage({ lang }: { lang: Lang }) {
   return (
     <main className="content-page guides-page">
       <section className="content-hero">
-        <header className="content-header">
-          <a href={de ? "/" : "/en"} aria-label="Bewerbungswerkstatt"><img className="brand-logo" src="/images/logo_darkmode.png" alt="Bewerbungswerkstatt" /></a>
-          <nav aria-label="Navigation">
-            <Link to={de ? "/" : "/en"}>{de ? "Startseite" : "Home"}</Link>
-            <Link to={de ? "/ratgeber" : "/en/guide"} aria-current="page">{de ? "Ratgeber" : "Guides"}</Link>
-            <Link to={de ? "/en/guide" : "/ratgeber"} className="lang-switch language-link" hrefLang={de ? "en" : "de"} aria-label={de ? "English version" : "Deutsche Version"}><Globe aria-hidden="true" />{de ? "EN" : "DE"}</Link>
-            <a className="button button--primary" href={de ? "/#kontakt" : "/en#contact"}>{de ? "Kontakt aufnehmen" : "Get in touch"}</a>
-          </nav>
-        </header>
+        <ContentHeader lang={lang} langSwitch={de ? "/en/guide" : "/ratgeber"} guidesCurrent />
         <div className="content-hero__copy container container--narrow">
           <p className="eyebrow">{de ? "Ratgeber" : "Guides"}</p>
           <h1>{c.title}</h1>
