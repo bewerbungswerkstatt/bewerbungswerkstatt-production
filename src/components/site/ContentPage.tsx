@@ -11,8 +11,8 @@ export function ContentPage({ page }: { page: SeoPage }) {
   const related = pagesByLang(page.lang).filter((p) => p.path !== page.path);
   return (
     <main className="content-page">
+      <ContentHeader lang={page.lang} langSwitch={page.noEnAlternate ? null : page.alternate} />
       <section className="content-hero">
-        <ContentHeader lang={page.lang} langSwitch={page.noEnAlternate ? null : page.alternate} />
         <div className="content-hero__copy container container--narrow">
           <p className="eyebrow">{page.eyebrow}</p>
           <h1>{page.h1}</h1>

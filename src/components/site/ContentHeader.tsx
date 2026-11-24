@@ -42,6 +42,7 @@ export function ContentHeader({ lang, langSwitch, guidesCurrent = false }: Conte
 
   return (
     <>
+      <div className="content-header-bar">
       <header className="content-header">
         <a href={home} aria-label="Bewerbungswerkstatt"><img className="brand-logo" src="/images/logo_darkmode.png" alt="Bewerbungswerkstatt" /></a>
         <div className="content-header__actions">
@@ -63,6 +64,7 @@ export function ContentHeader({ lang, langSwitch, guidesCurrent = false }: Conte
           </button>
         </div>
       </header>
+      </div>
       <div className={`menu-overlay ${menuOpen ? "menu-overlay--open" : ""}`} aria-hidden={!menuOpen}>
         <button className="menu-backdrop" type="button" aria-label={de ? "Menü schliessen" : "Close menu"} onClick={() => setMenuOpen(false)} />
         <aside className="mobile-menu" id="mobile-menu" aria-label={de ? "Mobile Navigation" : "Mobile navigation"}>

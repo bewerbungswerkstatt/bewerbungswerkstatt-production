@@ -202,6 +202,11 @@ function Header({ t }: { t: HomeContent }) {
       </div>
       <header className={`sticky-header ${scrolled ? "sticky-header--visible" : ""}`} aria-hidden={!scrolled}>
         <BrandLogo />
+        <nav className="sticky-header__nav" aria-label={t.navLabel}>
+          {t.menu.map(([href, label]) => <a href={href} key={href} tabIndex={scrolled ? 0 : -1}>{label}</a>)}
+          <Link to={t.switchText === "EN" ? "/ratgeber" : "/en/guide"} tabIndex={scrolled ? 0 : -1}>{t.switchText === "EN" ? "Ratgeber" : "Guides"}</Link>
+          <a href={t.switchHref} className="lang-switch language-link" aria-label={t.switchLabel} hrefLang={t.switchText.toLowerCase()} tabIndex={scrolled ? 0 : -1}><Globe aria-hidden="true" />{t.switchText}</a>
+        </nav>
         <div className="sticky-header__actions">
           <a className="button button--primary" href={contactHref}>{t.cta}</a>
           <button

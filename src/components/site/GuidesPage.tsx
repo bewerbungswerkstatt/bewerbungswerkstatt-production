@@ -9,8 +9,8 @@ export function GuidesPage({ lang }: { lang: Lang }) {
   const c = guidesContent[lang];
   return (
     <main className="content-page guides-page">
+      <ContentHeader lang={lang} langSwitch={de ? "/en/guide" : "/ratgeber"} guidesCurrent />
       <section className="content-hero">
-        <ContentHeader lang={lang} langSwitch={de ? "/en/guide" : "/ratgeber"} guidesCurrent />
         <div className="content-hero__copy container container--narrow">
           <p className="eyebrow">{de ? "Ratgeber" : "Guides"}</p>
           <h1>{c.title}</h1>
